@@ -1,0 +1,9 @@
+Pour extraire la BDD > passez par PHPMyAdmin pour exporter le fichier SQL et remplacer le fichier existant dans le dossier data.
+
+Pour update la base de données, il faut faire un
+	docker-compose down
+puis un
+	docker-compose up --build
+
+Et le fichier .sql dans le dossier data sera automatiquement créé avec les tables etc.
+
