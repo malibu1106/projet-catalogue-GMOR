@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : lun. 24 juin 2024 à 11:36
+-- Généré le : lun. 24 juin 2024 à 14:50
 -- Version du serveur : 8.0.37
 -- Version de PHP : 8.2.8
 
@@ -24,131 +24,120 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `bottom`
+-- Structure de la table `carts`
 --
 
-CREATE TABLE `bottom` (
-  `pants` varchar(255) NOT NULL,
-  `skirt` varchar(255) NOT NULL,
-  `boots` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `job/group`
---
-
-CREATE TABLE `job/group` (
-  `admin` varchar(255) NOT NULL,
-  `sob_admin` varchar(255) NOT NULL,
-  `logistique` varchar(255) NOT NULL,
-  `seller` varchar(255) NOT NULL,
-  `expediter` varchar(255) NOT NULL,
-  `accountant` varchar(255) NOT NULL,
-  `user` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `message`
---
-
-CREATE TABLE `message` (
-  `review` varchar(255) NOT NULL,
-  `contact` varchar(255) NOT NULL,
-  `support` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `message_user`
---
-
-CREATE TABLE `message_user` (
+CREATE TABLE `carts` (
   `id` int NOT NULL,
-  `produce_id` int NOT NULL,
   `user_id` int NOT NULL,
-  `commentary_content` int NOT NULL,
-  `Field` int NOT NULL
+  `product_id` int NOT NULL,
+  `product_quantity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `produce`
+-- Structure de la table `commentary`
 --
 
-CREATE TABLE `produce` (
-  `top` varchar(255) NOT NULL,
-  `bottom` varchar(255) NOT NULL,
-  `set` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `product_description`
---
-
-CREATE TABLE `product_description` (
+CREATE TABLE `commentary` (
   `id` int NOT NULL,
+  `commentary_user_id` int NOT NULL,
+  `commentary_product_id` int NOT NULL,
+  `commentary_content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `groups`
+--
+
+CREATE TABLE `groups` (
+  `groupe_id` int NOT NULL,
+  `group_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `groups`
+--
+
+INSERT INTO `groups` (`groupe_id`, `group_name`) VALUES
+(1, 'admin'),
+(2, 'sub_admin'),
+(3, 'gestion_commerciale'),
+(4, 'logistique'),
+(5, 'comptable'),
+(6, 'vendeur'),
+(7, 'utilisateur'),
+(8, 'formateur'),
+(9, 'apprenant');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `messages`
+--
+
+CREATE TABLE `messages` (
+  `message_id` int NOT NULL,
+  `message_type` varchar(255) NOT NULL,
+  `sender_user_id` int NOT NULL,
+  `receiver_user_id` int DEFAULT NULL,
+  `message_content` text NOT NULL,
+  `message_read` tinyint(1) DEFAULT NULL,
+  `message_answered` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int NOT NULL,
+  `ref` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `size` varchar(255) NOT NULL,
   `color` varchar(255) NOT NULL,
-  `stock` decimal(10,0) NOT NULL,
-  `price` decimal(3,2) NOT NULL,
-  `discount` decimal(3,2) NOT NULL
+  `stock` int NOT NULL,
+  `price` decimal(5,2) NOT NULL,
+  `discount` decimal(3,2) NOT NULL DEFAULT '1.00',
+  `category` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `commentary` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `image_1` varchar(255) NOT NULL,
+  `image_2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `image_3` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `image_4` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `set`
+-- Structure de la table `users`
 --
 
-CREATE TABLE `set` (
-  `dress` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `top`
---
-
-CREATE TABLE `top` (
-  `shirt` varchar(255) NOT NULL,
-  `pull` varchar(255) NOT NULL,
-  `jacket` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `user`
---
-
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `id` int NOT NULL,
   `first_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `job/group` int NOT NULL
+  `avatar` varchar(255) NOT NULL,
+  `group` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user_groupe`
+-- Structure de la table `users_groups`
 --
 
-CREATE TABLE `user_groupe` (
+CREATE TABLE `users_groups` (
   `user_id` int NOT NULL,
-  `groupe_id` int NOT NULL
+  `user_group` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -156,49 +145,79 @@ CREATE TABLE `user_groupe` (
 --
 
 --
--- Index pour la table `message_user`
+-- Index pour la table `carts`
 --
-ALTER TABLE `message_user`
+ALTER TABLE `carts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `product_description`
+-- Index pour la table `commentary`
 --
-ALTER TABLE `product_description`
+ALTER TABLE `commentary`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `user`
+-- Index pour la table `groups`
 --
-ALTER TABLE `user`
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`groupe_id`);
+
+--
+-- Index pour la table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`message_id`);
+
+--
+-- Index pour la table `products`
+--
+ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `user_groupe`
+-- Index pour la table `users`
 --
-ALTER TABLE `user_groupe`
-  ADD PRIMARY KEY (`user_id`);
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT pour la table `message_user`
+-- AUTO_INCREMENT pour la table `carts`
 --
-ALTER TABLE `message_user`
+ALTER TABLE `carts`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `product_description`
+-- AUTO_INCREMENT pour la table `commentary`
 --
-ALTER TABLE `product_description`
+ALTER TABLE `commentary`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `user`
+-- AUTO_INCREMENT pour la table `groups`
 --
-ALTER TABLE `user`
+ALTER TABLE `groups`
+  MODIFY `groupe_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT pour la table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `message_id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 

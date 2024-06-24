@@ -1,0 +1,49 @@
+@import 'body_reset.css';
+
+.messagerie_top {
+    width: 100vw;
+    height: 10vh;
+    background: yellow;
+}
+
+.messagerie_conversation_title {
+    height: 10vh;
+    width: 100%;
+    background: orange;
+    display: flex;
+}
+
+.messagerie_conversation_avatar {
+    height: 100%;
+    width: 20%;
+    background: blue;
+}
+
+.messagerie_conversation_name {
+    height: 100%;
+    width: 80%;
+    background: purple;
+}
+
+
+
+.messagerie_menu {
+    width: 20vw;
+    height: 90vh;
+    background: green;
+}
+
+
+.messagerie_main {
+    width: 80vw;
+    height: 90vh;
+    background: red;
+}
+
+.messagerie {
+    width: 100vw;
+    height: 100vh;
+    background: blue;
+    display: flex;
+    flex-wrap: wrap;
+}
