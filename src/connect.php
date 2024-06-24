@@ -1,6 +1,6 @@
 <?php 
 const DBHOST = 'db';
-const DBNAME = 'catalogue_gmor';
+const DBNAME = 'catalogue';
 const DBUSER = 'gmor';
 const DBPASS = 'gmor_password';
 
