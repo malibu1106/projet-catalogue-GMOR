@@ -1,6 +1,10 @@
 <?php
 // vérification que le formulaire est correctement rempli
 if(!empty($_POST)){
+  // debug
+  // echo '<pre>';
+  // print_r($_POST);
+  // echo '</pre>';
   if(
     isset($_POST["nom"], $_POST["prenom"] , $_POST["email"], $_POST["password"], $_POST["password2"]) 
     && !empty($_POST["nom"])  && !empty($_POST["prenom"]) && !empty($_POST["email"]) && !empty($_POST["password"]) && !empty($_POST["password2"])
@@ -41,19 +45,19 @@ if(!empty($_POST)){
       die("Le mon de passe ne correspondent pas.");
     }
     }
+    $sql = "INSERT INTO users (first_name, last_name, email, password, `group`) VALUES (:first_name, :last_name, :email, :password, 'user')";
 
-    $sql= "INSERT INTO users(first_name, last_name, email, password, `group`) VALUES (:fist_name, :last_name, :email, $password, 'user')";
+        $requete = $db->prepare($sql);
 
-    $requete= $db->prepare($sql);
+        $requete->bindValue(":first_name", $prenom, PDO::PARAM_STR);
+        $requete->bindValue(":last_name", $nom, PDO::PARAM_STR);
+        $requete->bindValue(":email", $_POST["email"], PDO::PARAM_STR);
+        $requete->bindValue(":password", $password, PDO::PARAM_STR);
 
-    $requete->bindValue("fist_name",$prenom, PDO::PARAM_STR);
-    $requete->bindValue("last_name",$nom, PDO::PARAM_STR);
-    $requete->bindValue("email",$_POST["email"], PDO::PARAM_STR);
-
-    $requete->execute();
-  }else{
-    die("Le formulaire est incomplet");
-  }
+        $requete->execute();
+    } else {
+        die("Le formulaire est incomplet");
+    }
 }
 
 ?>
