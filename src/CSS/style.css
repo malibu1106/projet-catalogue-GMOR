@@ -17,9 +17,14 @@
     bottom: 0;
     background: rgba(255, 0, 0, 1);
     display: none;
+    z-index: 15000;
 }
 
 /*HEADER*/
+.logo_index {
+    height: 100px;
+    margin: auto;
+}
 
 /*NAV*/
 nav {
@@ -99,4 +104,10 @@ ul.menu {
 .login-body {
     background-image: url(/img/temporaire/model-image-login.jpg);
     background-position: left 20% top 25%;
+}
+
+/*FOOTER*/
+.footer-pad {
+    padding-left: 50px;
+    padding-right: 50px;
 }
