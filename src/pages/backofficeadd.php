@@ -11,9 +11,9 @@
 <body>
     <?php require_once ('../elements/header.php');?>
 
-    <main>
+    <main class="backofficeadd-container">
         <article class="backofficeadd-card">
-            <H1>AJOUTER UN PRODUIT</H1>
+            <h1>AJOUTER UN PRODUIT</h1>
             <p>Référence du produit:</p> <input type="text">  
             <p>Nom du produit:</p> <input type="text">
             <p>Taille: </p> <select name="size" id="size">
