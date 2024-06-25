@@ -74,3 +74,10 @@ ul.menu {
     width: 30px;
     margin: 4px;
 }
+
+
+/*LOGIN.PHP*/
+.login-body{
+    background-image: url(/img/temporaire/model-image-login.jpg);
+    background-position: left 20% top 25%;
+}

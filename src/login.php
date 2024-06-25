@@ -15,7 +15,7 @@ if (isset($_POST['loginUser'])) {
 
         require_once('connect.php');
 
-        $user = verifyUserLoginPassword($db, $_POST['email'], $_POST['pass']);
+        $user = verifyUserLoginPassword($db, $_POST['email'], $_POST['password']);
 
         if ($user) {
             // On utilise une seule session pour stocker l'utilisateur
@@ -29,7 +29,7 @@ if (isset($_POST['loginUser'])) {
             header('Location: index.php');
             exit(); // On arrete le script aprés la redirection
         } else {
-            $errors[] = 'Email ou mot de passe incorrect, votre vie est un échec...';
+            $errors[] = 'Email ou mot de passe incorrect.';
         }
     } else {
         $errors[] = 'Veuillez remplir tous les champs du formulaire.';
@@ -49,7 +49,7 @@ if (isset($_POST['loginUser'])) {
     <link rel="stylesheet" href="/CSS/fonts.css">
 </head>
 
-<body class="d-flex align-items-center justify-content-center vh-100">
+<body class="d-flex align-items-center justify-content-center vh-100 login-body">
     <section class="full-box">
 
         <!-- Afficher les erreurs s'il y en a -->
