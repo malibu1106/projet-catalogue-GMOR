@@ -4,13 +4,19 @@
 @import "fonts.css";
 
 /*DEBUG*/
+#debugButton {
+    cursor: pointer;
+    line-height: 50px;
+    font-size: 2em;
+}
+
 #debug {
     width: 100vw;
-    height: 100px;
     position: absolute;
     left: 0;
     bottom: 0;
-    background: rgba(255, 0, 0, 0.5);
+    background: rgba(255, 0, 0, 1);
+    display: none;
 }
 
 /*HEADER*/
@@ -18,11 +24,17 @@
 /*NAV*/
 nav {
     display: flex;
-    justify-content: space-between;
     height: 50px;
-    background: blue;
     position: relative;
     z-index: 250;
+}
+
+.menuButtonsContainer {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 200;
 }
 
 #menuBurgerIcon {
@@ -35,10 +47,23 @@ ul#menuBurger {
     left: 0;
     width: 100vw;
     height: auto;
-    background: rgba(255, 0, 0, 0.8);
+    background-color: white;
     text-align: center;
     z-index: 100;
-    transition: top 1s;
+    transition: top 0.6s linear;
+    font-size: 1.4em;
+}
+
+#menuBurger li {
+    margin: 15px auto;
+}
+
+.hideMenuBurger {
+    top: -300px;
+}
+
+.showMenuBurger {
+    top: 50px;
 }
 
 ul.menu {
@@ -55,13 +80,7 @@ ul.menu {
     transform: rotate(90deg);
 }
 
-.hideMenuBurger {
-    top: -800px;
-}
 
-.showMenuBurger {
-    top: 50px;
-}
 
 #userMenu {
     display: flex;
@@ -77,7 +96,7 @@ ul.menu {
 
 
 /*LOGIN.PHP*/
-.login-body{
+.login-body {
     background-image: url(/img/temporaire/model-image-login.jpg);
     background-position: left 20% top 25%;
 }

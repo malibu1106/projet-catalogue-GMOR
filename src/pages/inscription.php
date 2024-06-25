@@ -7,21 +7,21 @@ if(!empty($_POST)){
   ){
     // Stocke le nom et prénom dans les variables respectives 
     $nom = strip_tags($_POST["nom"]);
-    $prenome = strip_tags($_POST["prenom"]);
+    $prenom = strip_tags($_POST["prenom"]);
 
     // Filtre et valide l’email dans la variable $_POST
-    if(!filter_var($_POST["email"] ,FILTER_VALIDATE_EMAIL)){
-      die("L'adresse email est incorrecte");
-    }
-    // Connecte avec la base de données 
-    require_once("connect.php");
+      if(!filter_var($_POST["email"] ,FILTER_VALIDATE_EMAIL)){
+        die("L'adresse email est incorrecte");
+      }
+      // Connecte avec la base de données 
+      require_once("../elements/connect.php");
 
-    $sql_email=" SELECT COUNT(*) AS nd_emails FROM users WHERE email = :email";
-    $requete_email = $db->prepare($sql_email);
-    $requete_email->bindValue(":email", $_POST["email"],PDO::PARAM_STR);
-    $requete_email->execute();
+      $sql_email=" SELECT COUNT(*) AS nd_emails FROM users WHERE email = :email";
+      $requete_email = $db->prepare($sql_email);
+      $requete_email->bindValue(":email", $_POST["email"],PDO::PARAM_STR);
+      $requete_email->execute();
 
-    $email_count = $requete_email->fetchColumn();  //prendre l’email dans la colonne 
+      $email_count = $requete_email->fetchColumn();  //prendre l’email dans la colonne 
 
     if ($email_count > 0){
       die("Cette edresse email est déjà ultilisée");
@@ -32,16 +32,28 @@ if(!empty($_POST)){
       $password = $_POST["password"];
       $password2 = $_POST["password2"];
 
-        if($password === $password2)
+        if($password === $password2){
 
           $password = password_hash($_POST["password"], PASSWORD_ARGON2ID);
 
-          header("Location: login.php");
+          header("Location: ../tools/login.php");
     }else{
       die("Le mon de passe ne correspondent pas.");
     }
-  }
+    }
 
+    $sql= "INSERT INTO users(first_name, last_name, email, password, `group`) VALUES (:fist_name, :last_name, :email, $password, 'user')";
+
+    $requete= $db->prepare($sql);
+
+    $requete->bindValue("fist_name",$prenom, PDO::PARAM_STR);
+    $requete->bindValue("last_name",$nom, PDO::PARAM_STR);
+    $requete->bindValue("email",$_POST["email"], PDO::PARAM_STR);
+
+    $requete->execute();
+  }else{
+    die("Le formulaire est incomplet");
+  }
 }
 
 ?>

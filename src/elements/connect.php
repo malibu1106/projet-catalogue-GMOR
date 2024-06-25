@@ -10,8 +10,8 @@ $dsn = "mysql:host=" . DBHOST . ";dbname=" . DBNAME . ";charset=utf8";
     //Maintenant, on se connecte avec le PDO
 try {
 $db = new PDO($dsn, DBUSER, DBPASS);
-echo "connexion réussie";
+// echo "connexion réussie";
 } catch(PDOException $error) {
-    echo "échec de la connection: " . $error->getMessage() . "</br>";
+    // echo "échec de la connection: " . $error->getMessage() . "</br>";
 }
 //ci-dessus la fonction nous sort le message d'erreur en cas d'échec

@@ -1,3 +1,4 @@
+/* BURGER MENU */
 let menuBurger = document.getElementById('menuBurger'); // MENU EN LUI MEME (  <ul>...</ul>  )
 let menuBurgerButton = document.getElementById('menuBurgerIcon'); // BOUTON DU MENU
 
@@ -12,5 +13,23 @@ function showOrHideMenuBurger() {
         menuBurger.classList.remove("showMenuBurger");
         menuBurger.classList.add("hideMenuBurger");
         menuBurgerButton.classList.remove('rotateIcon');
+    }
+}
+
+
+
+
+/* DEBUG ZONE */
+let debugZone = document.getElementById('debug');
+let debugButton = document.getElementById('debugButton');
+
+debugButton.addEventListener("click", showOrDebugZone);
+
+function showOrDebugZone() {
+    if (debugZone.style.display != "block") {
+        debugZone.style.display = "block";
+    }
+    else {
+        debugZone.style.display = "none";
     }
 }
