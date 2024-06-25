@@ -1,4 +1,5 @@
 <nav>
+<div class="menuButtonsContainer">
     <span id="menuBurgerIcon">☰</span>
     
 
@@ -24,6 +25,7 @@
                 </a>
             </li>
         </ul>
+</div>
 
 
     <ul class="menu hideMenuBurger" id="menuBurger">
