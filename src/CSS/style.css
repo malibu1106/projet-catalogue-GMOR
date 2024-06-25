@@ -88,8 +88,6 @@ ul.menu {
     transform: rotate(90deg);
 }
 
-
-
 #userMenu {
     display: flex;
     flex-direction: row;
@@ -97,12 +95,36 @@ ul.menu {
     height: 50px;
 }
 
-
 #userMenu img {
     width: 30px;
     margin: 8px;
 }
 
+/* SEARCH */
+.researchBar form {
+    background-color: ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    width: 90vw;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.researchBar input {
+    width: calc(90% - 40px);
+    height: 100%;
+    border: none;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
+.researchBar button {
+    width: 50px;
+    border: none;
+    background: none;
+}
 
 /*LOGIN.PHP*/
 .login-body {
