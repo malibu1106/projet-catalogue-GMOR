@@ -21,16 +21,19 @@
 }
 
 /*HEADER*/
+
 .logo_index {
     height: 100px;
-    margin: auto;
+    margin: 50px auto 0;
 }
 
 /*NAV*/
 nav {
     display: flex;
     height: 50px;
-    position: relative;
+    position: fixed;
+    width: 100%;
+    top: 0;
     z-index: 250;
 }
 
@@ -85,20 +88,47 @@ ul.menu {
     transform: rotate(90deg);
 }
 
-
-
 #userMenu {
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 50px;
 }
-
 
 #userMenu img {
     width: 30px;
-    margin: 4px;
+    margin: 8px;
 }
 
+/* SEARCH */
+.researchBar form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    width: 90vw;
+    max-width: 600px; // TEMP A VOIR
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.researchBar input {
+    width: calc(90% - 40px);
+    height: 100%;
+    border: none;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
+.researchBar input:focus {
+    outline: none;
+}
+
+.researchBar button {
+    width: 50px;
+    border: none;
+    background: none;
+}
 
 /*LOGIN.PHP*/
 .login-body {

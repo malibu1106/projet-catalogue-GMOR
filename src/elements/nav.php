@@ -1,7 +1,7 @@
 <nav>
 <div class="menuButtonsContainer">
     <span id="menuBurgerIcon">☰</span>
-    <span id="debugButton">Debug</span>
+    <span id="debugButton" style="font-size:1em">Debug</span>
     
 
         <ul class="menu" id="userMenu">
