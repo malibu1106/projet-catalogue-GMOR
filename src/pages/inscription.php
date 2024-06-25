@@ -19,7 +19,8 @@ if(!empty($_POST)){
       }
       // Connecte avec la base de données 
       require_once("../elements/connect.php");
-
+      // On ajoute le verification 
+      // Etape 2 : Verification de L'existentace de l'email dans la base de données
       $sql_email=" SELECT COUNT(*) AS nd_emails FROM users WHERE email = :email";
       $requete_email = $db->prepare($sql_email);
       $requete_email->bindValue(":email", $_POST["email"],PDO::PARAM_STR);
@@ -31,20 +32,22 @@ if(!empty($_POST)){
       die("Cette edresse email est déjà ultilisée");
     }
 
-
+    // etape 2 :confirmation des mots de passe
     if(isset($_POST["password"]) && isset($_POST["password2"])){
       $password = $_POST["password"];
       $password2 = $_POST["password2"];
-
+        // Validation de la correspondance des mots de passes
         if($password === $password2){
-
+          // ON hash le mot de passe
           $password = password_hash($_POST["password"], PASSWORD_ARGON2ID);
-
+          // Mot de passe confirme, procede a la logique d'inscription
           header("Location: ../tools/login.php");
     }else{
       die("Le mon de passe ne correspondent pas.");
     }
-    }
+    } //fin des verifications
+    
+    // on écri la roquete sql d'inscription
     $sql = "INSERT INTO users (first_name, last_name, email, password, `group`) VALUES (:first_name, :last_name, :email, :password, 'user')";
 
         $requete = $db->prepare($sql);
