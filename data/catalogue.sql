@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : lun. 24 juin 2024 à 14:50
+-- Généré le : mar. 25 juin 2024 à 07:53
 -- Version du serveur : 8.0.37
 -- Version de PHP : 8.2.8
 
@@ -37,10 +37,10 @@ CREATE TABLE `carts` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `commentary`
+-- Structure de la table `commentaries`
 --
 
-CREATE TABLE `commentary` (
+CREATE TABLE `commentaries` (
   `id` int NOT NULL,
   `commentary_user_id` int NOT NULL,
   `commentary_product_id` int NOT NULL,
@@ -98,15 +98,17 @@ CREATE TABLE `messages` (
 CREATE TABLE `products` (
   `id` int NOT NULL,
   `ref` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `brand` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `size` varchar(255) NOT NULL,
   `color` varchar(255) NOT NULL,
+  `pattern` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `material` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `gender` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `stock` int NOT NULL,
   `price` decimal(5,2) NOT NULL,
   `discount` decimal(3,2) NOT NULL DEFAULT '1.00',
   `category` varchar(255) NOT NULL,
   `content` text NOT NULL,
-  `commentary` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `image_1` varchar(255) NOT NULL,
   `image_2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `image_3` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -124,10 +126,21 @@ CREATE TABLE `users` (
   `first_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `avatar` varchar(255) NOT NULL,
-  `group` varchar(255) NOT NULL
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `group` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `avatar`, `group`) VALUES
+(1, 'super', 'admin', 'super@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$OW5XVHlqaktCS0hudnlHTA$2LZ2t5ehCOV4QeEAcD0ARL7fgk9WhGaqSsZ5MEr1OHQ', NULL, NULL),
+(2, 'guilain', 'admin', 'guilain@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$cUlHbkVtUXZITHEzdlBNdA$uX12BS4BjYDq8/uQW1GxKhiXXERCqNYtAqI1w/4hl/4', NULL, NULL),
+(3, 'morgane', 'admin', 'morgane@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$NkdGbFIwZzY1SDBacEh0Sw$ubz/vUmV9jXx5dR80zAOD7gQTtyoht5ZhKzQP/eb7FQ', NULL, NULL),
+(4, 'roberto', 'admin', 'roberto@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$V2xDZFduQXcxSEZwMnlNYQ$kpZavx+IKYGw+wtGOsj2rkMeUI5N1Bu/+4NKsBqrsFY', NULL, NULL),
+(5, 'osias', 'admin', 'osias@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$cERBLzl5R3FsWHE5Nm5Ubw$6grq+rt5BkmF5GKSwkGpmpNDFWjDJxiON3ZbPZF0DQc', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -151,9 +164,9 @@ ALTER TABLE `carts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `commentary`
+-- Index pour la table `commentaries`
 --
-ALTER TABLE `commentary`
+ALTER TABLE `commentaries`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -191,9 +204,9 @@ ALTER TABLE `carts`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `commentary`
+-- AUTO_INCREMENT pour la table `commentaries`
 --
-ALTER TABLE `commentary`
+ALTER TABLE `commentaries`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
@@ -218,7 +231,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
