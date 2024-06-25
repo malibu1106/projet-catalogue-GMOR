@@ -13,7 +13,7 @@ if (isset($_POST['loginUser'])) {
             die("L'adresse eMail est incorrecte");
         }
 
-        require_once('connect.php');
+        require_once('../elements/connect.php');
 
         $user = verifyUserLoginPassword($db, $_POST['email'], $_POST['password']);
 
@@ -22,11 +22,11 @@ if (isset($_POST['loginUser'])) {
             $_SESSION['user'] = [
                 'email' => $user['email'],
                 'id' => $user['id'],
-                "nom" => $user['nom'],
-                "prenom" => $user['prenom'],
+                "nom" => $user['first_name'],
+                "prenom" => $user['last_name'],
                 "group" => $user['group']
             ];
-            header('Location: index.php');
+            header('Location: ../index.php');
             exit(); // On arrete le script aprés la redirection
         } else {
             $errors[] = 'Email ou mot de passe incorrect.';
