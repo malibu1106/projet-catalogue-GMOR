@@ -106,6 +106,56 @@ ul.menu {
     background-position: left 20% top 25%;
 }
 
+/*BACKOFFICE*/
+/*Debut : selecteur couleur custom*/
+.custom-select {
+    position: relative;
+    display: inline-block;
+}
+.select-styled {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.select-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.select-options li {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.select-options li:hover {
+    background: #f0f0f0;
+}
+.color-preview {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border: 1px solid #000;
+    vertical-align: middle;
+}
+.bleu { background-color: blue; }
+.rouge { background-color: red; }
+/*Fin : selecteur couleur custom*/
+.backofficeadd-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    max-width: 600px;
+}
+
+
 /*FOOTER*/
 .footer-pad {
     padding-left: 50px;
