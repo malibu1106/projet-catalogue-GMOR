@@ -18,8 +18,17 @@
 /*NAV*/
 nav {
     display: flex;
-    justify-content: space-between;
     height: 50px;
+    position: relative;
+    z-index: 250;
+}
+
+.menuButtonsContainer {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 200;
 }
 
 #menuBurgerIcon {
@@ -28,14 +37,27 @@ nav {
 }
 
 ul#menuBurger {
-    display: none;
     position: absolute;
-    top: 50px;
     left: 0;
     width: 100vw;
     height: auto;
-    background: rgba(255, 0, 0, 0.8);
+    background-color: white;
     text-align: center;
+    z-index: 100;
+    transition: top 0.6s linear;
+    font-size: 1.4em;
+}
+
+#menuBurger li {
+    margin: 15px auto;
+}
+
+.hideMenuBurger {
+    top: -300px;
+}
+
+.showMenuBurger {
+    top: 50px;
 }
 
 ul.menu {
@@ -44,7 +66,15 @@ ul.menu {
 
 #menuBurgerIcon {
     cursor: pointer;
+    line-height: 50px;
+    transition: transform 1s;
 }
+
+.rotateIcon {
+    transform: rotate(90deg);
+}
+
+
 
 #userMenu {
     display: flex;
@@ -56,4 +86,11 @@ ul.menu {
 #userMenu img {
     width: 30px;
     margin: 4px;
+}
+
+
+/*LOGIN.PHP*/
+.login-body {
+    background-image: url(/img/temporaire/model-image-login.jpg);
+    background-position: left 20% top 25%;
 }

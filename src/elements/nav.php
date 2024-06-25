@@ -1,4 +1,5 @@
 <nav>
+<div class="menuButtonsContainer">
     <span id="menuBurgerIcon">☰</span>
     
 
@@ -24,9 +25,10 @@
                 </a>
             </li>
         </ul>
+</div>
 
 
-    <ul class="menu" id="menuBurger">
+    <ul class="menu hideMenuBurger" id="menuBurger">
         <li>
             <a href="#">Lien 1</a>
         </li>
