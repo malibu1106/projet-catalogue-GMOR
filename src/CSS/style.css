@@ -2,3 +2,25 @@
 @import "body_reset.css";
 /* FONTS */
 @import "fonts.css";
+
+/*DEBUG*/
+#debug {
+    width: 100vw;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(255, 0, 0, 0.5);
+}
+
+/*HEADER*/
+
+/*NAV*/
+ul.menu {
+    list-style: none;
+    display: none;
+}
+
+#menuBurgerIcon {
+    cursor: pointer;
+}
