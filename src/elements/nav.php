@@ -1,12 +1,50 @@
-NAV
 <nav>
     <span id="menuBurgerIcon">☰</span>
+    
+
+        <ul class="menu" id="userMenu">
+            <li>
+                <a href="#">
+                    <img class="userMenuIcon" src="../img/illustration/account.png">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="userMenuIcon" src="../img/illustration/message.png">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="userMenuIcon" src="../img/illustration/disconnect.png">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="userMenuIcon" src="../img/illustration/cart.png">
+                </a>
+            </li>
+        </ul>
+
+
     <ul class="menu" id="menuBurger">
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">6</a></li>
+        <li>
+            <a href="#">Lien 1</a>
+        </li>
+        <li>
+            <a href="#">Lien 2</a>
+        </li>
+        <li>
+            <a href="#">Lien 3</a>
+        </li>
+        <li>
+            <a href="#">Lien 4</a>
+        </li>
+        <li>
+            <a href="#">Lien 5</a>
+        </li>
+        <li>
+            <a href="#">Lien 6</a>
+        </li>
     </ul>
+
 </nav>

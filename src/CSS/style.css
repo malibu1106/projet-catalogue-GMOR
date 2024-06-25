@@ -16,14 +16,48 @@
 /*HEADER*/
 
 /*NAV*/
+nav {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+}
+
+#menuBurgerIcon {
+    padding: 0px 8px;
+    font-size: 2em;
+}
+
+ul#menuBurger {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100vw;
+    height: auto;
+    background: rgba(255, 0, 0, 0.8);
+    text-align: center;
+}
+
 ul.menu {
     list-style: none;
-    display: none;
 }
 
 #menuBurgerIcon {
     cursor: pointer;
 }
+
+#userMenu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+#userMenu img {
+    width: 30px;
+    margin: 4px;
+}
+
 
 /*LOGIN.PHP*/
 .login-body{
