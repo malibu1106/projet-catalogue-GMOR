@@ -24,3 +24,9 @@ ul.menu {
 #menuBurgerIcon {
     cursor: pointer;
 }
+
+/*LOGIN.PHP*/
+.login-body{
+    background-image: url(/img/temporaire/model-image-login.jpg);
+    background-position: left 20% top 25%;
+}
