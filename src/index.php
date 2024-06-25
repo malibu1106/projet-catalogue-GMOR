@@ -12,7 +12,12 @@
 </head>
 <body>
 <?php require_once ('elements/debug.php');?>
+
+
+
 <?php require_once ('elements/header.php');?>
+
+<?php require_once ('pages/mobile_slider.php');?>
 
 <?php require_once ('elements/footer.php');?>
 

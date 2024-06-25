@@ -20,6 +20,9 @@ nav {
     display: flex;
     justify-content: space-between;
     height: 50px;
+    background: blue;
+    position: relative;
+    z-index: 250;
 }
 
 #menuBurgerIcon {
@@ -28,14 +31,14 @@ nav {
 }
 
 ul#menuBurger {
-    display: none;
     position: absolute;
-    top: 50px;
     left: 0;
     width: 100vw;
     height: auto;
     background: rgba(255, 0, 0, 0.8);
     text-align: center;
+    z-index: 100;
+    transition: top 1s;
 }
 
 ul.menu {
@@ -44,6 +47,20 @@ ul.menu {
 
 #menuBurgerIcon {
     cursor: pointer;
+    line-height: 50px;
+    transition: transform 1s;
+}
+
+.rotateIcon {
+    transform: rotate(90deg);
+}
+
+.hideMenuBurger {
+    top: -800px;
+}
+
+.showMenuBurger {
+    top: 50px;
 }
 
 #userMenu {

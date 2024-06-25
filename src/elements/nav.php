@@ -26,7 +26,7 @@
         </ul>
 
 
-    <ul class="menu" id="menuBurger">
+    <ul class="menu hideMenuBurger" id="menuBurger">
         <li>
             <a href="#">Lien 1</a>
         </li>
