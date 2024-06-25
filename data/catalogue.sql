@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : mar. 25 juin 2024 à 07:31
+-- Généré le : mar. 25 juin 2024 à 07:53
 -- Version du serveur : 8.0.37
 -- Version de PHP : 8.2.8
 
@@ -37,10 +37,10 @@ CREATE TABLE `carts` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `commentary`
+-- Structure de la table `commentaries`
 --
 
-CREATE TABLE `commentary` (
+CREATE TABLE `commentaries` (
   `id` int NOT NULL,
   `commentary_user_id` int NOT NULL,
   `commentary_product_id` int NOT NULL,
@@ -98,15 +98,17 @@ CREATE TABLE `messages` (
 CREATE TABLE `products` (
   `id` int NOT NULL,
   `ref` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `brand` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `size` varchar(255) NOT NULL,
   `color` varchar(255) NOT NULL,
+  `pattern` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `material` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `gender` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `stock` int NOT NULL,
   `price` decimal(5,2) NOT NULL,
   `discount` decimal(3,2) NOT NULL DEFAULT '1.00',
   `category` varchar(255) NOT NULL,
   `content` text NOT NULL,
-  `commentary` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `image_1` varchar(255) NOT NULL,
   `image_2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `image_3` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -162,9 +164,9 @@ ALTER TABLE `carts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `commentary`
+-- Index pour la table `commentaries`
 --
-ALTER TABLE `commentary`
+ALTER TABLE `commentaries`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -202,9 +204,9 @@ ALTER TABLE `carts`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `commentary`
+-- AUTO_INCREMENT pour la table `commentaries`
 --
-ALTER TABLE `commentary`
+ALTER TABLE `commentaries`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
