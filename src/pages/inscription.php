@@ -14,7 +14,7 @@ if(!empty($_POST)){
         die("L'adresse email est incorrecte");
       }
       // Connecte avec la base de données 
-      require_once("connect.php");
+      require_once("../elements/connect.php");
 
       $sql_email=" SELECT COUNT(*) AS nd_emails FROM users WHERE email = :email";
       $requete_email = $db->prepare($sql_email);
@@ -36,7 +36,7 @@ if(!empty($_POST)){
 
           $password = password_hash($_POST["password"], PASSWORD_ARGON2ID);
 
-          header("Location: login.php");
+          header("Location: ../tools/login.php");
     }else{
       die("Le mon de passe ne correspondent pas.");
     }
