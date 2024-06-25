@@ -4,13 +4,19 @@
 @import "fonts.css";
 
 /*DEBUG*/
+#debugButton {
+    cursor: pointer;
+    line-height: 50px;
+    font-size: 2em;
+}
+
 #debug {
     width: 100vw;
-    height: 100px;
     position: absolute;
     left: 0;
     bottom: 0;
-    background: rgba(255, 0, 0, 0.5);
+    background: rgba(255, 0, 0, 1);
+    display: none;
 }
 
 /*HEADER*/
