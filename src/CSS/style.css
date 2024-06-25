@@ -21,16 +21,19 @@
 }
 
 /*HEADER*/
+
 .logo_index {
     height: 100px;
-    margin: auto;
+    margin: 50px auto 0;
 }
 
 /*NAV*/
 nav {
     display: flex;
     height: 50px;
-    position: relative;
+    position: fixed;
+    width: 100%;
+    top: 0;
     z-index: 250;
 }
 
@@ -91,12 +94,13 @@ ul.menu {
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 50px;
 }
 
 
 #userMenu img {
     width: 30px;
-    margin: 4px;
+    margin: 8px;
 }
 
 
