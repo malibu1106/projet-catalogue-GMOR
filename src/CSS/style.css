@@ -107,7 +107,8 @@ ul.menu {
     justify-content: space-between;
     margin: auto;
     width: 90vw;
-    max-width: 600px; // TEMP A VOIR
+    max-width: 600px;
+    /*max-width temp à voir */
     height: 40px;
     margin-bottom: 10px;
 }

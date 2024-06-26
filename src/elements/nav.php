@@ -28,7 +28,7 @@
             echo'
             <li>
                 <a href="tools/login.php">
-                    <img class="userMenuIcon" src="../img/illustration/connect.png">
+                    <img class="userMenuIcon" src="../img/illustration/account.png">
                 </a>
             </li>';
         }
