@@ -36,7 +36,7 @@ session_start();?>
                 </div>
                 <div class="photo-petite">
                     <div class="image-container">
-                        <img src="img/temporaire/ninja-cosmico-.jpeg">
+                        <img src="img/temporaire/ninja-cosmico.jpeg">
                         <div class="overlay">
                             <p>Consultez cet article</p>
                         </div>
@@ -56,7 +56,7 @@ session_start();?>
                 </div>
                 <div class="photo-petite">
                     <div class="image-container">
-                        <img src="img/temporaire/ninja-cosmico-.jpeg">
+                        <img src="img/temporaire/ninja-cosmico.jpeg">
                         <div class="overlay">
                             <p>Consultez cet article</p>
                         </div>
@@ -68,19 +68,19 @@ session_start();?>
     <section id="categories">
         <h1>Trouvez votre <span>bonheur</span> parmi nos articles</h1>
             <article class="rond-categorie">
-               <img src="img/temporaire/ninja-cosmico-.jpeg">
+               <img src="img/temporaire/ninja-cosmico.jpeg">
             </article>
             <article class="rond-categorie">
-               <img src="img/temporaire/ninja-cosmico-.jpeg">
+               <img src="img/temporaire/ninja-cosmico.jpeg">
             </article>
             <article class="rond-categorie">
-               <img src="img/temporaire/ninja-cosmico-.jpeg">
+               <img src="img/temporaire/ninja-cosmico.jpeg">
             </article>
             <article class="rond-categorie">
-               <img src="img/temporaire/ninja-cosmico-.jpeg">
+               <img src="img/temporaire/ninja-cosmico.jpeg">
             </article>
             <article class="rond-categorie">
-               <img src="img/temporaire/ninja-cosmico-.jpeg">
+               <img src="img/temporaire/ninja-cosmico.jpeg">
             </article>
     </section>
 <?php require_once ('elements/footer.php');?>
