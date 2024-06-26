@@ -1,3 +1,17 @@
+<?php 
+session_start();
+require_once("../tools/user.php");
+
+    if(!isset($_SESSION['user'])){
+        header('location: login.php');
+    }
+
+    if($_POST){
+        
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
