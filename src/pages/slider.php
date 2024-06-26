@@ -6,7 +6,7 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item">
-      <img src="../img/temporaire/model-image-login.jpg" height="700px" class="d-block w-100" alt="Description of Image 1" style="object-fit: cover;">
+      <img src="../img/temporaire/model-image-login.jpg" height="700px" class="d-block w-100 rounded" alt="Description of Image 1" style="object-fit: cover;">
       <div class="container">
         <div class="carousel-caption text-start">
           <h1>Laissez vos enfants créer leurs propres aventures avec Playmobil</h1>
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="carousel-item active">
-      <img src="../img/temporaire/model-image-login.jpg" height="700px" class="d-block w-100" alt="Description of Image 2" style="object-fit: cover;">
+      <img src="../img/temporaire/model-image-login.jpg" height="700px" class="d-block w-100 rounded" alt="Description of Image 2" style="object-fit: cover;">
       <div class="container">
         <div class="carousel-caption">
           <h1>Laissez libre cours à leur imagination avec nos jeux de construction</h1>
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="carousel-item">
-      <img src="../img/temporaire/model-image-login.jpg" height="700px" class="d-block w-100" alt="Description of Image 3" style="object-fit: cover;">
+      <img src="../img/temporaire/model-image-login.jpg" height="700px" class="d-block w-100 rounded" alt="Description of Image 3" style="object-fit: cover;">
       <div class="container">
         <div class="carousel-caption text-end">
           <h1>Éveillez leurs sens avec nos jeux d'éveil en bois</h1>
