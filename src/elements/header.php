@@ -1,8 +1,10 @@
 <header>
 <?php require_once ('nav.php');?>
-    <a href="#">
-        <img class="logo_index" src="../img/illustration/logo-online-training.png">
-    </a>
+    <div class="logo">
+
+            <img class="logo_index" src="../img/illustration/logo-online-training.png">
+
+    </div>  
     <div class="researchBar">
         <form class="searchForm" method="GET" action="pages/search.php">
             <input name="search" type="text" class="researchInput" placeholder="">
