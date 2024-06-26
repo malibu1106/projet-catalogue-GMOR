@@ -4,7 +4,7 @@
             <h5>A propos</h5>
             <ul class="nav flex-column">
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Qui sommes-nous ?</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nos politiques de confidentialités</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nos politiques de confidentialité</a></li>
             </ul>
         </div>
 
@@ -19,12 +19,12 @@
 
         <div class="col-md-5 offset-md-1 mb-3">
             <form>
-            <h5>Souscrire a notre newsletter</h5>
+            <h5>Souscrire à notre newsletter</h5>
                 <p>Résumé mensuel de nos nouveautés et actualités passionnantes.</p>
             <div class="d-flex flex-column flex-sm-row w-100 gap-2">
                 <label for="newsletter1" class="visually-hidden">Email address</label>
-                <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                <button class="btn btn-primary" type="button">Subscribe</button>
+                <input id="newsletter1" type="text" class="form-control" placeholder="Votre adresse email">
+                <button class="btn btn-primary" type="button">Souscrire</button>
             </div>
             </form>
         </div>
