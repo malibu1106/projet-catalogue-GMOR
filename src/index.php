@@ -20,8 +20,19 @@ session_start();?>
 
 <?php require_once ('elements/header.php');?>
 
-<?php require_once ('pages/mobile_slider.php');?>
+<?php require_once ('pages/slider.php');?>
 
+<section id="container-photos" style="border: solid green 1px">
+    <div class="container-photos-1" style="border: solid red 1px">
+        cacaprout
+        <div class="photo-grande" style="border: solid blue 1px">
+        cacaprout
+        </div>
+        <div class="photo-petite" style="border: solid yellow 1px">
+        cacapipi
+        </div>
+    </div>
+</section>
 <?php require_once ('elements/footer.php');?>
 
     

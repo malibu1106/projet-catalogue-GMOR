@@ -104,19 +104,19 @@ ul.menu {
 .researchBar form {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: auto;
     width: 90vw;
-    max-width: 600px; // TEMP A VOIR
-    height: 40px;
-    margin-bottom: 10px;
+    max-width: 600px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-bottom: solid black 1px;
 }
 
 .researchBar input {
-    width: calc(90% - 40px);
     height: 100%;
+    width: calc(100% - 30px);
     border: none;
-    border-bottom: 1px solid black;
     text-align: center;
 }
 
@@ -125,9 +125,9 @@ ul.menu {
 }
 
 .researchBar button {
-    width: 50px;
-    border: none;
+    width: 30px;
     background: none;
+    border: none;
 }
 
 /*LOGIN.PHP*/
@@ -152,6 +152,7 @@ ul.menu {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+
 .backofficeadd-card {
     background-color: white;
     padding: 2rem;
