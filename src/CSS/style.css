@@ -137,6 +137,77 @@ ul.menu {
     background-position: left 20% top 25%;
 }
 
+/*BACKOFFICE*/
+/*Debut : selecteur couleur custom*/
+.custom-select {
+    position: relative;
+    /* display: inline-block; */
+    display: flex;
+    flex-direction: row;
+
+}
+.select-styled {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    text-align: center;
+
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.select-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 2px solid #3b3b3b;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+}
+.select-options li {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.select-options li:hover {
+    background: #f0f0f0;
+}
+.color-preview {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border: 1px solid #000;
+    vertical-align: middle;
+}
+.bleu { background-color: blue; }
+.rouge { background-color: red; }
+/*Fin : selecteur couleur custom*/
+.backofficeadd-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.backofficeadd-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(211, 211, 211);
+    max-width: 600px;
+    padding: 15px;
+    border: 2px solid black;
+    border-radius: 20px;
+    filter: drop-shadow(0 0 0.75rem rgb(56, 56, 56));
+}
+
+
 /*FOOTER*/
 .footer-pad {
     padding-left: 50px;
