@@ -15,7 +15,7 @@ $search_name = $db->prepare("SELECT * FROM products WHERE
     id LIKE :id OR
     ref LIKE :ref OR
     brand LIKE :brand OR
-    size LIKE :size OR
+    `size` LIKE :`size` OR
     color LIKE :color OR
     pattern LIKE :pattern OR
     material LIKE :material OR
@@ -47,6 +47,7 @@ $search_name->execute();
 // Obtient les résultats
 $result = $search_name->fetchAll(PDO::FETCH_ASSOC);
 
+// debug
 echo '<pre>';
 print_r($result);
 echo '</pre>';
