@@ -22,14 +22,14 @@ session_start();?>
 
 <?php require_once ('pages/slider.php');?>
 
-<section id="container-photos" style="border: solid green 1px">
-    <div class="container-photos-1" style="border: solid red 1px">
-        cacaprout
-        <div class="photo-grande" style="border: solid blue 1px">
-        cacaprout
+<section id="container-photos">
+    <div class="container-photos-1">
+    
+        <div class="photo-grande">
+        <img src="img/temporaire/photo1.jpg">
         </div>
-        <div class="photo-petite" style="border: solid yellow 1px">
-        cacapipi
+        <div class="photo-petite">
+        <img src="img/temporaire/ninja-cosmico-.jpeg">
         </div>
     </div>
 </section>
