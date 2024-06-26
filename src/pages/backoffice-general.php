@@ -11,42 +11,44 @@
 <body class="backofficegeneral-body">
     <?php require_once ('../elements/header.php');?>
 
-    <article class="backgene-set">
-        <h2 class="backgene-title">Administrateur</h2>
-    </article>
-
-    <section class="backgene-panel">
-        <div class="flex">
-            <div class="cards1 clickCards overhide">
-                <div><img src="/img/07240e0d46169c9bd473159975cbbfe3.png" width="300px" height="300px" alt=""></div>
-                <div class="white">
-                    <p class="overtext"><span class="fname">Utilisateur</span></p>
-                    <p class="overtextp">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ullam odit, quos minus</p>
-                </div>
-            </div>
-            <div class="cards2 clickCards overhide">
-                <div><img src="/img/4ad274d6e62a46fbcb0d89861a009b56.png" width="300px" height="300px" alt=""></div>
-                <div class="white">
-                    <p class="overtext"><span class="fname">Produits</span></p>
-                    <p class="overtextp">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ullam odit, quos minus</p>
-                </div>
-            </div>
-            <div class="cards3 clickCards overhide">
-                <div><img src="/img/81BpIkbEsTHPE.png" width="300px" height="300px" alt=""></div>
-                <div class="white">
-                    <p class="overtext"><span class="fname">Messagerie</span></p>
-                    <p class="overtextp">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ullam odit, quos minus</p>
-                </div>
-            </div>
-            <div class="cards4 clickCards overhide">
-                <div><img src="/img/e0bbf170d4045c2c38393e083f3d2dbd.png" width="300px" height="300px" alt=""></div>
-                <div class="white">
-                    <p class="overtext"><span class="fname">Commandes</span></p>
-                    <p class="overtextp">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ullam odit, quos minus</p>
-                </div>
-            </div>
+    <article class="backgene-section">
+        <div class="backgene-set">
+            <h2 class="backgene-title">Administrateur</h2>
         </div>
-    </section>
+
+        <section class="backgene-panel">
+            <div class="flex">
+                <div class="cards1 clickCards overhide">
+                    <div><img src="/img/07240e0d46169c9bd473159975cbbfe3.png" width="300px" height="300px" alt=""></div>
+                    <div class="white">
+                        <p class="overtext"><span class="fname">Utilisateur</span></p>
+                        <p class="overtextp">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ullam odit, quos minus</p>
+                    </div>
+                </div>
+                <div class="cards2 clickCards overhide">
+                    <div><img src="/img/4ad274d6e62a46fbcb0d89861a009b56.png" width="300px" height="300px" alt=""></div>
+                    <div class="white">
+                        <p class="overtext"><span class="fname">Produits</span></p>
+                        <p class="overtextp">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ullam odit, quos minus</p>
+                    </div>
+                </div>
+                <div class="cards3 clickCards overhide">
+                    <div><img src="/img/81BpIkbEsTHPE.png" width="300px" height="300px" alt=""></div>
+                    <div class="white">
+                        <p class="overtext"><span class="fname">Messagerie</span></p>
+                        <p class="overtextp">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ullam odit, quos minus</p>
+                    </div>
+                </div>
+                <div class="cards4 clickCards overhide">
+                    <div><img src="/img/e0bbf170d4045c2c38393e083f3d2dbd.png" width="300px" height="300px" alt=""></div>
+                    <div class="white">
+                        <p class="overtext"><span class="fname">Commandes</span></p>
+                        <p class="overtextp">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ullam odit, quos minus</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
 
     <?php require_once ('../elements/footer.php');?>
 </body>
