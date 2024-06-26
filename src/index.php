@@ -20,7 +20,7 @@ session_start();?>
 
 <?php require_once ('elements/header.php');?>
 
-<?php require_once ('pages/mobile_slider.php');?>
+<?php require_once ('pages/slider.php');?>
 
 <?php require_once ('elements/footer.php');?>
 
