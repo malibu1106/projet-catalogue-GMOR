@@ -47,6 +47,7 @@ $search_name->execute();
 // Obtient les résultats
 $results = $search_name->fetchAll(PDO::FETCH_ASSOC);
 
+
 // debug
 // echo '<pre>';
 // print_r($results);
@@ -79,10 +80,15 @@ $results = $search_name->fetchAll(PDO::FETCH_ASSOC);
 <body>
 <?php require_once ('../elements/debug.php');?>
 
-<?php require_once ('../elements/header.php');?>
+<?php require_once ('../elements/header.php');
+    if(empty($results)){
+    echo 'Aucun résultat pour votre recherche.';
+}?>
 
     <h2>Nom catégorie</h2>
         <div class="tri">Zone de tri ici</div>
+
+        
 
         <section class="affichage_des_produits">
 
