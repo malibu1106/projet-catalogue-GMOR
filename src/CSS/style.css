@@ -107,9 +107,10 @@ ul.menu {
     justify-content: space-around;
     margin: auto;
     width: 90vw;
-    max-width: 600px; // TEMP A VOIR
-    height: 40px;
-    margin-bottom: 10px;
+    max-width: 600px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-bottom: solid black 1px;
 }
 
 .researchBar input {
