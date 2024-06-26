@@ -22,9 +22,18 @@
 
 /*HEADER*/
 
+.logo {
+    height: 60px;
+    position: fixed;
+    top: 50px;
+    z-index: 200;
+    background: white;
+    width: 100vw;
+}
+
 .logo_index {
-    height: 100px;
-    margin: 50px auto 0;
+    height: 100%;
+    margin: auto;
 }
 
 /*NAV*/
@@ -105,11 +114,10 @@ ul.menu {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin: auto;
+    margin: 110px auto;
     width: 90vw;
     max-width: 600px;
     margin-bottom: 20px;
-    margin-top: 20px;
     border-bottom: solid black 1px;
 }
 

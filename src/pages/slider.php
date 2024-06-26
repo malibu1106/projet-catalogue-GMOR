@@ -1,104 +1,49 @@
-<div class="slider">
-        <div class="slides">
-            <!-- Exemple de slide de produit. Remplace ce bloc avec un foreach en PHP pour ajouter tes produits -->
-            <!-- <?php
-            $products = [
-                ['name' => 'Produit 1', 'image' => 'path/to/image1.jpg', 'price' => '29.99'],
-                ['name' => 'Produit 2', 'image' => 'path/to/image2.jpg', 'price' => '39.99'],
-                // Ajoute d'autres produits ici
-            ];
-
-            foreach ($products as $product) {
-                echo '<div class="slide">';
-                echo '<img src="' . $product['image'] . '" alt="' . $product['name'] . '">';
-                echo '<div class="product-info">';
-                echo '<h2>' . $product['name'] . '</h2>';
-                echo '<p>' . $product['price'] . ' €</p>';
-                echo '</div>';
-                echo '</div>';
-                
-            }
-            ?> -->
-
-
-                 <div class="slide">
-                 <img src="../img/temporaire/model-image-login.jpg">
-                 <div class="product-info">
-                 <h2>Le slip sale de Gepeto</h2>
-                 <p>22€</p>
-                 </div>
-                 </div>
-
-                 <div class="slide">
-                 <img src="../img/temporaire/model-image-login.jpg">
-                 <div class="product-info">
-                 <h2>Le slip sale de Pierre</h2>
-                 <p>22€</p>
-                 </div>
-                 </div>
-
-
+<div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" aria-label="Slide 1" style="height:30px;width:30px;border-radius:50%;"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" class="active" aria-current="true" aria-label="Slide 2" style="height:30px;width:30px;border-radius:50%;"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" style="height:30px;width:30px;border-radius:50%;"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item">
+      <img src="../img/temporaire/model-image-login.jpg" height="700px" class="d-block w-100" alt="Description of Image 1" style="object-fit: cover;">
+      <div class="container">
+        <div class="carousel-caption text-start">
+          <h1>Laissez vos enfants créer leurs propres aventures avec Playmobil</h1>
+          <p class="opacity-75">Consultez notre pack exclusif Playmobil</p>
+          <p><a class="btn btn-lg btn-primary mb-5" href="#">En savoir plus</a></p>
         </div>
-        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+      </div>
     </div>
-    <script src="../JS/slider.js"></script>
+    <div class="carousel-item active">
+      <img src="../img/temporaire/model-image-login.jpg" height="700px" class="d-block w-100" alt="Description of Image 2" style="object-fit: cover;">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Laissez libre cours à leur imagination avec nos jeux de construction</h1>
+          <p>Consultez notre meilleure vente LEGO</p>
+          <p><a class="btn btn-lg btn-primary mb-5" href="#">En savoir plus</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="../img/temporaire/model-image-login.jpg" height="700px" class="d-block w-100" alt="Description of Image 3" style="object-fit: cover;">
+      <div class="container">
+        <div class="carousel-caption text-end">
+          <h1>Éveillez leurs sens avec nos jeux d'éveil en bois</h1>
+          <p>Consultez notre jeu favori</p>
+          <p><a class="btn btn-lg btn-primary mb-5" href="#">En savoir plus</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
-    <style>
-        .slider {
-    position: relative;
-    max-width: 1000px;
-    margin: 50px auto;
-    overflow: hidden;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.slide {
-    min-width: 100%;
-    box-sizing: border-box;
-    display: none;
-}
-
-.slide img {
-    width: 100%;
-    display: block;
-}
-
-.product-info {
-    text-align: center;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0,0,0,0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 10;
-}
-
-.prev {
-    left: 10px;
-}
-
-.next {
-    right: 10px;
-}
-</style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
