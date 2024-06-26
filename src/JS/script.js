@@ -34,32 +34,4 @@ function showOrDebugZone() {
     }
 }
 
-/*DEBUT TEMPORAIRE */
-/*SELECTEUR COULEUR CUSTOM DU BACKOFFICE*/
-document.addEventListener('DOMContentLoaded', function() {
-    var customSelect = document.querySelector('.custom-select');
-    var select = customSelect.querySelector('select');
-    var selectStyled = customSelect.querySelector('.select-styled');
-    var options = customSelect.querySelector('.select-options');
-
-    selectStyled.addEventListener('click', function(e) {
-        e.stopPropagation();
-        this.classList.toggle('active');
-        options.style.display = options.style.display === 'none' ? 'block' : 'none';
-    });
-
-    options.querySelectorAll('li').forEach(function(option) {
-        option.addEventListener('click', function() {
-            selectStyled.textContent = this.textContent;
-            select.value = this.getAttribute('data-value');
-            options.style.display = 'none';
-        });
-    });
-
-    document.addEventListener('click', function() {
-        selectStyled.classList.remove('active');
-        options.style.display = 'none';
-    });
-});
-/*FIN TEMPORAIRE */
 
