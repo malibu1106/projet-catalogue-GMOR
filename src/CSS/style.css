@@ -217,6 +217,7 @@ textarea {
     flex-direction: column;
     align-items: center;
 }
+
 .submit-btn {
     display: block;
     width: 200px;
