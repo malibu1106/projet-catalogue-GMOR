@@ -1,4 +1,4 @@
-<footer class="footer-pad pt-5">
+<footer class="footer-pad pt-5 bg-light">
     <div class="row">
         <div class="col-6 col-md-2 mb-3">
             <h5>A propos</h5>
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 border-top">
         <p>© 2024 Online FormaPro, Inc. All rights reserved.</p>
         <ul class="list-unstyled d-flex">
             <li class="ms-3"><a class="link-body-emphasis" href="#"><i class="bi bi-twitter" style="font-size: 1.5rem;"></i></a></li>

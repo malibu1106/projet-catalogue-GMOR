@@ -1,3 +1,17 @@
+<?php 
+session_start();
+require_once("../tools/user.php");
+
+    if(!isset($_SESSION['user'])){
+        header('location: login.php');
+    }
+
+    if($_POST){
+        
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,60 +22,86 @@
     <link rel="stylesheet" href="../CSS/style.css">
     <title>Document</title>
 </head>
-<body>
+<body class="backofficeadd-body">
     <?php require_once ('../elements/header.php');?>
 
     <main class="backofficeadd-container">
         <article class="backofficeadd-card">
             <h1>AJOUTER UN PRODUIT</h1>
-            <p>Référence du produit:</p> <input type="text">  
-            <p>Nom du produit:</p> <input type="text">
-            <p>Taille: </p> <select name="size" id="size">
-                <option value="XS">XS</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-            </select>
-
-            
-            <p>Couleur: </p>
-                <div id="custom-select" class="custom-select">
-                    <select name="color" id="color" style="display: none;">
-                        <option value="bleu">bleu</option>
-                        <option value="rouge">rouge</option>
-                    </select>
-                    <div class="select-styled">bleu</div>
-                    <ul class="select-options" style="display: none;">
-                        <li data-value="bleu"><span class="color-preview bleu"></span>bleu</li>
-                        <li data-value="rouge"><span class="color-preview rouge"></span>rouge</li>
-                    </ul>
+            <form method="POST">
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Référence du produit:</p>
+                    <input type="text" required>
                 </div>
-
-            
-            <p>Stock:</p> <input type="text">
-            <p>Prix:</p> <input type="text">
-            <p>Promotion:</p>
-            <p>Catégorie</p><select name="category" id="category">
-                <option value="shirt">T-shirt</option>
-                <option value="pull">Pull</option>
-                <option value="Jacket">Veste</option>
-                <option value="pants">Pantalon</option>
-                <option value="skirt">Jupe</option>
-                <option value="boots">Bottes</option>
-                <option value="dress">Robe</option>
-            </select>
-
-            <p>Description :</p>
-            <input type="text">
-
-            <p>Commentaire:</p>
-
-            <p>Télécharger images:</p>
-            <button>1</button>
-            <button>1</button>
-            <button>1</button>
-            <button>1</button>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Nom du produit:</p>
+                    <input type="text" required>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Taille: </p>
+                    <select name="size" id="size" required>
+                        <option value="">Sélectionnez une taille</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Couleur: </p>
+                    <div id="custom-select" class="custom-select">
+                        <select name="color" id="color" required>
+                            <option value="">Sélectionnez une couleur</option>
+                            <option value="bleu">bleu</option>
+                            <option value="rouge">rouge</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Stock:</p>
+                    <input type="number" min="0" required>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Prix:</p>
+                    <input type="number" min="0" step="0.01" required>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Promotion:</p>
+                    <input type="checkbox">
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Catégorie</p>
+                    <select name="category" id="category" required>
+                        <option value="">Sélectionnez une catégorie</option>
+                        <option value="shirt">T-shirt</option>
+                        <option value="pull">Pull</option>
+                        <option value="Jacket">Veste</option>
+                        <option value="pants">Pantalon</option>
+                        <option value="skirt">Jupe</option>
+                        <option value="boots">Bottes</option>
+                        <option value="dress">Robe</option>
+                    </select>
+                </div>
+                <div>
+                    <p class="rem-bts">Description:</p>
+                    <textarea name="description" id="description" required></textarea>
+                </div>
+                <p class="img-text-center">Télécharger images:</p>
+                <div class="image-upload">
+                    <input type="file" name="image1" id="image1" accept="image/*" style="display: none;">
+                    <label for="image1" class="image-upload-btn">Image 1</label>
+                    <input type="file" name="image2" id="image2" accept="image/*" style="display: none;">
+                    <label for="image2" class="image-upload-btn">Image 2</label>
+                    <input type="file" name="image3" id="image3" accept="image/*" style="display: none;">
+                    <label for="image3" class="image-upload-btn">Image 3</label>
+                    <input type="file" name="image4" id="image4" accept="image/*" style="display: none;">
+                    <label for="image4" class="image-upload-btn">Image 4</label>
+                </div>
+                <div class="backoff-center-btn">
+                    <button type="submit" class="submit-btn">Ajouter le Produit</button>
+                </div>
+            </form>
         </article>
     </main>
 

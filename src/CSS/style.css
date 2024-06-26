@@ -138,6 +138,79 @@ ul.menu {
     border: none;
 }
 
+/*BODY*/
+#container-photos {
+    display:flex;
+    height: 130vh;
+    width:100%;
+}
+
+.container-photos-1 {
+    display:flex;
+    width: 100%;
+    flex-direction: column;
+    height: 60vh;
+}
+
+.photo-grande {
+    width: 100%;
+    height: 60vh;
+    display:flex;
+    justify-content: center;
+}
+
+.photo-grande img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.photo-petite {
+    width: 100%;
+    height: 60vh;
+    display:flex;
+    justify-content: center;
+    margin-top: 45px;
+}
+
+.photo-petite img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+
+/* BODY*/
+#container-photos {
+    display:flex;
+    width: 95%;
+    height: auto;
+    margin:auto;
+    justify-content: center;
+}
+
+.container-photos-1 {
+    display:flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: space-evenly;
+    height: auto;
+    flex-wrap:wrap;
+    gap: 50px;
+}
+
+.photo-grande {
+    width: 600px;
+    height: auto;
+}
+
+.photo-petite {
+    width: 600px;
+    height: auto;
+    margin: 0;
+} 
+
+}
+
 /*LOGIN.PHP*/
 .login-body {
     background-image: url(/img/temporaire/model-image-login.jpg);
@@ -145,86 +218,101 @@ ul.menu {
 }
 
 /*BACKOFFICE*/
-/*Debut : selecteur couleur custom*/
-.custom-select {
-    position: relative;
-    /* display: inline-block; */
-    display: flex;
-    flex-direction: row;
-
+.backofficeadd-body {
+    background-image: url(/img/temporaire/518310.jpg);
+    background-size: 120%;
+    background-position: top 0% right 0px;
+    background-repeat: no-repeat;
+    
 }
-
-.select-styled {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    text-align: center;
-
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-}
-
-.select-options {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #fff;
-    border: 2px solid #3b3b3b;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-
-}
-
-.select-options li {
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.select-options li:hover {
-    background: #f0f0f0;
-}
-
-.color-preview {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-right: 5px;
-    border: 1px solid #000;
-    vertical-align: middle;
-}
-
-.bleu {
-    background-color: blue;
-}
-
-.rouge {
-    background-color: red;
-}
-
-/*Fin : selecteur couleur custom*/
 .backofficeadd-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .backofficeadd-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+}
+.backofficeadd-card h1 {
+    color: #007bff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.backofficeadd-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.backofficeadd-line p {
+    width: 200px;
+    margin-bottom: 0;
+}
+.backofficeadd-line input[type="text"],
+.backofficeadd-line select,
+.backofficeadd-line .custom-select {
+    flex-grow: 1;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+textarea {
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+.image-upload {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.img-text-center {
+    text-align: center;
+}
+.image-upload-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.image-upload-btn:hover {
+    background-color: #5a6268;
+}
+.backoff-center-btn {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background-color: rgb(211, 211, 211);
-    max-width: 600px;
-    padding: 15px;
-    border: 2px solid black;
-    border-radius: 20px;
-    filter: drop-shadow(0 0 0.75rem rgb(56, 56, 56));
+}
+
+.submit-btn {
+    display: block;
+    width: 200px;
+    padding: 0.75rem;
+    margin-top: 1.5rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.submit-btn:hover {
+    background-color: #218838;
 }
 
 
