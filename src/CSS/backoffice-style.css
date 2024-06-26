@@ -1,0 +1,343 @@
+/* CLEAN CSS */
+@import "body_reset.css";
+/* FONTS */
+@import "fonts.css";
+
+/*DEBUG*/
+#debugButton {
+    cursor: pointer;
+    line-height: 50px;
+    font-size: 2em;
+}
+
+#debug {
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(255, 0, 0, 1);
+    display: none;
+    z-index: 15000;
+}
+
+/*HEADER*/
+
+.logo_index {
+    height: 100px;
+    margin: 50px auto 0;
+}
+
+/*NAV*/
+nav {
+    display: flex;
+    height: 50px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 250;
+}
+
+.menuButtonsContainer {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 200;
+}
+
+#menuBurgerIcon {
+    padding: 0px 8px;
+    font-size: 2em;
+}
+
+ul#menuBurger {
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    height: auto;
+    background-color: white;
+    text-align: center;
+    z-index: 100;
+    transition: top 0.6s linear;
+    font-size: 1.4em;
+}
+
+#menuBurger li {
+    margin: 15px auto;
+}
+
+.hideMenuBurger {
+    top: -300px;
+}
+
+.showMenuBurger {
+    top: 50px;
+}
+
+ul.menu {
+    list-style: none;
+}
+
+#menuBurgerIcon {
+    cursor: pointer;
+    line-height: 50px;
+    transition: transform 1s;
+}
+
+.rotateIcon {
+    transform: rotate(90deg);
+}
+
+#userMenu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+}
+
+#userMenu img {
+    width: 30px;
+    margin: 8px;
+}
+
+/* SEARCH */
+.researchBar form {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    width: 90vw;
+    max-width: 600px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-bottom: solid black 1px;
+}
+
+.researchBar input {
+    height: 100%;
+    width: calc(100% - 30px);
+    border: none;
+    text-align: center;
+}
+
+.researchBar input:focus {
+    outline: none;
+}
+
+.researchBar button {
+    width: 30px;
+    background: none;
+    border: none;
+}
+
+@media only screen and (min-width: 768px) {
+
+
+/*BACKOFFICE GENERAL*/
+.backofficegeneral-body {
+    background-image: url(/img/temporaire/empty-red-brick-wall.jpg);
+    background-size: 120%;
+    background-position: top 0% right 0px;
+    background-repeat: no-repeat;
+    
+}
+.backgene-set {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+.backgene-title{
+    font-size: 50px;
+}
+.backgene-panel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.flex {
+    display: flex;
+    flex-direction: row;
+    margin-left: 30px;
+    margin-top: 30px;
+    margin-bottom: 100px;
+    gap: 20px;
+    text-align: center;
+    font-family: "Aquire";
+}
+.white{
+    background-color: white;
+}
+.cards1{
+    width: 50px;
+    height: 430px;
+    background-image: url(/img/temporaire/123478.png);
+    background-position: 60%;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    border: 2px solid rgb(143, 143, 143);
+    filter: drop-shadow(0 0 0.40rem rgb(12, 12, 12));
+}
+.cards2{
+    width: 50px;
+    height: 430px;
+    background-image: url(/img/temporaire/123478.png);
+    background-position: 60%;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    border: 2px solid rgb(143, 143, 143);
+    filter: drop-shadow(0 0 0.40rem rgb(12, 12, 12));
+}
+.cards3{
+    width: 50px;
+    height: 430px;
+    background-image: url(/img/temporaire/123478.png);
+    background-position: 60%;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    border: 2px solid rgb(143, 143, 143);
+    filter: drop-shadow(0 0 0.40rem rgb(12, 12, 12));
+}
+.cards4{
+    width: 50px;
+    height: 430px;
+    background-image: url(/img/temporaire/123478.png);
+    background-position: 60%;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    border: 2px solid rgb(143, 143, 143);
+    filter: drop-shadow(0 0 0.40rem rgb(12, 12, 12));
+}
+.overhide {
+    overflow: hidden;
+}
+.overtextp{
+    text-wrap: wrap;
+    font-size: 15px;
+    margin-top: 12px;
+    padding: 0px 25px;
+    padding-bottom: 30px;
+}
+.overtext {
+    margin-top: 0px;
+    font-weight: bold;
+    font-size: 18px;
+    padding-top: 10px;
+}
+.fname {
+    font-weight: lighter;
+    color: rgb(255, 62, 62);
+}
+
+/*BACKOFFICE PRODUITS*/
+.bg-produits {
+}
+
+/*BACKOFFICE ADD*/
+.backofficeadd-body {
+    background-image: url(/img/temporaire/518310.jpg);
+    background-size: 120%;
+    background-position: top 0% right 0px;
+    background-repeat: no-repeat;
+    
+}
+.backofficeadd-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.backofficeadd-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+}
+.backofficeadd-card h1 {
+    color: #007bff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.backofficeadd-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.backofficeadd-line p {
+    width: 200px;
+    margin-bottom: 0;
+}
+.backofficeadd-line input[type="text"],
+.backofficeadd-line select,
+.backofficeadd-line .custom-select {
+    flex-grow: 1;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+textarea {
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+.image-upload {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.img-text-center {
+    text-align: center;
+}
+.image-upload-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.image-upload-btn:hover {
+    background-color: #5a6268;
+}
+.backoff-center-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.submit-btn {
+    display: block;
+    width: 200px;
+    padding: 0.75rem;
+    margin-top: 1.5rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.submit-btn:hover {
+    background-color: #218838;
+}
+
+
+/*FOOTER*/
+.footer-pad {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+}

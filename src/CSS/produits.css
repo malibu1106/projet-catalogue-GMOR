@@ -1,0 +1,27 @@
+.affichage_des_produits {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 96vw;
+    margin: auto;
+}
+
+.affichage_des_produits article {
+    width: 400px;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.affichage_des_produits figure {
+    width: 100%;
+    margin: 0;
+}
+
+.affichage_des_produits figure img {
+    margin: auto;
+}
+
+.affichage_des_produits figcaption {
+    text-align: center;
+}

@@ -27,7 +27,7 @@
         else{
             echo'
             <li>
-                <a href="tools/login.php">
+                <a href="../tools/login.php">
                     <img class="userMenuIcon" src="../img/illustration/account.png">
                 </a>
             </li>';
@@ -36,7 +36,7 @@
 
 
             <li>
-                <a href="pages/cart.php">
+                <a href="../pages/cart.php">
                     <img class="userMenuIcon" src="../img/illustration/cart.png">
                 </a>
             </li>
