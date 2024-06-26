@@ -22,17 +22,67 @@ session_start();?>
 
 <?php require_once ('pages/slider.php');?>
 
-<section id="container-photos">
-    <div class="container-photos-1">
-    
-        <div class="photo-grande">
-        <img src="img/temporaire/photo1.jpg">
-        </div>
-        <div class="photo-petite">
-        <img src="img/temporaire/ninja-cosmico-.jpeg">
-        </div>
-    </div>
-</section>
+<section id="container-global">
+        <h1>Découvrez nos&nbsp;<span>meilleures ventes</span>&nbsp;du mois</h1>
+        <article class="container-photos-haut">
+            <div class="container-photos-1">
+                <div class="photo-grande">
+                    <div class="image-container">
+                        <img src="img/temporaire/photo1.jpg">
+                        <div class="overlay">
+                            <p>Consultez cet article</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="photo-petite">
+                    <div class="image-container">
+                        <img src="img/temporaire/ninja-cosmico.jpeg">
+                        <div class="overlay">
+                            <p>Consultez cet article</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article class="container-photos-bas">
+            <div class="container-photos-1">
+                <div class="photo-grande">
+                    <div class="image-container">
+                        <img src="img/temporaire/photo1.jpg">
+                        <div class="overlay">
+                            <p>Consultez cet article</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="photo-petite">
+                    <div class="image-container">
+                        <img src="img/temporaire/ninja-cosmico.jpeg">
+                        <div class="overlay">
+                            <p>Consultez cet article</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    <section id="categories">
+        <h1>Trouvez votre <span>bonheur</span> parmi nos articles</h1>
+            <article class="rond-categorie">
+               <img src="img/temporaire/ninja-cosmico.jpeg">
+            </article>
+            <article class="rond-categorie">
+               <img src="img/temporaire/ninja-cosmico.jpeg">
+            </article>
+            <article class="rond-categorie">
+               <img src="img/temporaire/ninja-cosmico.jpeg">
+            </article>
+            <article class="rond-categorie">
+               <img src="img/temporaire/ninja-cosmico.jpeg">
+            </article>
+            <article class="rond-categorie">
+               <img src="img/temporaire/ninja-cosmico.jpeg">
+            </article>
+    </section>
 <?php require_once ('elements/footer.php');?>
 
     
