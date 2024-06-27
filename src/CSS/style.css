@@ -23,7 +23,7 @@
 /*HEADER*/
 
 .logo {
-    height: 60px;
+    height: 70px;
     position: fixed;
     top: 50px;
     z-index: 200;
@@ -32,7 +32,7 @@
 }
 
 .logo_index {
-    height: 100%;
+    height: 80%;
     margin: auto;
 }
 
@@ -114,7 +114,7 @@ ul.menu {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin: 110px auto;
+    margin: 130px auto;
     width: 90vw;
     max-width: 600px;
     margin-bottom: 20px;
@@ -155,7 +155,7 @@ body{
 }
 
 #container-global h1 span {
-    color: #BF2C2C;
+    color: rgb(191, 44, 44);
 }
 
 .container-photos-haut {
@@ -264,6 +264,7 @@ body{
     justify-content: center;
     max-width:1200px;
     margin: 50px auto;
+    margin-bottom: 200px;
 }
 
 #categories h1{
@@ -285,6 +286,17 @@ body{
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
+    transition: transform 0.1s ease-in-out;
+}
+
+.rond-categorie:hover img {
+    transform: scale(1.03);
+}
+
+.rond-categorie p {
+    display:flex;
+    justify-content: center;
+    margin-top: 15px;
 }
 
 @media only screen and (min-width: 768px) {
