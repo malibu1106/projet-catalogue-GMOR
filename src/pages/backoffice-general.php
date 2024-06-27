@@ -12,41 +12,41 @@
     <?php require_once ('../elements/header.php');?>
 
     <article class="backgene-set">
-        <h2 class="backgene-title">Administrateur</h2>
-    </article>
-
-    <section class="backgene-panel">
-        <div class="flex">
-            <div class="cards1 clickCards overhide">
-                <div><img src="/img/07240e0d46169c9bd473159975cbbfe3.png" width="300px" height="300px" alt=""></div>
-                <div class="white">
-                    <p class="overtext"><span class="fname">Utilisateur</span></p>
-                    <p class="overtextp">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ullam odit, quos minus</p>
-                </div>
-            </div>
-            <div class="cards2 clickCards overhide">
-                <div><img src="/img/4ad274d6e62a46fbcb0d89861a009b56.png" width="300px" height="300px" alt=""></div>
-                <div class="white">
-                    <p class="overtext"><span class="fname">Produits</span></p>
-                    <p class="overtextp">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ullam odit, quos minus</p>
-                </div>
-            </div>
-            <div class="cards3 clickCards overhide">
-                <div><img src="/img/81BpIkbEsTHPE.png" width="300px" height="300px" alt=""></div>
-                <div class="white">
-                    <p class="overtext"><span class="fname">Messagerie</span></p>
-                    <p class="overtextp">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ullam odit, quos minus</p>
-                </div>
-            </div>
-            <div class="cards4 clickCards overhide">
-                <div><img src="/img/e0bbf170d4045c2c38393e083f3d2dbd.png" width="300px" height="300px" alt=""></div>
-                <div class="white">
-                    <p class="overtext"><span class="fname">Commandes</span></p>
-                    <p class="overtextp">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti ullam odit, quos minus</p>
-                </div>
-            </div>
+        <div class="general-title">
+            <h2 class="backgene-title">Administrateur</h2>
         </div>
-    </section>
+    
+
+    <div class="backoff-general-panel">
+        <div class="card" id="users">
+            <div class="card-icon">👥</div>
+            <div class="img-card-general" >
+                <img src="/img/temporaire/ninja-cosmico.jpeg" alt="">
+            </div>
+            <div class="card-title">Utilisateurs</div>
+            <div class="card-content">Gérez les rôles et les permissions des utilisateurs de votre plateforme.</div>
+            <button class="card-action">Gérer les utilisateurs</button>
+        </div>
+        <div class="card" id="products">
+            <div class="card-icon">📦</div>
+            <div class="card-title">Produits</div>
+            <div class="card-content">Ajoutez, modifiez ou supprimez des produits de votre catalogue.</div>
+            <button class="card-action">Gérer les produits</button>
+        </div>
+        <div class="card" id="messages">
+            <div class="card-icon">💬</div>
+            <div class="card-title">Messagerie</div>
+            <div class="card-content">Consultez et répondez aux messages des utilisateurs et clients.</div>
+            <button class="card-action">Accéder à la messagerie</button>
+        </div>
+        <div class="card" id="orders">
+            <div class="card-icon">🛒</div>
+            <div class="card-title">Commandes</div>
+            <div class="card-content">Suivez et gérez les commandes en cours et l'historique des ventes.</div>
+            <button class="card-action">Voir les commandes</button>
+        </div>
+    </div>
+    </article>
 
     <?php require_once ('../elements/footer.php');?>
 </body>

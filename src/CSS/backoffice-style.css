@@ -141,99 +141,113 @@ ul.menu {
     background-repeat: no-repeat;
     
 }
-.backgene-set {
+
+.backgene-set{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
 }
-.backgene-title{
-    font-size: 50px;
+
+.img-card-general{
+    height: 250px;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 2px solid rgba(46, 46, 46, 0.644);
 }
-.backgene-panel{
+
+.general-title{
+    margin: 50px auto;
+}
+
+.backoff-general-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 100px auto;
+}
+.card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    padding: 30px;
+    transition: all 0.3s ease;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px;
+    position: relative;
+    padding-top: 60px;
+}
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+.card-icon {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 40px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
-.flex {
-    display: flex;
-    flex-direction: row;
-    margin-left: 30px;
-    margin-top: 30px;
-    margin-bottom: 100px;
-    gap: 20px;
-    text-align: center;
-    font-family: "Aquire";
-}
-.white{
-    background-color: white;
-}
-.cards1{
-    width: 50px;
-    height: 430px;
-    background-image: url(/img/temporaire/123478.png);
-    background-position: 60%;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    border: 2px solid rgb(143, 143, 143);
-    filter: drop-shadow(0 0 0.40rem rgb(12, 12, 12));
-}
-.cards2{
-    width: 50px;
-    height: 430px;
-    background-image: url(/img/temporaire/123478.png);
-    background-position: 60%;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    border: 2px solid rgb(143, 143, 143);
-    filter: drop-shadow(0 0 0.40rem rgb(12, 12, 12));
-}
-.cards3{
-    width: 50px;
-    height: 430px;
-    background-image: url(/img/temporaire/123478.png);
-    background-position: 60%;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    border: 2px solid rgb(143, 143, 143);
-    filter: drop-shadow(0 0 0.40rem rgb(12, 12, 12));
-}
-.cards4{
-    width: 50px;
-    height: 430px;
-    background-image: url(/img/temporaire/123478.png);
-    background-position: 60%;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    border: 2px solid rgb(143, 143, 143);
-    filter: drop-shadow(0 0 0.40rem rgb(12, 12, 12));
-}
-.overhide {
-    overflow: hidden;
-}
-.overtextp{
-    text-wrap: wrap;
-    font-size: 15px;
-    margin-top: 12px;
-    padding: 0px 25px;
-    padding-bottom: 30px;
-}
-.overtext {
-    margin-top: 0px;
+.card-title {
+    font-size: 24px;
     font-weight: bold;
-    font-size: 18px;
-    padding-top: 10px;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
 }
-.fname {
-    font-weight: lighter;
-    color: rgb(255, 62, 62);
+.card-content {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.card-action {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center;
+    width: 100%;
+}
+.card-action:hover {
+    background-color: #0056b3;
+}
+#users .card-icon { background-color: #4285f4; }
+#products .card-icon { background-color: #f44242; }
+#messages .card-icon { background-color: #42f47c; }
+#orders .card-icon { background-color: #f4c542; }
+
+
 }
 
 /*BACKOFFICE PRODUITS*/
 .bg-produits {
+    background-color: #fdffe6;
+    padding-top: 100px;
 }
+.backoff-short-desc{
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+
+
 
 /*BACKOFFICE ADD*/
 .backofficeadd-body {
@@ -340,4 +354,3 @@ textarea {
     padding-right: 50px;
 }
 
-}
