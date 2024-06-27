@@ -1,0 +1,53 @@
+#container-pcp {
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    margin-top: 50px;
+}
+
+.photo-pcp img {
+    width: 350px;
+}
+
+.miniatures {
+    display:none;
+}
+
+.description {
+    width: 100%;
+    text-align: center;
+    height: 40vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.btn-tailles {
+    width: 100%;
+    display:flex;
+    justify-content: center;
+}
+
+.btn-tailles button {
+    width: 90px;
+}
+
+#suggestions {
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    margin-top: 100px;
+}
+
+.photos-suggestions {
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 45px;
+}
+
+footer {
+    margin-top: 70px;
+}
