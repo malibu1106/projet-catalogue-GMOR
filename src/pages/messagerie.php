@@ -14,6 +14,7 @@ session_start();
     <link rel="stylesheet" href="../CSS/messagerie.css">
     <!-- Inclusion du script JavaScript -->
     <script type="text/javascript" src="../JS/script.js" defer></script>
+    <script type="text/javascript" src="../JS/messagerie.js" defer></script>
 </head>
 <body>
 
