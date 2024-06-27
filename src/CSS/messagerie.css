@@ -2,16 +2,12 @@
 
 
 
-.messagerie_top {
-    width: 100%;
-    height: 10%;
-    background: yellow;
-}
+
 
 .messagerie_conversation_title {
     height: 10%;
     width: 100%;
-    background: orange;
+
     display: flex;
     align-items: center;
 }
@@ -20,13 +16,16 @@
     height: 50px;
     width: 20%;
     min-width: 50px;
-    background: pink;
+}
+
+.messagerie_conversation_avatar img {
+    width: 40px;
+    margin: 5px;
 }
 
 .messagerie_conversation_name {
     height: 100%;
     width: 80%;
-    background: purple;
 }
 
 
@@ -35,36 +34,134 @@
     width: 20%;
     min-width: 160px;
     height: 90%;
-    background: green;
 }
 
 
 .messagerie_main {
     height: 90%;
-    min-width: 50%;
-    background: red;
+    max-height: 64vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 80%;
+    max-width: 1000px;
     margin: auto;
+}
+
+
+/* Custom scrollbar styles */
+.messagerie_main::-webkit-scrollbar {
+    width: 12px;
+    /* Width of the entire scrollbar */
+}
+
+.messagerie_main::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Color of the scrollbar track */
+    border-radius: 10px;
+    /* Roundness of the scrollbar track */
+}
+
+.messagerie_main::-webkit-scrollbar-thumb {
+    background-color: #888;
+    /* Color of the scrollbar thumb */
+    border-radius: 10px;
+    /* Roundness of the scrollbar thumb */
+    border: 3px solid #f1f1f1;
+    /* Space around the scrollbar thumb */
+}
+
+.messagerie_main::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Color of the scrollbar thumb when hovered */
+}
+
+.message {
+    width: 80%;
+    max-width: 460px;
+    margin: 30px;
+    padding: 20px 16px;
+    border-radius: 10px;
+    position: relative;
 }
 
 .message_received {
-    background: pink;
-    width: 80%;
+    background: #DFDEF3;
+    margin-left: 5%;
+
 }
 
 .message_sent {
-    background: orange;
-    width: 80%;
-    margin-left: 20%;
+    background: #8883e2;
+    margin-left: 15%;
+}
+
+.message:first-of-type {
+    margin-top: 80px;
+}
+
+
+.message_time {
+    position: absolute;
+    right: 5px;
+    bottom: 0;
+    font-size: 0.8em;
 }
 
 .messagerie {
-
     width: 96vw;
-    min-width: 350px;
+    min-width: 450px;
     max-width: 1200px;
-
     max-height: 76vh;
-    margin: auto;
+    margin: 50px auto;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+}
+
+.messagerie h2 {
+    position: fixed;
+    background: white;
+    width: 100%;
+    z-index: 20;
+}
+
+.messagerie_input_text {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 96%;
+    height: 50px;
+    background: white;
+    max-width: 900px;
+    font-size: 1.2em;
+
+
+}
+
+.messagerie_input_text input {
+    width: calc(100% - 150px);
+    padding: 5px;
+    height: 40px;
+    border: none;
+    box-shadow: 0px 0px 2px black;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.messagerie_input_text input[type="submit"] {
+    width: 100px;
+    background: #DFDEF3;
+    border-radius: 4px;
+
+}
+
+.messagerie_input_text input[type="submit"]:hover {
+    background: #8883e2
+}
+
+.messagerie_input_text input:focus {
+    outline: none;
 }
