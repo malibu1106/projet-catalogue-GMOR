@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : mar. 25 juin 2024 à 07:53
+-- Généré le : jeu. 27 juin 2024 à 07:52
 -- Version du serveur : 8.0.37
 -- Version de PHP : 8.2.8
 
@@ -82,12 +82,23 @@ INSERT INTO `groups` (`groupe_id`, `group_name`) VALUES
 CREATE TABLE `messages` (
   `message_id` int NOT NULL,
   `message_type` varchar(255) NOT NULL,
+  `datetime` datetime NOT NULL,
   `sender_user_id` int NOT NULL,
   `receiver_user_id` int DEFAULT NULL,
   `message_content` text NOT NULL,
   `message_read` tinyint(1) DEFAULT NULL,
   `message_answered` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `messages`
+--
+
+INSERT INTO `messages` (`message_id`, `message_type`, `datetime`, `sender_user_id`, `receiver_user_id`, `message_content`, `message_read`, `message_answered`) VALUES
+(1, 'conversation', '2027-06-24 09:52:59', 3, 4, 'Bonjour Roberto, franchement je voulais te dire que t\'es trop beau et que c\'est pas la peine que tu m\'offres un sandwich parce que j\'ai pas été sage !', 0, 0),
+(2, 'conversation', '2027-06-24 09:54:12', 4, 3, 'Bonjour Morgane, merci c\'est gentil ! Eh bah pas de problème pour la peine je vais en manger deux ! Allez salut fréro !', 0, 0),
+(3, 'conversation', '2027-06-24 09:52:59', 2, 4, 'guilain to roberto', 0, 0),
+(4, 'conversation', '2027-06-24 09:53:59', 4, 2, 'roberto to guilain', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -219,7 +230,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT pour la table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `message_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `message_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `products`
