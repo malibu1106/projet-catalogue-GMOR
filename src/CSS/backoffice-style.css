@@ -135,7 +135,7 @@ ul.menu {
 
 /*BACKOFFICE GENERAL*/
 .backofficegeneral-body {
-    background-image: url(/img/temporaire/empty-red-brick-wall.jpg);
+    background-image: url(/img/temporaire/brick-wall-red-brick-wallpaper.webp);
     background-size: 120%;
     background-position: top 0% right 0px;
     background-repeat: no-repeat;
@@ -146,7 +146,11 @@ ul.menu {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 20px;
+}
+.backgene-section{
+    background-color: #fffff8;
+    padding: 10px;
 }
 .backgene-title{
     font-size: 50px;
@@ -233,6 +237,7 @@ ul.menu {
 
 /*BACKOFFICE PRODUITS*/
 .bg-produits {
+    background-image: url(/img/temporaire/brick-wall-1869537_1920.jpg);
 }
 
 /*BACKOFFICE ADD*/
