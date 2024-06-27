@@ -70,8 +70,11 @@ $results = $search_name->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/produits.css">
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Ícones do Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Script JavaScript -->
     <script type="text/javascript" src="../JS/script.js" defer></script>
     
     <title>Accueil</title>
@@ -81,19 +84,18 @@ $results = $search_name->fetchAll(PDO::FETCH_ASSOC);
 <?php require_once ('../elements/debug.php');?>
 
 <?php require_once ('../elements/header.php');
+
+ // Vérifie si $results est vide
     if(empty($results)){
     echo 'Aucun résultat pour votre recherche.';
-}?>
-
-    <h2>Nom catégorie</h2>
-        <div class="tri">Zone de tri ici</div>
-
-        
-
-        <section class="affichage_des_produits">
+}
 
 
-    <?php foreach ($results as $result){
+else{
+    echo '<h2>Résultats de la recherche</h2>';
+    echo'<section class="affichage_des_produits">';
+// Boucle pour afficher chaque résultat
+    foreach ($results as $result){
 
         echo '<article class="">
                 <figure class="">
@@ -102,20 +104,10 @@ $results = $search_name->fetchAll(PDO::FETCH_ASSOC);
                 </figure>
         </article>';
     }
+}
+?>
 
-    ?>
-
-
-
-        
-
-
-
-
-
-
-        
-
+<!-- Fermer la section qui a été ouverte dans php -->
 </section>
 
 <?php require_once ('../elements/footer.php');?>
