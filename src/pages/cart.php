@@ -1,6 +1,14 @@
 <?php
+
+use LDAP\Result;
+
 require_once("../elements/connect.php");
 require_once("../elements/header.php");
+
+$sql = "SELECT * FROM products";
+$requete = $db->prepare($sql);
+$requete->execute();
+$cartResults = $requete->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -22,6 +30,17 @@ require_once("../elements/header.php");
     <title>cart</title>
 </head>
 <body>
+<?php foreach($cartResults as $cartResult){
 
+echo '<article class="">
+<figure class="">
+    <img class="" src="'. $cartResult['image_1'].'" alt="php name ici">
+    <figcaption class="">'. $cartResult['brand'].'</figcaption>
+</figure>
+</article>';
+
+}
+
+?>
 </body>
 </html>
