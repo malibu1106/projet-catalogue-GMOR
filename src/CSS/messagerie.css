@@ -1,5 +1,7 @@
 @import 'body_reset.css';
 
+
+
 .messagerie_top {
     width: 100%;
     height: 10%;
@@ -11,13 +13,14 @@
     width: 100%;
     background: orange;
     display: flex;
+    align-items: center;
 }
 
 .messagerie_conversation_avatar {
-    height: 100%;
+    height: 50px;
     width: 20%;
     min-width: 50px;
-    background: blue;
+    background: pink;
 }
 
 .messagerie_conversation_name {
@@ -30,21 +33,38 @@
 
 .messagerie_menu {
     width: 20%;
+    min-width: 160px;
     height: 90%;
     background: green;
 }
 
 
 .messagerie_main {
-    width: 80%;
     height: 90%;
+    min-width: 50%;
     background: red;
+    margin: auto;
+}
+
+.message_received {
+    background: pink;
+    width: 80%;
+}
+
+.message_sent {
+    background: orange;
+    width: 80%;
+    margin-left: 20%;
 }
 
 .messagerie {
-    width: 1000px;
-    height: 600px;
-    background: blue;
+
+    width: 96vw;
+    min-width: 350px;
+    max-width: 1200px;
+
+    max-height: 76vh;
+    margin: auto;
     display: flex;
     flex-wrap: wrap;
 }
