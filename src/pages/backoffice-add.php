@@ -2,7 +2,7 @@
 session_start();
 require_once("../elements/connect.php");
 
-$imagePath = ""; // Initialisation de la variable
+$imagePath = ""; // Initialisation de la variable pour le chemin de l'image
 
 // Vérification et traitement du fichier uploadé
 if (isset($_FILES["image_1"]) && $_FILES["image_1"]["error"] === 0) {
@@ -11,35 +11,42 @@ if (isset($_FILES["image_1"]) && $_FILES["image_1"]["error"] === 0) {
         "jpeg" => "image/jpeg",
         "png" => "image/png"
     ];
-
+    
+    // Définit les types de fichiers autorisés
     $filename = $_FILES["image_1"]["name"];
     $filetype = $_FILES["image_1"]["type"];
     $filesize = $_FILES["image_1"]["size"];
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
+    // Vérifie si le type de fichier est autorisé
     if (!array_key_exists($extension, $allowed) || !in_array($filetype, $allowed)) {
         die("Erreur : le format du fichier est incorrect");
     }
 
+    // Vérifie la taille du fichier (max 1 Mo)
     if ($filesize > 1024 * 1024) {
         die("Fichier trop volumineux");
     }
 
+    // Génère un nouveau nom de fichier unique
     $newname = md5(uniqid()) . ".$extension";
-    $newfilename = __DIR__ . "/img/upload_model/$newname";
+    $newfilename = "../img/upload_model/$newname";
 
+    // Déplace le fichier uploadé vers le dossier de destination
     if (!move_uploaded_file($_FILES["image_1"]["tmp_name"], $newfilename)) {
         die("L'upload a échoué");
     }
 
-    chmod($newfilename, 0644);
-    $imagePath = "/img/upload_model/$newname"; // Chemin relatif à stocker dans la base de données
+    chmod($newfilename, 0644); // Définit les permissions du fichier
+    $imagePath = "../img/upload_model/$newname"; // Chemin relatif à stocker dans la base de données
 }
 
-if ($_POST && isset($_POST["ref"]) && isset($_POST["brand"]) && isset($_POST["size"]) && isset($_POST["color"]) 
-    && isset($_POST["pattern"]) && isset($_POST["material"]) && isset($_POST["gender"]) && isset($_POST["stock"]) 
+// Vérifie si le formulaire a été soumis et si tous les champs requis sont présents
+if ($_POST && isset($_POST["ref"]) && isset($_POST["brand"]) && isset($_POST["size"]) && isset($_POST["color"])
+    && isset($_POST["pattern"]) && isset($_POST["material"]) && isset($_POST["gender"]) && isset($_POST["stock"])
     && isset($_POST["price"]) && isset($_POST["discount"]) && isset($_POST["category"]) && isset($_POST["content"])) {
 
+    // Nettoyage des données entrées par l'utilisateur
     $ref = strip_tags($_POST["ref"]);
     $brand = strip_tags($_POST["brand"]);
     $size = strip_tags($_POST["size"]);
@@ -49,19 +56,19 @@ if ($_POST && isset($_POST["ref"]) && isset($_POST["brand"]) && isset($_POST["si
     $gender = strip_tags($_POST["gender"]);
     $stock = strip_tags($_POST["stock"]);
     $price = strip_tags($_POST["price"]);
-    $discount = strip_tags($_POST["discount"]); // Correction ici
+    $discount = strip_tags($_POST["discount"]);
     $category = strip_tags($_POST["category"]);
     $content = strip_tags($_POST["content"]);
 
-    // Utilisation de $imagePath défini plus haut
-    $images = $imagePath;
+    $images = $imagePath; // stockage du chemin de l'image défini plus haut dans une variable
 
-    $sql = "INSERT INTO products (ref, brand, size, color, pattern, material, gender, stock, price, discount, category, content, image_1) 
+    // Préparation de la requête SQL pour insérer les données dans la table products
+    $sql = "INSERT INTO products (ref, brand, size, color, pattern, material, gender, stock, price, discount, category, content, image_1)
             VALUES (:ref, :brand, :size, :color, :pattern, :material, :gender, :stock, :price, :discount, :category, :content, :image_1)";
-    
+
     try {
         $query = $db->prepare($sql);
-
+        // Liaison des valeurs aux paramètres de la requête
         $query->bindValue(":ref", $ref);
         $query->bindValue(":brand", $brand);
         $query->bindValue(":size", $size);
@@ -76,19 +83,20 @@ if ($_POST && isset($_POST["ref"]) && isset($_POST["brand"]) && isset($_POST["si
         $query->bindValue(":content", $content);
         $query->bindValue(":image_1", $images);
 
+        // Exécution de la requête
         if ($query->execute()) {
-            require_once("../elements/disconnect.php");
-            header("Location: backoffice-produits.php");
+            require_once("../elements/disconnect.php"); // Ferme la connexion à la base de données
+            header("Location: backoffice-produits.php"); // Redirige vers la page des produits du backoffice
             exit();
         } else {
             echo "Erreur lors de l'exécution de la requête.";
-            print_r($query->errorInfo());
+            print_r($query->errorInfo()); // Affiche les détails de l'erreur
         }
     } catch (PDOException $e) {
-        echo "Erreur : " . $e->getMessage();
+        echo "Erreur : " . $e->getMessage(); // Affiche les erreurs PDO
     }
 } else if ($_POST) {
-    var_dump($_POST);
+    var_dump($_POST); // Affiche le contenu de $_POST pour le débogage
     die("Erreur veuillez réessayer");
 }
 ?>
@@ -186,13 +194,13 @@ if ($_POST && isset($_POST["ref"]) && isset($_POST["brand"]) && isset($_POST["si
                     <p class="rem-bts">Catégorie:</p>
                     <select name="category" id="category" required>
                         <option value="">Sélectionnez une catégorie</option>
-                        <option value="shirt">T-shirt</option>
-                        <option value="pull">Pull</option>
-                        <option value="Jacket">Veste</option>
-                        <option value="pants">Pantalon</option>
-                        <option value="skirt">Jupe</option>
-                        <option value="boots">Bottes</option>
-                        <option value="dress">Robe</option>
+                        <option value="T-shirt">T-shirt</option>
+                        <option value="Pull">Pull</option>
+                        <option value="Veste">Veste</option>
+                        <option value="Pantalon">Pantalon</option>
+                        <option value="Jupe">Jupe</option>
+                        <option value="Bottes">Bottes</option>
+                        <option value="Robe">Robe</option>
                     </select>
                 </div>
                 <div>
