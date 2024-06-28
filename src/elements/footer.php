@@ -1,23 +1,6 @@
 <footer class="footer-pad pt-5 bg-light">
     <div class="row">
-        <div class="col-6 col-md-2 mb-3">
-            <h5>A propos</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Qui sommes-nous ?</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nos politiques de confidentialité</a></li>
-            </ul>
-        </div>
-
-        <div class="col-6 col-md-2 mb-3">
-            <h5>Contact</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nous contacter</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Réseaux</a></li>
-            </ul>
-        </div>
-
-        <div class="col-md-5 offset-md-1 mb-3">
+    <div class="col-md-5 offset-md-1 mb-3">
             <form>
             <h5>Souscrire à notre newsletter</h5>
                 <p>Résumé mensuel de nos nouveautés et actualités passionnantes.</p>
@@ -27,6 +10,23 @@
                 <button class="btn btn-primary" type="button">Souscrire</button>
             </div>
             </form>
+        </div>
+
+        <div class="col-6 col-md-3 mb-3">
+            <h5>A propos</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Qui sommes-nous ?</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nos politiques de confidentialité</a></li>
+            </ul>
+        </div>
+
+        <div class="col-6 col-md-3 mb-3">
+            <h5>Contact</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nous contacter</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Réseaux</a></li>
+            </ul>
         </div>
     </div>
 

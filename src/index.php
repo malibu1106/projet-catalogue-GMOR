@@ -70,23 +70,23 @@ session_start();?>
         <h1>Trouvez votre <span>bonheur</span> parmi nos articles</h1>
             <article class="rond-categorie">
                <img src="img/temporaire/ninja-cosmico.jpeg">
-               <!-- <p>Robes</p> -->
+               <p>Robes</p>
             </article>
             <article class="rond-categorie">
                <img src="img/temporaire/ninja-cosmico.jpeg">
-               <!-- <p>T-shirts</p> -->
+               <p>T-shirts</p>
             </article>
             <article class="rond-categorie">
                <img src="img/temporaire/ninja-cosmico.jpeg">
-               <!-- <p>Pantalons</p> -->
+               <p>Pantalons</p>
             </article>
             <article class="rond-categorie">
                <img src="img/temporaire/ninja-cosmico.jpeg">
-               <!-- <p>Vestes</p> -->
+               <p>Vestes</p>
             </article>
             <article class="rond-categorie">
                <img src="img/temporaire/ninja-cosmico.jpeg">
-               <!-- <p>Pulls</p> -->
+               <p>Pulls</p>
             </article>
     </section>
 <?php require_once ('elements/footer.php');?>
