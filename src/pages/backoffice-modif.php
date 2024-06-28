@@ -1,7 +1,31 @@
 <?php
 session_start();
+require_once("../elements/connect.php");
 
-// Traitement du formulaire de mise à jour
+// Vérification de l'existence de l'ID du produit à modifier
+if (isset($_GET['id']) && !empty($_GET['id'])) {
+    $id = $_GET['id'];
+
+    // Récupération des données du produit à modifier depuis la base de données
+    $query = $db->prepare('SELECT * FROM products WHERE id = :id');
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->execute();
+    $produit = $query->fetch(PDO::FETCH_ASSOC);
+
+    if (!$produit) {
+        $_SESSION['erreur'] = "Le produit n'existe pas";
+        header('Location: backoffice-produits.php');
+        exit();
+    }
+} else {
+    $_SESSION['erreur'] = "ID du produit non spécifié";
+    header('Location: backoffice-produits.php');
+    exit();
+}
+
+$imagePath = $produit['image_1']; // Par défaut, garde l'image principale existante
+
+// Traitement du formulaire de mise à jour du produit
 if ($_POST) {
     if (isset($_POST['id']) && !empty($_POST['id'])
         && isset($_POST['ref']) && !empty($_POST['ref'])
@@ -13,13 +37,8 @@ if ($_POST) {
         && isset($_POST['gender']) && !empty($_POST['gender'])
         && isset($_POST['stock']) && !empty($_POST['stock'])
         && isset($_POST['price']) && !empty($_POST['price'])
-        && isset($_POST['discount']) && !empty($_POST['discount'])
-        && isset($_POST['category']) && !empty($_POST['category'])
-        && isset($_POST['content']) && !empty($_POST['content'])
-        ) {
-
-        require_once("../elements/connect.php");
-
+        && isset($_POST['discount']) && isset($_POST['category']) && isset($_POST['content'])
+    ) {
         $id = strip_tags($_POST["id"]);
         $ref = strip_tags($_POST["ref"]);
         $brand = strip_tags($_POST["brand"]);
@@ -34,21 +53,17 @@ if ($_POST) {
         $category = strip_tags($_POST["category"]);
         $content = strip_tags($_POST["content"]);
 
-        // Vérification de la promotion
-        $discount = isset($_POST['discount']) ? 1 : 0;
-
-        // Gestion de l'upload de l'image
-        $imagePath = ""; // Initialisation de la variable
-        if (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) {
+        // Gestion de l'upload de l'image principale
+        if (isset($_FILES["image_1"]) && $_FILES["image_1"]["error"] === 0) {
             $allowed = [
                 "jpg" => "image/jpeg",
                 "jpeg" => "image/jpeg",
                 "png" => "image/png"
             ];
 
-            $filename = $_FILES["image"]["name"];
-            $filetype = $_FILES["image"]["type"];
-            $filesize = $_FILES["image"]["size"];
+            $filename = $_FILES["image_1"]["name"];
+            $filetype = $_FILES["image_1"]["type"];
+            $filesize = $_FILES["image_1"]["size"];
             $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
             if (!array_key_exists($extension, $allowed) || !in_array($filetype, $allowed)) {
@@ -60,29 +75,43 @@ if ($_POST) {
             }
 
             $newname = md5(uniqid()) . ".$extension";
-            $newfilename = __DIR__ . "/img/upload_animaux/$newname";
+            $newfilename = "../img/upload_model/$newname";
 
-            if (!move_uploaded_file($_FILES["image"]["tmp_name"], $newfilename)) {
+            if (!move_uploaded_file($_FILES["image_1"]["tmp_name"], $newfilename)) {
                 die("L'upload a échoué");
             }
 
             chmod($newfilename, 0644);
-            $imagePath = "img/upload_animaux/$newname"; // Chemin relatif à stocker dans la base de données
+            $imagePath = "img/upload_model/$newname"; // Chemin relatif à stocker dans la base de données
         }
 
         // Construction de la requête SQL
-        $sql = 'UPDATE products SET `ref`=:ref, `brand`=:brand, `size`=:size, `color`=:color, 
-        `pattern`=:pattern, `material`=:material, `gender`=:gender, `stock`=:stock, 
-        `price`=:price, `discount`=:discount, `category`=:category, `content`=:content';
-        
-        if ($imagePath) {
-            $sql .= ', `images`=:images';
-        }
-        $sql .= ' WHERE `id`=:id;';
+        $sql = 'UPDATE products SET ref=:ref, brand=:brand, size=:size, color=:color, 
+                pattern=:pattern, material=:material, gender=:gender, stock=:stock, 
+                price=:price, discount=:discount, category=:category, content=:content';
 
+        // Vérification et gestion des images facultatives
+        if (isset($_FILES["image_2"]) && $_FILES["image_2"]["error"] === 0) {
+            $imagePath2 = handleImageUpload($_FILES["image_2"]);
+            $sql .= ', image_2=:image_2';
+        }
+
+        if (isset($_FILES["image_3"]) && $_FILES["image_3"]["error"] === 0) {
+            $imagePath3 = handleImageUpload($_FILES["image_3"]);
+            $sql .= ', image_3=:image_3';
+        }
+
+        if (isset($_FILES["image_4"]) && $_FILES["image_4"]["error"] === 0) {
+            $imagePath4 = handleImageUpload($_FILES["image_4"]);
+            $sql .= ', image_4=:image_4';
+        }
+
+        $sql .= ' WHERE id=:id';
+
+        // Préparation de la requête SQL
         $query = $db->prepare($sql);
 
-        $query->bindValue(":id", $id, PDO::PARAM_INT);
+        // Liaison des valeurs aux paramètres de la requête
         $query->bindValue(":ref", $ref, PDO::PARAM_STR);
         $query->bindValue(":brand", $brand, PDO::PARAM_STR);
         $query->bindValue(":size", $size, PDO::PARAM_STR);
@@ -95,48 +124,70 @@ if ($_POST) {
         $query->bindValue(":discount", $discount, PDO::PARAM_INT);
         $query->bindValue(":category", $category, PDO::PARAM_STR);
         $query->bindValue(":content", $content, PDO::PARAM_STR);
+        $query->bindValue(":id", $id, PDO::PARAM_INT);
 
-        if ($imagePath) {
-            $query->bindValue(":images", $imagePath, PDO::PARAM_STR);
+        // Bind des valeurs pour les images facultatives si elles existent
+        if (isset($imagePath2)) {
+            $query->bindValue(":image_2", $imagePath2, PDO::PARAM_STR);
+        }
+        if (isset($imagePath3)) {
+            $query->bindValue(":image_3", $imagePath3, PDO::PARAM_STR);
+        }
+        if (isset($imagePath4)) {
+            $query->bindValue(":image_4", $imagePath4, PDO::PARAM_STR);
         }
 
-        $query->execute();
-
-        $_SESSION['message'] = "Fiche produit modifiée";
-        // header("Location: pagedetail.php?id=$id");
-        exit();
+        // Exécution de la requête
+        if ($query->execute()) {
+            $_SESSION['message'] = "Produit mis à jour avec succès";
+            header("Location: backoffice-produits.php");
+            exit();
+        } else {
+            echo "Erreur lors de la mise à jour du produit.";
+            print_r($query->errorInfo());
+        }
 
     } else {
         $_SESSION['erreur'] = "Le formulaire est incomplet";
-        header('Location: backoffice-modif.php?id=' . $_POST['id']);
+        header("Location: backoffice-modif.php?id=$id");
         exit();
     }
 }
 
-// Récupération des données actuelles du produit si l'id est présent dans l'URL
-if (isset($_GET["id"]) && !empty($_GET["id"])) {
-    require_once("../elements/connect.php");
+// Fonction pour gérer l'upload des images et retourner le chemin relatif
+function handleImageUpload($file) {
+    $allowed = [
+        "jpg" => "image/jpeg",
+        "jpeg" => "image/jpeg",
+        "png" => "image/png"
+    ];
 
-    $id = strip_tags($_GET["id"]);
+    $filename = $file["name"];
+    $filetype = $file["type"];
+    $filesize = $file["size"];
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
-    $sql = "SELECT * FROM products WHERE id = :id;";
-
-    $query = $db->prepare($sql);
-
-    $query->bindValue(':id', $id, PDO::PARAM_INT);
-
-    $query->execute();
-
-    $produit = $query->fetch();
-
-    if (!$produit) {
-        $_SESSION['erreur'] = "Cet id n'existe pas...";
+    if (!array_key_exists($extension, $allowed) || !in_array($filetype, $allowed)) {
+        die("Erreur : le format du fichier est incorrect");
     }
 
-} else {
-    $_SESSION["erreur"] = "URL invalide";
+    if ($filesize > 1024 * 1024) {
+        die("Fichier trop volumineux");
+    }
+
+    $newname = md5(uniqid()) . ".$extension";
+    $newfilename = "../img/upload_model/$newname";
+
+    if (!move_uploaded_file($file["tmp_name"], $newfilename)) {
+        die("L'upload a échoué");
+    }
+
+    chmod($newfilename, 0644);
+    return "img/upload_model/$newname"; // Retourne le chemin relatif
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -146,200 +197,145 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../CSS/backoffice-style.css">
-    <title>Document</title>
+    <title>Modifier le Produit</title>
 </head>
-<body class="backofficemodif-body">
-    <?php require_once ('../elements/header.php');?>
+<body class="backofficeadd-body">
+    <?php require_once('../elements/header.php'); ?>
+    <main class="backofficeadd-container">
+        <article class="backofficeadd-card">
+            <h1>MODIFIER LE PRODUIT</h1>
+            <?php
+            // Vérification de l'existence de l'ID du produit à modifier
+            if (isset($_GET['id']) && !empty($_GET['id'])) {
+                $id = $_GET['id'];
 
-    <main class="backkoff-admin-panel">
-        <article class="backofficemodif-container">
-            <section class="backofficemodif-card">
-                <h1>PRODUIT ACTUEL</h1>
+                // Récupération des données du produit à modifier depuis la base de données
+                $query = $db->prepare('SELECT * FROM products WHERE id = :id');
+                $query->bindValue(':id', $id, PDO::PARAM_INT);
+                $query->execute();
+                $produit = $query->fetch(PDO::FETCH_ASSOC);
 
-
-                <form method="POST" enctype="multipart/form-data">
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Référence du produit:</p>
-                        <p><?= $produit['ref'] ?></p>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Nom du produit:</p>
-                        <p><?= $produit['brand'] ?></p>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Taille: </p>
-                        <p><?= $produit['size'] ?></p>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Couleur: </p>
-                        <p><?= $produit['color'] ?></p>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Motif: </p>
-                        <p><?= $produit['pattern'] ?></p>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Matière: </p>
-                        <p><?= $produit['material'] ?></p>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Genre: </p>
-                        <p><?= $produit['gender'] ?></p>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Stock:</p>
-                        <?= $produit['stock'] ?>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Prix:</p>
-                        <?= $produit['price'] ?>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Promotion:</p>
-                        <?= $produit['discount'] ?>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Catégorie:</p>
-                        <p><?= $produit['category'] ?></p>
-                    </div>
-                    <div>
-                        <p class="rem-bts">Description:</p>
-                        <p><?= $produit['content'] ?></p>
-                    </div>
-                    <p class="img-text-center">Télécharger images:</p>
-                    <div class="image-upload">
-                        <label for="image1" class="image-upload-btn">Image 1</label>
-                            <div class="backoff-modif-img"></div>
-                        <label for="image2" class="image-upload-btn">Image 2</label>
-                            <div class="backoff-modif-img"></div>
-                        <label for="image3" class="image-upload-btn">Image 3</label>
-                            <div class="backoff-modif-img"></div>
-                        <label for="image4" class="image-upload-btn">Image 4</label>
-                            <div class="backoff-modif-img"></div>
-                    </div>
-                    <div class="backoff-center-btn">
-                        <button type="submit" class="submit-btn">Ajouter le Produit</button>
-                    </div>
-                </form>
-                
-            </section>
-        </article>
-
-
-        <article class="backofficemodif-container">
-            <section class="backofficemodif-card">
-                <h1>MODIFIER UN PRODUIT</h1>
-                <form method="POST" enctype="multipart/form-data">
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Référence du produit:</p>
-                        <input type="text" name="ref" value="<?= htmlspecialchars($produit['ref']) ?>" required>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Nom du produit:</p>
-                        <input type="text" name="brand" value="<?= htmlspecialchars($produit['brand']) ?>" required>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Taille: </p>
-                        <select name="size" id="size" required>
-                            <option value="">Sélectionnez une taille</option>
-                            <option value="XS">XS</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
+                if (!$produit) {
+                    echo "<p>Le produit n'existe pas.</p>";
+                } else {
+            ?>
+            <form method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?php echo $produit['id']; ?>">
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Référence du produit:</p>
+                    <input type="text" name="ref" value="<?php echo htmlspecialchars($produit['ref']); ?>" required>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Nom du produit:</p>
+                    <input type="text" name="brand" value="<?php echo htmlspecialchars($produit['brand']); ?>" required>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Taille: </p>
+                    <select name="size" id="size" required>
+                        <option value="">Sélectionnez une taille</option>
+                        <option value="XS" <?php if ($produit['size'] === 'XS') echo 'selected'; ?>>XS</option>
+                        <option value="S" <?php if ($produit['size'] === 'S') echo 'selected'; ?>>S</option>
+                        <option value="M" <?php if ($produit['size'] === 'M') echo 'selected'; ?>>M</option>
+                        <option value="L" <?php if ($produit['size'] === 'L') echo 'selected'; ?>>L</option>
+                        <option value="XL" <?php if ($produit['size'] === 'XL') echo 'selected'; ?>>XL</option>
+                    </select>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Couleur: </p>
+                    <div id="custom-select" class="custom-select">
+                        <select name="color" id="color" required>
+                            <option value="">Sélectionnez une couleur</option>
+                            <option value="bleu" <?php if ($produit['color'] === 'bleu') echo 'selected'; ?>>Bleu</option>
+                            <option value="rouge" <?php if ($produit['color'] === 'rouge') echo 'selected'; ?>>Rouge</option>
                         </select>
                     </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Couleur: </p>
-                        <div id="custom-select" class="custom-select">
-                            <select name="color" id="color" required>
-                                <option value="">Sélectionnez une couleur</option>
-                                <option value="bleu">bleu</option>
-                                <option value="rouge">rouge</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Motif: </p>
-                        <div id="custom-select" class="custom-select">
-                            <select name="pattern" id="pattern" required>
-                                <option value="">Sélectionnez un motif</option>
-                                <option value="rayure">Rayure</option>
-                                <option value="losange">Losange</option>
-                                <option value="carre">Carré</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Matière: </p>
-                        <div id="custom-select" class="custom-select">
-                            <select name="material" id="material" required>
-                                <option value="">Sélectionnez un materiel</option>
-                                <option value="coton">Coton</option>
-                                <option value="polyestere">Polyestere</option>
-                                <option value="cuir">Cuir</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Genre: </p>
-                        <div id="custom-select" class="custom-select">
-                            <select name="gender" id="gender" required>
-                                <option value="">Sélectionnez un genre</option>
-                                <option value="homme">Homme</option>
-                                <option value="femme">Femme</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Stock:</p>
-                        <input type="number" name="stock" min="0" required>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Prix:</p>
-                        <input type="number" name="price" min="0" step="0.01" required>
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Promotion:</p>
-                        <input type="number" name="discount">
-                    </div>
-                    <div class="backofficemodif-line">
-                        <p class="rem-bts">Catégorie:</p>
-                        <select name="category" id="category" required>
-                            <option value="">Sélectionnez une catégorie</option>
-                            <option value="T-shirt">T-shirt</option>
-                            <option value="Pull">Pull</option>
-                            <option value="Veste">Veste</option>
-                            <option value="Pantalon">Pantalon</option>
-                            <option value="Jupe">Jupe</option>
-                            <option value="Bottes">Bottes</option>
-                            <option value="Robe">Robe</option>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Motif: </p>
+                    <div id="custom-select" class="custom-select">
+                        <select name="pattern" id="pattern" required>
+                            <option value="">Sélectionnez un motif</option>
+                            <option value="rayure" <?php if ($produit['pattern'] === 'rayure') echo 'selected'; ?>>Rayure</option>
+                            <option value="losange" <?php if ($produit['pattern'] === 'losange') echo 'selected'; ?>>Losange</option>
+                            <option value="carre" <?php if ($produit['pattern'] === 'carre') echo 'selected'; ?>>Carré</option>
                         </select>
                     </div>
-                    <div>
-                        <p class="rem-bts">Description:</p>
-                        <textarea name="content" id="description" required></textarea>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Matière: </p>
+                    <div id="custom-select" class="custom-select">
+                        <select name="material" id="material" required>
+                            <option value="">Sélectionnez un matériel</option>
+                            <option value="coton" <?php if ($produit['material'] === 'coton') echo 'selected'; ?>>Coton</option>
+                            <option value="polyestere" <?php if ($produit['material'] === 'polyestere') echo 'selected'; ?>>Polyestere</option>
+                            <option value="cuir" <?php if ($produit['material'] === 'cuir') echo 'selected'; ?>>Cuir</option>
+                        </select>
                     </div>
-                    <p class="img-text-center">Télécharger images:</p>
-                    <div class="image-upload">
-                        <input type="file" name="image_1" id="image1" accept="image/*" style="display: none;">
-                        <label for="image1" class="image-upload-btn">Image 1</label>
-                        <input type="file" name="image_2" id="image2" accept="image/*" style="display: none;">
-                        <label for="image2" class="image-upload-btn">Image 2</label>
-                        <input type="file" name="image_3" id="image3" accept="image/*" style="display: none;">
-                        <label for="image3" class="image-upload-btn">Image 3</label>
-                        <input type="file" name="image_4" id="image4" accept="image/*" style="display: none;">
-                        <label for="image4" class="image-upload-btn">Image 4</label>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Genre: </p>
+                    <div id="custom-select" class="custom-select">
+                        <select name="gender" id="gender" required>
+                            <option value="">Sélectionnez un genre</option>
+                            <option value="homme" <?php if ($produit['gender'] === 'homme') echo 'selected'; ?>>Homme</option>
+                            <option value="femme" <?php if ($produit['gender'] === 'femme') echo 'selected'; ?>>Femme</option>
+                        </select>
                     </div>
-                    <div class="backoff-center-btn">
-                        <button type="submit" class="submit-btn">Ajouter le Produit</button>
-                    </div>
-                </form>
-            </section>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Stock:</p>
+                    <input type="number" name="stock" min="0" value="<?php echo $produit['stock']; ?>" required>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Prix:</p>
+                    <input type="number" name="price" min="0" step="0.01" value="<?php echo $produit['price']; ?>" required>
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Promotion:</p>
+                    <input type="number" name="discount" value="<?php echo $produit['discount']; ?>">
+                </div>
+                <div class="backofficeadd-line">
+                    <p class="rem-bts">Catégorie:</p>
+                    <select name="category" id="category" required>
+                        <option value="">Sélectionnez une catégorie</option>
+                        <option value="T-shirt" <?php if ($produit['category'] === 'T-shirt') echo 'selected'; ?>>T-shirt</option>
+                        <option value="Pull" <?php if ($produit['category'] === 'Pull') echo 'selected'; ?>>Pull</option>
+                        <option value="Veste" <?php if ($produit['category'] === 'Veste') echo 'selected'; ?>>Veste</option>
+                        <option value="Pantalon" <?php if ($produit['category'] === 'Pantalon') echo 'selected'; ?>>Pantalon</option>
+                        <option value="Jupe" <?php if ($produit['category'] === 'Jupe') echo 'selected'; ?>>Jupe</option>
+                        <option value="Bottes" <?php if ($produit['category'] === 'Bottes') echo 'selected'; ?>>Bottes</option>
+                        <option value="Robe" <?php if ($produit['category'] === 'Robe') echo 'selected'; ?>>Robe</option>
+                    </select>
+                </div>
+                <div>
+                    <p class="rem-bts">Description:</p>
+                    <textarea name="content" id="description" required><?php echo htmlspecialchars($produit['content']); ?></textarea>
+                </div>
+                <p class="img-text-center">Télécharger des images:</p>
+                <div class="image-upload">
+                    <input type="file" name="image_1" id="image1" accept="image/*" style="display: none;">
+                    <label for="image1" class="image-upload-btn">Image 1</label>
+                    <input type="file" name="image_2" id="image2" accept="image/*" style="display: none;">
+                    <label for="image2" class="image-upload-btn">Image 2</label>
+                    <input type="file" name="image_3" id="image3" accept="image/*" style="display: none;">
+                    <label for="image3" class="image-upload-btn">Image 3</label>
+                    <input type="file" name="image_4" id="image4" accept="image/*" style="display: none;">
+                    <label for="image4" class="image-upload-btn">Image 4</label>
+                </div>
+                <div class="backoff-center-btn">
+                    <button type="submit" class="submit-btn">Mettre à jour le Produit</button>
+                </div>
+            </form>
+            <?php
+                } // fin du else (produit trouvé)
+            } else {
+                echo "<p>Identifiant du produit non spécifié.</p>";
+            }
+            ?>
         </article>
     </main>
 
     <?php require_once ('../elements/footer.php');?>
 </body>
-    <script type="text/javascript" src="../JS/script.js" defer></script>
+<script type="text/javascript" src="../JS/script.js" defer></script>
 </html>

@@ -111,3 +111,90 @@ if ($_POST && isset($_POST["ref"]) && isset($_POST["brand"]) && isset($_POST["si
     die("Erreur : veuillez réessayer");
 }
 ?>
+
+
+
+
+// Récupération des données actuelles du produit si l'id est présent dans l'URL
+// if (isset($_GET["id"]) && !empty($_GET["id"])) {
+//     require_once("../elements/connect.php");
+
+//     $id = strip_tags($_GET["id"]);
+
+//     $sql = "SELECT * FROM products WHERE id = :id;";
+
+//     $query = $db->prepare($sql);
+
+//     $query->bindValue(':id', $id, PDO::PARAM_INT);
+
+//     $query->execute();
+
+//     $produit = $query->fetch();
+
+//     if (!$produit) {
+//         $_SESSION['erreur'] = "Cet id n'existe pas...";
+//     }
+
+// } else {
+//     $_SESSION["erreur"] = "URL invalide";
+// }
+
+
+<!-- 
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="backofficemodif-line">
+                        <p class="rem-bts">Référence du produit:</p>
+                        <p><?= $produit['ref'] ?></p>
+                    </div>
+                    <div class="backofficemodif-line">
+                        <p class="rem-bts">Nom du produit:</p>
+                        <p><?= $produit['brand'] ?></p>
+                    </div>
+                    <div class="backofficemodif-line">
+                        <p class="rem-bts">Taille: </p>
+                        <p><?= $produit['size'] ?></p>
+                    </div>
+                    <div class="backofficemodif-line">
+                        <p class="rem-bts">Couleur: </p>
+                        <p><?= $produit['color'] ?></p>
+                    </div>
+                    <div class="backofficemodif-line">
+                        <p class="rem-bts">Motif: </p>
+                        <p><?= $produit['pattern'] ?></p>
+                    </div>
+                    <div class="backofficemodif-line">
+                        <p class="rem-bts">Matière: </p>
+                        <p><?= $produit['material'] ?></p>
+                    </div>
+                    <div class="backofficemodif-line">
+                        <p class="rem-bts">Genre: </p>
+                        <p><?= $produit['gender'] ?></p>
+                    </div>
+                    <div class="backofficemodif-line">
+                        <p class="rem-bts">Stock:</p>
+                        <?= $produit['stock'] ?>
+                    </div>
+                    <div class="backofficemodif-line">
+                        <p class="rem-bts">Prix:</p>
+                        <?= $produit['price'] ?>
+                    </div>
+                    <div class="backofficemodif-line">
+                        <p class="rem-bts">Promotion:</p>
+                        <?= $produit['discount'] ?>
+                    </div>
+                    <div class="backofficemodif-line">
+                        <p class="rem-bts">Catégorie:</p>
+                        <p><?= $produit['category'] ?></p>
+                    </div>
+                    <div>
+                        <p class="rem-bts">Description:</p>
+                        <p><?= $produit['content'] ?></p>
+                    </div>
+                    <p class="img-text-center">Télécharger images:</p>
+                    <div class="image-upload">
+                        <img src="<?= $imagePath; ?>" class="d-block mx-lg-auto" alt="Bootstrap Themes" width="auto" height="600px" loading="lazy">
+                    </div>
+                    <div class="backoff-center-btn">
+                        <button type="submit" class="submit-btn">Ajouter le Produit</button>
+                    </div>
+                </form> -->
