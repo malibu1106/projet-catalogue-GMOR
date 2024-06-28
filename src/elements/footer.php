@@ -12,7 +12,7 @@
             </form>
         </div>
 
-        <div class="col-6 col-md-3 mb-3">
+        <div class="col-6 col-md-3 px-5 mb-3">
             <h5>A propos</h5>
             <ul class="nav flex-column">
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Qui sommes-nous ?</a></li>

@@ -8,10 +8,6 @@ require_once("../elements/connect.php");
     $requete->execute();
     $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-    
-    // echo "<pre>";
-    // print_r($resulta);
-    // echo "</pre>";
 ?>
 
 
@@ -63,7 +59,7 @@ require_once("../elements/connect.php");
                         <tr>
                             <td>
                                 <button class="btn btn-sm btn-primary" title="Voir"><i class="bi bi-eye"></i></button>
-                                <button class="btn btn-sm btn-warning" title="Modifier"><i class="bi bi-pencil"></i></button>
+                                <button class="btn btn-sm btn-warning" title="Modifier"><a href="backoffice-modif.php?id=<?= $produit["id"] ?>"><i class="bi bi-pencil"></i></button>
                                 <button class="btn btn-sm btn-danger" title="Supprimer"><a href="../tools/delete.php?id=<?= $produit["id"] ?>"><i class="bi bi-trash"></i></button>
                             </td>
                             <td><?= $produit['ref'] ?></td>
