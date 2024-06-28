@@ -52,14 +52,17 @@ echo '<article class="">
     <//Boutons d’accouplement pour ajouter des produits >
 
    <div class="btn_action" style="display: flex; width: 50px;">
-        <a href=" ?id=$cartResult["id"]"><img src="../img/illustration/add_produce.png " alt="add produce"></a>
-        <a href=" ?id=$cartResult["id"]"><img src="../img/illustration/remove_produce.png" alt="remove produce"></a>
-        <a href=" ?id=$cartResult["id"]"><img src="../img/illustration/delete.png" alt="delete produce"></a>
+        <a href=" ?id=$_GET["id"]"><img src="../img/illustration/add_produce.png " alt="add produce"></a>
+        <a href=" ?id=$_GET["id"]"><img src="../img/illustration/remove_produce.png" alt="remove produce"></a>
+        <a href="../tools/cart_delete.php?id=$_GET["id"]"><img src="../img/illustration/delete.png" alt="delete produce"></a>
     </div>
 </figure>
 </article>';
  }
 }
+    echo '<pre>';
+    print_r($cartResults);
+    echo '</pre>';
 ?>
 
 <!-- Fermer la section qui a été ouverte dans php -->
