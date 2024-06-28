@@ -1,6 +1,14 @@
 <?php
+
+use LDAP\Result;
+
 require_once("../elements/connect.php");
 require_once("../elements/header.php");
+
+$sql = "SELECT * FROM products";
+$requete = $db->prepare($sql);
+$requete->execute();
+$cartResults = $requete->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -22,6 +30,41 @@ require_once("../elements/header.php");
     <title>cart</title>
 </head>
 <body>
+    
+<?php    
+    if(empty($cartResults)){
+        echo 'not the product in this cart.';
+        
+    }else{
+        echo '<h2>your cart have X products</h2>';
+        echo'<section class="affichage_des_produits">';
+// Boucle pour afficher chaque résultat
+ foreach($cartResults as $cartResult){
 
+echo '<article class="">
+<figure class="">
+    <img class="" src="'. $cartResult['image_1'].'" alt="php name ici">
+    <figcaption class="">'. $cartResult['brand'].'</figcaption>
+    <figcaption class="">'. $cartResult['color'].'</figcaption>
+    <figcaption class="">'. $cartResult['size'].'</figcaption>
+    <figcaption class="">'. $cartResult['price'].'</figcaption>
+
+    <//Boutons d’accouplement pour ajouter des produits >
+
+   <div class="btn_action" style="display: flex; width: 50px;">
+        <a href=" ?id=$cartResult["id"]"><img src="../img/illustration/add_produce.png " alt="add produce"></a>
+        <a href=" ?id=$cartResult["id"]"><img src="../img/illustration/remove_produce.png" alt="remove produce"></a>
+        <a href=" ?id=$cartResult["id"]"><img src="../img/illustration/delete.png" alt="delete produce"></a>
+    </div>
+</figure>
+</article>';
+ }
+}
+?>
+
+<!-- Fermer la section qui a été ouverte dans php -->
+</section>
+
+<?php require_once ('../elements/footer.php');?>
 </body>
 </html>

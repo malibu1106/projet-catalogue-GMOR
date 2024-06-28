@@ -130,6 +130,60 @@ ul.menu {
     border: none;
 }
 
+
+/*BACKOFFICE MODIF*/
+.backkoff-admin-panel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.backofficemodif-body {
+    background-image: url(/img/temporaire/012454.jpg);
+    background-size: 120%;
+    background-position: top 0% right 0px;
+    background-repeat: no-repeat;
+    
+}
+.backofficemodif-container {
+    max-width: 400px;
+    margin: 2rem 5rem;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.backofficemodif-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+}
+.backofficemodif-card h1 {
+    color: #007bff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.backofficemodif-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.backofficemodif-line p {
+    width: 200px;
+    margin-bottom: 0;
+}
+.backofficemodif-line input[type="text"],
+.backofficemodif-line select,
+.backofficemodif-line .custom-select {
+    flex-grow: 1;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+
 @media only screen and (min-width: 768px) {
 
 
@@ -231,6 +285,64 @@ ul.menu {
 #messages .card-icon { background-color: #42f47c; }
 #orders .card-icon { background-color: #f4c542; }
 
+/*BACKOFFICE MODIF*/
+.backkoff-admin-panel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.backofficemodif-body {
+    background-image: url(/img/temporaire/012454.jpg);
+    background-size: 120%;
+    background-position: top 0% right 0px;
+    background-repeat: no-repeat;
+    
+}
+.backofficemodif-container {
+    max-width: 600px;
+    margin: 2rem 5rem;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.backofficemodif-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+}
+.backofficemodif-card h1 {
+    color: #007bff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.backofficemodif-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.backofficemodif-line p {
+    width: 200px;
+    margin-bottom: 0;
+}
+.backofficemodif-line input[type="text"],
+.backofficemodif-line select,
+.backofficemodif-line .custom-select {
+    flex-grow: 1;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+
+
+
+
+
+
 
 }
 
@@ -245,9 +357,6 @@ ul.menu {
     overflow: hidden; 
     text-overflow: ellipsis;
 }
-
-
-
 
 /*BACKOFFICE ADD*/
 .backofficeadd-body {
@@ -346,6 +455,11 @@ textarea {
 .submit-btn:hover {
     background-color: #218838;
 }
+
+
+
+
+
 
 
 /*FOOTER*/
