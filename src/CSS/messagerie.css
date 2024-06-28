@@ -1,14 +1,15 @@
 @import 'body_reset.css';
 
 
-
+#newMessage {
+    display: none;
+}
 
 
 .messagerie_conversation_title {
     height: 10%;
     width: 100%;
     margin-top: 10px;
-
     display: flex;
     align-items: center;
 }
@@ -35,6 +36,16 @@
     width: 20%;
     min-width: 160px;
     height: 90%;
+}
+
+.messagerie_menu a {
+    display: flex;
+    line-height: 40px;
+}
+
+.messagerie_menu img {
+    width: 35px;
+    height: 35px;
 }
 
 

@@ -19,14 +19,14 @@ session_start();?>
 
 <?php require_once ('../elements/header.php');?>
 
-<div class="retour-accueil">
-     <a href="../index.php">Accueil</a>
-</div>
+    <div class="retour-accueil">
+    <a href="../index.php">Accueil</a>
+    </div>
 
 <section id="container-pcp">
     <article class="photos-article">
         <figure class="photo-pcp">
-        <img src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
+        <img id="thumbnail" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
         </figure>
         <figure class="miniatures">
             <img src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
@@ -34,6 +34,11 @@ session_start();?>
             <img src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
         </figure>
     </article>
+
+    <div id="fullscreen-container">
+        <span id="close-btn">&times;</span>
+        <img id="fullscreen-image" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
+    </div>
 
     <article class="description">
         <h4>NOM DE L'ARTICLE</h4>
@@ -44,7 +49,7 @@ session_start();?>
         </div>
         <p>Description du produit, matière etc</p>
         <div class="add-to-cart">
-        <button>Ajouter au panier</button>
+        <button class="btn btn-dark" type="button";>Ajouter au panier</button>
         </div>
     </article>
 </section>
@@ -58,7 +63,15 @@ session_start();?>
     </article>
 </section>
         
+<script>
+    document.getElementById('thumbnail').addEventListener('click', function() {
+    document.getElementById('fullscreen-container').style.display = 'flex';
+});
 
+document.getElementById('close-btn').addEventListener('click', function() {
+    document.getElementById('fullscreen-container').style.display = 'none';
+});
+</script>
 <?php require_once ('../elements/footer.php');?>
 
 </body>

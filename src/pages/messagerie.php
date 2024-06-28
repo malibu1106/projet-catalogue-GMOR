@@ -1,7 +1,6 @@
 <?php 
 // Démarrer la session
 session_start(); 
-date_default_timezone_set('Europe/Paris'); 
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -37,7 +36,7 @@ require_once ('../elements/header.php');
 
 <section class="messagerie">
     <div class="messagerie_menu">
-        <a href="#">Nouveau message</a>
+        <a href="../pages/messagerie.php"><img src="../img/illustration/new_message.png"></a>
         
         <?php 
         $chat = []; 
@@ -57,7 +56,7 @@ require_once ('../elements/header.php');
 
                 echo '<a href="../pages/messagerie.php?with_user_id='.$conversation_user_id.'#ancre_dernier_message">';
                 echo '<div class="messagerie_conversation_title';
-                if ($conversation_user_infos['id'] == $_GET['with_user_id']) {
+                if ((isset($_GET['with_user_id']) && ($conversation_user_infos['id'] == $_GET['with_user_id']))) {
                     echo ' selected';
                 }
                 echo '">';
@@ -111,14 +110,21 @@ require_once ('../elements/header.php');
     </div>
 
     <?php if(isset($_GET['with_user_id'])): ?>
-    
-    <?php endif; ?>
 </section><form class="messagerie_input_text" method="POST" id="message_form" action="../tools/messagerie_envoi_msg.php">
-        <input type="text" name="conversation_message" id="conversation_message" placeholder="Envoyer un message à <?= ucfirst($conversation_user_with['first_name']) ?>">
-        <input type="hidden" name="sender_id" value="<?= $user_id ?>">
-        <input type="hidden" name="receiver_id" value="<?= $_GET['with_user_id'] ?>">
-        <input type="submit" value="Envoyer">
-    </form>
+    <input type="text" name="conversation_message" id="conversation_message" placeholder="Envoyer un message à <?= ucfirst($conversation_user_with['first_name']) ?>">
+    <input type="hidden" name="sender_id" value="<?= $user_id ?>">
+    <input type="hidden" name="receiver_id" value="<?= $_GET['with_user_id'] ?>">
+    <input type="submit" value="Envoyer">
+</form>
+<?php else: ?>
+    </section><form class="messagerie_input_text" method="POST" id="new_message_form" action="../tools/messagerie_new_envoi_msg.php">
+    <input type="text" name="new_conversation_message" id="new_conversation_message" placeholder="">
+    <input type="hidden" name="new_sender_id" value="<?= $user_id ?>">
+    <input type="hidden" name="new_receiver_id" value="">
+    <input type="submit" value="Envoyer">
+</form>
+<?php endif; ?>
+
 
     <script>
 $(document).ready(function() {
@@ -204,6 +210,6 @@ $(document).ready(function() {
 });
 </script>
 
+
 </body>
 </html>
-
