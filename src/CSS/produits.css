@@ -1,27 +1,120 @@
+.retour-accueil a {
+    text-decoration: none;
+    color: #BF2C2C;
+    font-size:1.2em;
+}
+
+.retour-accueil a.visited {
+    text-decoration: none;
+    color: #BF2C2C;
+}
+
+.retour-accueil a:hover {
+    text-decoration: underline;
+}
+
 .affichage_des_produits {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 96vw;
     margin: auto;
+    gap: 60px;
+    margin-top:70px;
 }
 
-.affichage_des_produits article {
-    width: 400px;
+.affichage_des_produits .container {
+    width: 300px;
     height: auto;
     display: flex;
     justify-content: space-between;
 }
 
-.affichage_des_produits figure {
+.affichage_des_produits .card {
     width: 100%;
     margin: 0;
+    border-radius: 0;
+    border:none;
 }
 
-.affichage_des_produits figure img {
+.affichage_des_produits .card img {
     margin: auto;
 }
 
-.affichage_des_produits figcaption {
+.affichage_des_produits .intro {
     text-align: center;
+}
+
+.container img {
+    height:400px;
+}
+
+body h1 {
+    display:flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.retour-accueil {
+    padding-left: 4%;
+}
+
+/*ANIMATION*/
+
+.card {
+	position: relative;
+	height: 500px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.intro {
+	position: absolute;
+	height: 90px;
+	width: 100%;
+	bottom: 0;
+	overflow: hidden;
+	color: #fff;
+	background-color: rgba(27, 27, 27, .5);
+	transition: .4s ease-in-out;
+}
+
+.card:hover .intro {
+	height: 280px;
+	bottom: 0;
+	background-color: #000;
+}
+
+.card:hover .text-p {
+	opacity: 1;
+	visibility: visible;
+}
+
+.card:hover img {
+	transform: scale(1.1) rotate(-3deg);
+}
+
+.card img {
+	height: 400px;
+	width: 350px;
+	object-fit: cover;
+	transition: transform .4s ease-in-out;
+}
+
+.text-h1 {
+	margin: 10px;
+	text-transform: uppercase;
+	font-size: 28px;
+    font-weight: 400;
+}
+
+.text-p {
+	font-size: 16px;
+	padding: 10px;
+	visibility: hidden;
+	opacity: 0;
+}
+
+footer {
+    margin-top: 70px;
 }
