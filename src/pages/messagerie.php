@@ -1,7 +1,6 @@
 <?php 
 // Démarrer la session
 session_start(); 
-date_default_timezone_set('Europe/Paris'); 
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -204,6 +203,6 @@ $(document).ready(function() {
 });
 </script>
 
+
 </body>
 </html>
-

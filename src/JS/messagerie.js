@@ -9,3 +9,13 @@ document.addEventListener("DOMContentLoaded", function () {
         dernierMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
 });
+
+let userList = document.getElementById('user_list');
+let newMessageInputZone = document.getElementById('newMessage');
+if (userList) { userList.addEventListener("change", displayInputText); }
+
+function displayInputText() {
+    newMessageInputZone.style.display = "block";
+    document.getElementById('receiver_id').value = userList.value;
+
+}
