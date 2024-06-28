@@ -27,10 +27,13 @@
     width: 100%;
     display:flex;
     justify-content: center;
+    gap: 10px;
 }
 
 .btn-tailles button {
     width: 90px;
+    border: none;
+    padding: 5px;
 }
 
 #suggestions {
@@ -48,6 +51,33 @@
     gap: 45px;
 }
 
+.add-to-cart button{
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgba(29, 29, 29, 0.9);
+    color: white;
+}
+
 footer {
     margin-top: 70px;
+}
+
+@media screen and (min-width: 1024px) {
+    .miniatures {
+        display:flex;
+        height: 150px;
+        justify-content: space-between;
+    }
+
+    #container-pcp {
+        justify-content:center;
+        display:flex;
+        flex-direction: revert;
+    }
+
+    .description {
+        width: 40%;
+        margin-bottom: 15%;
+    }
 }
