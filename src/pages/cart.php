@@ -45,8 +45,16 @@ echo '<article class="">
 <figure class="">
     <img class="" src="'. $cartResult['image_1'].'" alt="php name ici">
     <figcaption class="">'. $cartResult['brand'].'</figcaption>
-    <figcaption class="">'. $cartResult['price'].'</figcaption>
     <figcaption class="">'. $cartResult['size'].'</figcaption>
+    <figcaption class="">'. $cartResult['price'].'</figcaption>
+
+    <//Boutons d’accouplement pour ajouter des produits >
+    
+   <div class="btn_action" style="display: flex; width: 50px;">
+        <a href=" ?id=$cartResult["id"]"><img src="../img/illustration/add_produce.png " alt="add produce"></a>
+        <a href=" ?id=$cartResult["id"]"><img src="../img/illustration/remove_produce.png" alt="remove produce"></a>
+        <a href=" ?id=$cartResult["id"]"><img src="../img/illustration/delete.png" alt="delete produce"></a>
+    </div>
 </figure>
 </article>';
  }
