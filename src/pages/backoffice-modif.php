@@ -188,7 +188,6 @@ function handleImageUpload($file) {
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -203,7 +202,7 @@ function handleImageUpload($file) {
     <?php require_once('../elements/header.php'); ?>
     <main class="backofficeadd-container">
         <article class="backofficeadd-card">
-            <h1>MODIFIER LE PRODUIT</h1>
+            <h1 class="title-mod">MODIFIER LE PRODUIT</h1>
             <?php
             // Vérification de l'existence de l'ID du produit à modifier
             if (isset($_GET['id']) && !empty($_GET['id'])) {
