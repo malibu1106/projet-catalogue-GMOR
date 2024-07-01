@@ -21,7 +21,6 @@ date_default_timezone_set('Europe/Paris');
 <audio style="display:none" id="notificationSound" src="../sounds/notification.mp3" preload="auto"></audio>
 
 <?php
-
 $user_id = $_SESSION['user']['id'];
 require_once("../elements/connect.php");
 
@@ -38,36 +37,52 @@ require_once ('../elements/header.php');
 <section class="messagerie">
     <div class="messagerie_menu">
         <a href="../pages/messagerie.php"><img src="../img/illustration/new_message.png">Nouveau message</a>
-        
+
         <?php 
-        $chat = []; 
+        $chat = [];
+
+        // Parcourir toutes les conversations
         foreach ($conversations as $conversation) {
-            if ($conversation['sender_user_id'] !== $user_id && !in_array($conversation['sender_user_id'], $chat)) {
-                $chat[] = $conversation['sender_user_id'];
-                $conversation_user_id = $conversation['sender_user_id'];
+            $sender_id = $conversation['sender_user_id'];
+            $receiver_id = $conversation['receiver_user_id'];
 
-                $sql = "SELECT id, first_name, last_name, avatar FROM users WHERE id = :conversation_user_id";
-                $query = $db->prepare($sql);
-                $query->bindValue(':conversation_user_id', $conversation_user_id);
-                $query->execute();
-                $conversation_user_infos = $query->fetch(PDO::FETCH_ASSOC);
-                if(empty($conversation_user_infos['avatar'])){
-                    $conversation_user_infos['avatar'] = "../img/upload_avatars/default_avatar.png";
-                }
-
-                echo '<a href="../pages/messagerie.php?with_user_id='.$conversation_user_id.'#ancre_dernier_message">';
-                echo '<div class="messagerie_conversation_title';
-                if ((isset($_GET['with_user_id']) && ($conversation_user_infos['id'] == $_GET['with_user_id']))) {
-                    echo ' selected';
-                }
-                echo '">';
-                echo '<div class="messagerie_conversation_avatar">';
-                echo '<img class="conversation_avatar" alt="Avatar de '.$conversation_user_infos['first_name'].'" src="'.$conversation_user_infos['avatar'].'">';
-                echo '</div>';
-                echo '<div class="messagerie_conversation_name">';
-                echo ucfirst($conversation_user_infos['first_name']) . ' ' . ucfirst($conversation_user_infos['last_name']);
-                echo '</div></div></a>';
+            // Ajoutez l'ID de l'expéditeur s'il est différent de l'utilisateur connecté et s'il n'est pas déjà dans $chat
+            if ($sender_id != $user_id && !in_array($sender_id, $chat)) {
+                $chat[] = $sender_id;
             }
+
+            // Ajoutez l'ID du destinataire s'il est différent de l'utilisateur connecté et s'il n'est pas déjà dans $chat
+            if ($receiver_id != $user_id && !in_array($receiver_id, $chat)) {
+                $chat[] = $receiver_id;
+            }
+        }
+
+        // Récupérer les informations des utilisateurs dans $chat et les afficher
+        foreach ($chat as $conversation_user_id) {
+            $sql = "SELECT id, first_name, last_name, avatar FROM users WHERE id = :conversation_user_id";
+            $query = $db->prepare($sql);
+            $query->bindValue(':conversation_user_id', $conversation_user_id);
+            $query->execute();
+            $conversation_user_infos = $query->fetch(PDO::FETCH_ASSOC);
+
+            // Assurez-vous que l'avatar a une valeur par défaut si vide
+            if (empty($conversation_user_infos['avatar'])) {
+                $conversation_user_infos['avatar'] = "../img/upload_avatars/default_avatar.png";
+            }
+
+            // Afficher les informations de l'utilisateur dans votre interface
+            echo '<a href="../pages/messagerie.php?with_user_id='.$conversation_user_id.'#ancre_dernier_message">';
+            echo '<div class="messagerie_conversation_title';
+            if (isset($_GET['with_user_id']) && $_GET['with_user_id'] == $conversation_user_id) {
+                echo ' selected';
+            }
+            echo '">';
+            echo '<div class="messagerie_conversation_avatar">';
+            echo '<img class="conversation_avatar" alt="Avatar de '.$conversation_user_infos['first_name'].'" src="'.$conversation_user_infos['avatar'].'">';
+            echo '</div>';
+            echo '<div class="messagerie_conversation_name">';
+            echo ucfirst($conversation_user_infos['first_name']) . ' ' . ucfirst($conversation_user_infos['last_name']);
+            echo '</div></div></a>';
         }
         ?>
     </div>
