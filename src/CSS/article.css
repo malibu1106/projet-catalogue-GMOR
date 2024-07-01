@@ -26,7 +26,7 @@
 }
 
 .photo-pcp img {
-    width: 350px;
+    max-width: 350px;
     cursor: pointer;
 }
 
@@ -88,6 +88,14 @@
     outline: solid 2px rgb(220, 220, 220);
 }
 
+.btn-tailles button.clicked {
+    outline: solid 2px rgb(220, 220, 220);
+}
+
+.btn-tailles button:focus {
+    outline: none;
+}
+
 #suggestions {
     width: 100%;
     display:flex;
@@ -113,6 +121,18 @@ footer {
         display:flex;
         height: 150px;
         justify-content: space-between;
+        cursor: pointer;
+    }
+
+    .miniatures img {
+        width: auto; 
+        max-height: 100%; 
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out;
+    }
+
+    .miniatures img:hover {
+        transform: scale(1.05);
     }
 
     #container-pcp {
@@ -124,5 +144,11 @@ footer {
     .description {
         width: 40%;
         margin-bottom: 15%;
+    }
+
+    .photo-pcp img {
+        width: 350px; /* Taille fixe de l'image principale */
+        height: 583px; /* Ajustement automatique de la hauteur */
+        cursor: pointer;
     }
 }

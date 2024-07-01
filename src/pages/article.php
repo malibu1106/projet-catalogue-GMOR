@@ -29,9 +29,9 @@ session_start();?>
         <img id="thumbnail" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
         </figure>
         <figure class="miniatures">
-            <img src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
-            <img src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
-            <img src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
+            <img class="miniature" src="../img/temporaire/ninja-cosmico.jpeg" alt="php name">
+            <img  class="miniature" src="../img/temporaire/photo1.jpg" alt="php name">
+            <img class="miniature" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
         </figure>
     </article>
 
@@ -64,12 +64,74 @@ session_start();?>
 </section>
         
 <script>
+
+//pour rendre la photo-pcp clicable et qu'elle s'affiche en fullscreen
     document.getElementById('thumbnail').addEventListener('click', function() {
     document.getElementById('fullscreen-container').style.display = 'flex';
 });
 
 document.getElementById('close-btn').addEventListener('click', function() {
     document.getElementById('fullscreen-container').style.display = 'none';
+});
+
+//pour qu'une miniature s'affiche à la place de l'image pcp
+document.addEventListener('DOMContentLoaded', function() {
+    const thumbnails = document.getElementById('thumbnail');
+    const miniatures = document.querySelectorAll('.miniature');
+
+    let currentThumbnail = document.getElementById('thumbnail');
+
+      // remplacer l'image principale par la miniature cliquée
+      function replaceThumbnail(thumbnail, newThumbnail) {
+        const tempSrc = thumbnail.src;
+        thumbnail.src = newThumbnail.src;
+        newThumbnail.src = tempSrc;
+        currentThumbnail = thumbnail; // Mettre à jour currentThumbnail
+    }
+
+    // clic sur chaque miniature
+    miniatures.forEach(function(miniature) {
+        miniature.addEventListener('click', function() {
+            replaceThumbnail(currentThumbnail, miniature);
+        });
+    });
+
+    // Afficher l'image en plein écran
+    thumbnail.addEventListener('click', function() {
+        document.getElementById('fullscreen-image').src = currentThumbnail.src;
+        document.getElementById('fullscreen-container').style.display = 'flex';
+    });
+
+    // Fermer l'image en plein écran
+    document.getElementById('close-btn').addEventListener('click', function() {
+        document.getElementById('fullscreen-container').style.display = 'none';
+    });
+});
+
+//pour le outline au clic sur une taille
+document.querySelectorAll('.btn-tailles button').forEach(button => {
+    button.addEventListener('mousedown', function(event) {
+        // Supprime la classe 'clicked' de tous les boutons
+        document.querySelectorAll('.btn-tailles button').forEach(btn => btn.classList.remove('clicked'));
+        
+        // Ajoute la classe 'clicked' au bouton cliqué
+        this.classList.add('clicked');
+        
+        // Prévenir la perte de focus pendant le clic
+        event.preventDefault();
+
+        // empêche la perte de focus après le clic
+        this.blur();
+    });
+});
+
+// enlève la classe 'clicked' quand clique ailleurs
+document.addEventListener('click', function(event) {
+    // Vérifie si le clic s'est produit à l'extérieur des boutons
+    if (!event.target.closest('.btn-tailles button')) {
+        // Supprime la classe 'clicked' de tous les boutons
+        document.querySelectorAll('.btn-tailles button').forEach(btn => btn.classList.remove('clicked'));
+    }
 });
 </script>
 <?php require_once ('../elements/footer.php');?>
