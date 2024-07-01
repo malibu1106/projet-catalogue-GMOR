@@ -76,6 +76,19 @@ require_once ('../elements/header.php');
             if (isset($_GET['with_user_id']) && $_GET['with_user_id'] == $conversation_user_id) {
                 echo ' selected';
             }
+            $sql = "SELECT * FROM messages WHERE sender_user_id = :conversation_user_id AND receiver_user_id = :user_id AND message_read = 0";
+            $query = $db->prepare($sql);
+            $query->bindValue(':conversation_user_id', $conversation_user_id);
+            $query->bindValue(':user_id', $user_id);
+            $query->execute();
+            $unread_message = $query->fetch(PDO::FETCH_ASSOC);
+            if($unread_message){echo ' unread';}
+            
+
+
+
+
+
             echo '">';
             echo '<div class="messagerie_conversation_avatar">';
             echo '<img class="conversation_avatar" alt="Avatar de '.$conversation_user_infos['first_name'].'" src="'.$conversation_user_infos['avatar'].'">';
@@ -154,10 +167,25 @@ require_once ('../elements/header.php');
                 echo '</div>';
             }
             }
-            echo '<div id="ancre_dernier_message"></div>';
+            echo '';
         
         ?>
     </div>
+
+
+    <?php
+        // Marquer tous les messages de cette conversation comme lus
+        if (isset($_GET['with_user_id'])) {
+            $with_user_id = $_GET['with_user_id'];
+            $sql = "UPDATE messages SET message_read = 1 WHERE receiver_user_id = :user_id AND sender_user_id = :with_user_id AND message_read = 0";
+            $query = $db->prepare($sql);
+            $query->bindValue(':user_id', $user_id);
+            $query->bindValue(':with_user_id', $with_user_id);
+            $query->execute();
+        }
+        ?>
+
+
 
     <?php if(isset($_GET['with_user_id'])): ?>
 </section><form class="messagerie_input_text" method="POST" id="message_form" action="../tools/messagerie_envoi_msg.php" enctype="multipart/form-data">
@@ -222,6 +250,8 @@ require_once ('../elements/header.php');
                 messageHtml += '<div class="message_time">' + (new Date(message.datetime)).toLocaleString() + '</div>';
                 messageHtml += '</div>';
             });
+
+            messageHtml += '<div id="ancre_dernier_message"></div>';
 
             $('#messagerie_main').html(messageHtml);
 
