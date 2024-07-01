@@ -11,10 +11,10 @@ $requete = $db->prepare($sql);
 $requete->execute();
 $cartResults = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-$sql_count ="SELECT COUNT(*) FROM`carts` WHERE ID <> 0";
+$sql_count ="SELECT COUNT(*) AS total_products FROM`carts` WHERE ID <> 0";
 $requete_count = $db->prepare($sql_count);
 $requete_count->execute();
-$result_count = $requete_count->fetchAll(PDO::FETCH_ASSOC);
+$result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -41,7 +41,7 @@ $result_count = $requete_count->fetchAll(PDO::FETCH_ASSOC);
         echo 'not the product in this cart.';
         
     }else{
-        echo '<h2>your cart have <?= . $result_count  . ?> products</h2>';
+        echo '<h2>your cart have X products</h2>';
         echo'<section class="affichage_des_produits">';
 // Boucle pour afficher chaque résultat
  foreach($cartResults as $cartResult){
