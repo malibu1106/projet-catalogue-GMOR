@@ -1,15 +1,20 @@
 <?php
 
-use LDAP\Result;
+
 
 require_once("../elements/connect.php");
 require_once("../elements/header.php");
 
-$sql = "SELECT * FROM products";
+// $sql = "SELECT * FROM products";
+$sql = "SELECT * FROM  carts c LEFT JOIN products p  ON p.id = c.product_id LEFT JOIN users u ON c.user_id = u.id ";
 $requete = $db->prepare($sql);
 $requete->execute();
 $cartResults = $requete->fetchAll(PDO::FETCH_ASSOC);
 
+$sql_count ="SELECT COUNT(*) FROM`carts` WHERE ID <> 0";
+$requete_count = $db->prepare($sql_count);
+$requete_count->execute();
+$result_count = $requete_count->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -36,7 +41,7 @@ $cartResults = $requete->fetchAll(PDO::FETCH_ASSOC);
         echo 'not the product in this cart.';
         
     }else{
-        echo '<h2>your cart have X products</h2>';
+        echo '<h2>your cart have <?= . $result_count  . ?> products</h2>';
         echo'<section class="affichage_des_produits">';
 // Boucle pour afficher chaque résultat
  foreach($cartResults as $cartResult){
@@ -60,6 +65,9 @@ echo '<article class="">
 </article>';
  }
 }
+    echo '<pre>';
+    print_r($result_count);
+    echo '</pre>';
     echo '<pre>';
     print_r($cartResults);
     echo '</pre>';
