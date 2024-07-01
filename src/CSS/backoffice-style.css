@@ -131,7 +131,143 @@ ul.menu {
 }
 
 
+
+
+/*//////////////////////////BACK OFFICE//////////////////////////////////*/
+
+/*BACKOFFICE ADD*/
+.image-upload {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.image-upload-container {
+    width: 215px;
+    margin-bottom: 20px;
+}
+
+.image-preview {
+    width: 215px;
+    height: 300px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.backofficeadd-body {
+    background-image: url(/img/temporaire/518310.jpg);
+    background-size: 120%;
+    background-position: top 0% right 0px;
+    background-repeat: no-repeat;
+    font-family: "Montserrat", sans-serif;
+}
+
+.backofficeadd-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.backofficeadd-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+}
+.backofficeadd-card h1 {
+    color: #007bff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.backofficeadd-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.backofficeadd-line p {
+    width: 200px;
+    margin-bottom: 0;
+}
+.backofficeadd-line input[type="text"],
+.backofficeadd-line select,
+.backofficeadd-line .custom-select {
+    flex-grow: 1;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+textarea {
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+.image-upload {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.img-text-center {
+    text-align: center;
+}
+.image-upload-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.image-upload-btn:hover {
+    background-color: #5a6268;
+}
+.backoff-center-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title-mod {
+    font-weight: bold;
+}
+
+.submit-btn {
+    display: block;
+    width: 235px;
+    padding: 0.75rem;
+    margin-top: 1.5rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.submit-btn:hover {
+    background-color: #218838;
+}
+
+
+
 /*BACKOFFICE MODIF*/
+
 .backkoff-admin-panel{
     display: flex;
     flex-direction: row;
@@ -144,7 +280,7 @@ ul.menu {
     background-size: 120%;
     background-position: top 0% right 0px;
     background-repeat: no-repeat;
-    
+    font-family: "Montserrat", sans-serif;
 }
 .backofficemodif-container {
     max-width: 400px;
@@ -184,35 +320,30 @@ ul.menu {
 }
 
 
-@media only screen and (min-width: 768px) {
-    .image-upload {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    
-    .image-upload-container {
-        width: 215px;
-        margin-bottom: 20px;
-    }
-    
-    .image-preview {
-        width: 215px;
-        height: 300px;
-        border: 1px solid #ddd;
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-    
-    .image-preview img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
 
+/*BACKOFFICE PRODUITS*/
+.backoff-prod-title{
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+}
+
+.bg-produits {
+    background-image: url(/img/temporaire/backoff-prod.jpg);
+    background-size: cover;
+    padding-top: 100px;
+}
+.backoff-short-desc{
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+
+
+
+@media only screen and (min-width: 768px) {
 
 /*BACKOFFICE GENERAL*/
 .backofficegeneral-body {
@@ -372,126 +503,6 @@ ul.menu {
 
 
 }
-
-/*BACKOFFICE PRODUITS*/
-.backoff-prod-title{
-    color: white;
-}
-
-.bg-produits {
-    background-image: url(/img/temporaire/backoff-prod.jpg);
-    background-size: cover;
-    padding-top: 100px;
-}
-.backoff-short-desc{
-    max-width: 150px;
-    white-space: nowrap;
-    overflow: hidden; 
-    text-overflow: ellipsis;
-}
-
-/*BACKOFFICE ADD*/
-.backofficeadd-body {
-    background-image: url(/img/temporaire/518310.jpg);
-    background-size: 120%;
-    background-position: top 0% right 0px;
-    background-repeat: no-repeat;
-    
-}
-.backofficeadd-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.backofficeadd-card {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-}
-.backofficeadd-card h1 {
-    color: #007bff;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-.backofficeadd-line {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-.backofficeadd-line p {
-    width: 200px;
-    margin-bottom: 0;
-}
-.backofficeadd-line input[type="text"],
-.backofficeadd-line select,
-.backofficeadd-line .custom-select {
-    flex-grow: 1;
-    padding: 0.5rem;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-}
-textarea {
-    width: 100%;
-    min-height: 100px;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-}
-.image-upload {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-.img-text-center {
-    text-align: center;
-}
-.image-upload-btn {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: #6c757d;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.image-upload-btn:hover {
-    background-color: #5a6268;
-}
-.backoff-center-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-
-.submit-btn {
-    display: block;
-    width: 200px;
-    padding: 0.75rem;
-    margin-top: 1.5rem;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.submit-btn:hover {
-    background-color: #218838;
-}
-
-
-
 
 
 
