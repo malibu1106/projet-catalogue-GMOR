@@ -22,7 +22,9 @@ session_start();?>
         <div class="retour-accueil">
         <a href="../index.php">Accueil</a>
         </div>
-        <div class="tri">Zone de tri ici</div>
+        <div class="tri">Zone de tri ici
+            foreach catégories
+        </div>
 
         <section class="affichage_des_produits">
 
