@@ -47,4 +47,5 @@
         border-radius: 10px; 
         color: white;
     }
+    </style>
 </footer>
