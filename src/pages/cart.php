@@ -11,7 +11,7 @@ $requete = $db->prepare($sql);
 $requete->execute();
 $cartResults = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-$sql_count ="SELECT COUNT(*) AS total_products FROM`carts` WHERE ID <> 0";
+$sql_count ="SELECT SUM(`product_quantity`) FROM `carts` WHERE id;";
 $requete_count = $db->prepare($sql_count);
 $requete_count->execute();
 $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
@@ -53,6 +53,8 @@ echo '<article class="">
     <figcaption class="">'. $cartResult['color'].'</figcaption>
     <figcaption class="">'. $cartResult['size'].'</figcaption>
     <figcaption class="">'. $cartResult['price'].'</figcaption>
+    <figcaption class="">'. $cartResult['product_quantity'].'</figcaption>
+    
 
     <//Boutons d’accouplement pour ajouter des produits >
 
