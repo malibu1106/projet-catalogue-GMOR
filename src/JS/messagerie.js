@@ -11,11 +11,20 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 let userList = document.getElementById('user_list');
-let newMessageInputZone = document.getElementById('newMessage');
-if (userList) { userList.addEventListener("change", displayInputText); }
+let newMessageInputZone = document.getElementById('new_conversation_message');
+let receiverIdInput = document.getElementById('new_receiver_id');
+
+if (userList) {
+    userList.addEventListener("change", displayInputText);
+}
 
 function displayInputText() {
     newMessageInputZone.style.display = "block";
-    document.getElementById('receiver_id').value = userList.value;
+    receiverIdInput.value = userList.value;
 
+    // Récupérer le texte de l'option sélectionnée
+    var selectedOptionText = userList.options[userList.selectedIndex].text;
+
+    // Mettre à jour le placeholder avec le nom et prénom de la personne sélectionnée
+    newMessageInputZone.placeholder = "Envoyer un message à " + selectedOptionText;
 }
