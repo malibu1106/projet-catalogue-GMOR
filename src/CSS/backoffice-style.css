@@ -140,7 +140,7 @@ ul.menu {
     flex-wrap: wrap;
 }
 .backofficemodif-body {
-    background-image: url(/img/temporaire/012454.jpg);
+    background-image: url(/img/temporaire/321303.jpg);
     background-size: 120%;
     background-position: top 0% right 0px;
     background-repeat: no-repeat;
@@ -185,6 +185,33 @@ ul.menu {
 
 
 @media only screen and (min-width: 768px) {
+    .image-upload {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .image-upload-container {
+        width: 215px;
+        margin-bottom: 20px;
+    }
+    
+    .image-preview {
+        width: 215px;
+        height: 300px;
+        border: 1px solid #ddd;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    
+    .image-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
 
 /*BACKOFFICE GENERAL*/
@@ -294,7 +321,7 @@ ul.menu {
     flex-wrap: wrap;
 }
 .backofficemodif-body {
-    background-image: url(/img/temporaire/012454.jpg);
+    background-image: url(/img/temporaire/321303.jpg);
     background-size: 120%;
     background-position: top 0% right 0px;
     background-repeat: no-repeat;
@@ -347,8 +374,13 @@ ul.menu {
 }
 
 /*BACKOFFICE PRODUITS*/
+.backoff-prod-title{
+    color: white;
+}
+
 .bg-produits {
-    background-color: #fdffe6;
+    background-image: url(/img/temporaire/backoff-prod.jpg);
+    background-size: cover;
     padding-top: 100px;
 }
 .backoff-short-desc{
@@ -440,6 +472,8 @@ textarea {
     align-items: center;
 }
 
+
+
 .submit-btn {
     display: block;
     width: 200px;
@@ -467,4 +501,13 @@ textarea {
     padding-left: 50px;
     padding-right: 50px;
 }
+.color-footer {
+    background-color: rgb(248, 248, 248);
+}
+
+
+
+
+
+
 
