@@ -80,7 +80,7 @@ if (isset($_POST['loginUser'])) {
                     </div>
                     <button class="w-100 btn btn-lg btn-primary" name="loginUser" type="submit">Connexion</button>
                     <hr class="my-4">
-                    <small class="text-body-secondary">Si vous ne possédez pas de compte cliquer sur <a href="inscription.php">S'enregistrer</a>.</small>
+                    <small class="text-body-secondary">Si vous ne possédez pas de compte cliquer sur <a class="registerbtn" href="inscription.php">S'enregistrer</a>.</small>
                 </form>
             </section>
         </article>

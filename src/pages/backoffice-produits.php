@@ -35,7 +35,7 @@ require_once("../elements/connect.php");
             </div>
 
             <div class="table-responsive">
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover mt-3 mb-5">
                     <thead>
                         <tr>
                             <th>Action</th>
