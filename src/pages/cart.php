@@ -1,11 +1,12 @@
 <?php
 
-use LDAP\Result;
+
 
 require_once("../elements/connect.php");
 require_once("../elements/header.php");
 
-$sql = "SELECT * FROM products";
+// $sql = "SELECT * FROM products";
+$sql = "SELECT * FROM products p LEFT JOIN carts c ON p.id = c.product_id";
 $requete = $db->prepare($sql);
 $requete->execute();
 $cartResults = $requete->fetchAll(PDO::FETCH_ASSOC);
