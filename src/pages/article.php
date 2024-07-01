@@ -47,7 +47,17 @@ session_start();?>
         <div class="btn-tailles">
         <button>XS</button><button>S</button><button>M</button><button>L</button>
         </div>
-        <p>Description du produit, matière etc</p>
+        <div class="description-produit">
+        <p id="descr-produit">Top bandeau court en matière tissée. Modèle avec petit bord volanté en haut, cordon de serrage à nouer à 
+            l'encolure et ouverture en V devant. Partie smockée à la taille avec basque. Doublé. <br>
+
+            NUMÉRO D'ARTICLE:1236558002<br>
+            Longueur: Courte<br>
+            Longueur des manches: Sans manches<br>
+            Coupe: Slim fit<br>
+            Style: Bandeau, Petite ouverture, Smocks<br>
+            Description : Blanc/vert/jaune, Fleuri<br></p>
+        </div>
         <div class="add-to-cart">
         <button class="btn btn-dark" type="button";>Ajouter au panier</button>
         </div>
