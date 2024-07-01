@@ -1,4 +1,4 @@
-<footer class="footer-pad pt-5 bg-light">
+<footer class="footer-pad pt-5 color-footer">
     <div class="row">
     <div class="col-md-5 offset-md-1 mb-3">
             <form>
@@ -7,10 +7,10 @@
             <div class="d-flex flex-column flex-sm-row w-100 gap-2">
                 <label for="newsletter1" class="visually-hidden">Email address</label>
                 <input id="newsletter1" type="text" class="form-control" placeholder="Votre adresse email">
-                <button class="btn btn-primary" type="button">Souscrire</button>
+                <button class="btn btn-dark" type="button";>Souscrire</button>
             </div>
             </form>
-        </div>
+    </div>
 
         <div class="col-6 col-md-3 px-5 mb-3">
             <h5>A propos</h5>
@@ -38,4 +38,14 @@
             <li class="ms-3"><a class="link-body-emphasis" href="#"><i class="bi bi-facebook" style="font-size: 1.5rem;"></i></a></li>
         </ul>
     </div>
+
+    <style>
+        .btn .btn-color{
+        background-color: rgba(29, 29, 29, 0.9); 
+        border: none; 
+        padding: 10px; 
+        border-radius: 10px; 
+        color: white;
+    }
+    </style>
 </footer>

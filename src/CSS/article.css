@@ -1,3 +1,22 @@
+.retour-accueil a {
+    text-decoration: none;
+    color: #BF2C2C;
+    font-size:1.2em;
+}
+
+.retour-accueil a.visited {
+    text-decoration: none;
+    color: #BF2C2C;
+}
+
+.retour-accueil a:hover {
+    text-decoration: underline;
+}
+
+.retour-accueil {
+    padding-left: 4%;
+}
+
 #container-pcp {
     width: 100%;
     display:flex;
@@ -7,11 +26,39 @@
 }
 
 .photo-pcp img {
-    width: 350px;
+    max-width: 350px;
+    cursor: pointer;
 }
 
 .miniatures {
     display:none;
+}
+
+#fullscreen-container {
+    display: none; /* Caché par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Fond noir semi-transparent */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Au-dessus des autres éléments */
+}
+
+#fullscreen-image {
+    width: 30%;
+    height: 80%;
+}
+
+#close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
 }
 
 .description {
@@ -34,6 +81,19 @@
     width: 90px;
     border: none;
     padding: 5px;
+    background-color: rgb(235, 235, 235);
+}
+
+.btn-tailles button:hover{
+    outline: solid 2px rgb(220, 220, 220);
+}
+
+.btn-tailles button.clicked {
+    outline: solid 2px rgb(220, 220, 220);
+}
+
+.btn-tailles button:focus {
+    outline: none;
 }
 
 #suggestions {
@@ -49,14 +109,7 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 45px;
-}
-
-.add-to-cart button{
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: rgba(29, 29, 29, 0.9);
-    color: white;
+    margin-top: 40px;
 }
 
 footer {
@@ -68,6 +121,18 @@ footer {
         display:flex;
         height: 150px;
         justify-content: space-between;
+        cursor: pointer;
+    }
+
+    .miniatures img {
+        width: auto; 
+        max-height: 100%; 
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out;
+    }
+
+    .miniatures img:hover {
+        transform: scale(1.05);
     }
 
     #container-pcp {
@@ -79,5 +144,11 @@ footer {
     .description {
         width: 40%;
         margin-bottom: 15%;
+    }
+
+    .photo-pcp img {
+        width: 350px; /* Taille fixe de l'image principale */
+        height: 583px; /* Ajustement automatique de la hauteur */
+        cursor: pointer;
     }
 }

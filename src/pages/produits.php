@@ -19,7 +19,6 @@ session_start();?>
 
 <?php require_once ('../elements/header.php');?>
 
-    <h1>NOM DE LA CATÉGORIE</h1>
         <div class="retour-accueil">
         <a href="../index.php">Accueil</a>
         </div>
