@@ -69,19 +69,19 @@ session_start();?>
     <section id="categories">
         <h1>Trouvez votre <span>bonheur</span> parmi nos articles</h1>
             <article class="rond-categorie">
-               <img src="img/temporaire/ninja-cosmico.jpeg">
+               <img src="img/temporaire/robe.png">
                <p>Robes</p>
             </article>
             <article class="rond-categorie">
-               <img src="img/temporaire/ninja-cosmico.jpeg">
+               <img src="img/temporaire/tshirt.png">
                <p>T-shirts</p>
             </article>
             <article class="rond-categorie">
-               <img src="img/temporaire/ninja-cosmico.jpeg">
+               <img src="img/temporaire/pantalon.png">
                <p>Pantalons</p>
             </article>
             <article class="rond-categorie">
-               <img src="img/temporaire/ninja-cosmico.jpeg">
+               <img src="img/temporaire/veste.png">
                <p>Vestes</p>
             </article>
             <article class="rond-categorie">

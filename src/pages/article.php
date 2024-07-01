@@ -31,7 +31,7 @@ session_start();?>
         <figure class="miniatures">
             <img class="miniature" src="../img/temporaire/ninja-cosmico.jpeg" alt="php name">
             <img  class="miniature" src="../img/temporaire/photo1.jpg" alt="php name">
-            <img class="miniature" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
+            <img class="miniature" src="../img/temporaire/test.jpg" alt="php name">
         </figure>
     </article>
 
