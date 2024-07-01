@@ -321,24 +321,7 @@ textarea {
 
 
 
-/*BACKOFFICE PRODUITS*/
-.backoff-prod-title{
-    color: white;
-    font-family: "Montserrat", sans-serif;
-    font-weight: bold;
-}
 
-.bg-produits {
-    background-image: url(/img/temporaire/backoff-prod.jpg);
-    background-size: cover;
-    padding-top: 100px;
-}
-.backoff-short-desc{
-    max-width: 150px;
-    white-space: nowrap;
-    overflow: hidden; 
-    text-overflow: ellipsis;
-}
 
 
 
@@ -443,6 +426,35 @@ textarea {
 #messages .card-icon { background-color: #42f47c; }
 #orders .card-icon { background-color: #f4c542; }
 
+
+
+
+
+
+/*BACKOFFICE PRODUITS*/
+.backoff-prod-title{
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+}
+.bg-produits {
+    background-image: url(/img/temporaire/backoff-prod.jpg);
+    background-size: cover;
+    padding-top: 100px;
+}
+.backoff-short-desc{
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+
+
+
+
+
+
 /*BACKOFFICE MODIF*/
 .backkoff-admin-panel{
     display: flex;
@@ -466,7 +478,6 @@ textarea {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-
 .backofficemodif-card {
     background-color: white;
     padding: 2rem;
@@ -494,11 +505,6 @@ textarea {
     border: 1px solid #ced4da;
     border-radius: 4px;
 }
-
-
-
-
-
 
 
 
