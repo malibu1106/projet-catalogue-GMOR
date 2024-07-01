@@ -199,7 +199,7 @@ function handleImageUpload($file) {
     <link rel="stylesheet" href="../CSS/backoffice-style.css">
     <title>Modifier le Produit</title>
 </head>
-<body class="backofficeadd-body">
+<body class="backofficemodif-body">
     <?php require_once('../elements/header.php'); ?>
     <main class="backofficeadd-container">
         <article class="backofficeadd-card">

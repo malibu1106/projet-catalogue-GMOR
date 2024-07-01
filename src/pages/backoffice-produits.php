@@ -26,7 +26,7 @@ require_once("../elements/connect.php");
 
     <main class="bg-produits">
         <article class="backgene-set container mt-4">
-            <h2 class="backgene-title mb-4">Gestion des Produits</h2>
+            <h1 class="backoff-prod-title mb-4">Gestion des Produits</h1>
 
             <div class="mb-3">
                 <a href="backoffice-add.php" class="btn btn-success">
