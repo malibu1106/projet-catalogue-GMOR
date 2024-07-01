@@ -31,7 +31,7 @@ session_start();?>
         <figure class="miniatures">
             <img class="miniature" src="../img/temporaire/ninja-cosmico.jpeg" alt="php name">
             <img  class="miniature" src="../img/temporaire/photo1.jpg" alt="php name">
-            <img class="miniature" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
+            <img class="miniature" src="../img/temporaire/test.jpg" alt="php name">
         </figure>
     </article>
 
@@ -47,7 +47,10 @@ session_start();?>
         <div class="btn-tailles">
         <button>XS</button><button>S</button><button>M</button><button>L</button>
         </div>
-        <p>Description du produit, matière etc</p>
+        <div class="description-produit">
+        <p id="descr-produit1"></p>
+        <p id="descr-produit2"></p>
+        </div>
         <div class="add-to-cart">
         <button class="btn btn-dark" type="button";>Ajouter au panier</button>
         </div>
