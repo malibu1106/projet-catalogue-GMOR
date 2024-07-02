@@ -127,16 +127,6 @@ foreach ($chats as $chat) {
             echo '</select>';
             
 
-
-
-
-
-
-
-
-
-
-
         } else {
             $sql = "SELECT id, first_name, last_name, avatar FROM users WHERE id = :conversation_user_id";
             $query = $db->prepare($sql);
