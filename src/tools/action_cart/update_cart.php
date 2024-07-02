@@ -16,8 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         switch($action) {
             case 'add':
-                $sql = "UPDATE carts SET product_quantity = product_quantity + 1 WHERE id = :cart_id";
+                $sql = "UPDATE carts SET product_quantity = LEAST(product_quantity + 1, 99) WHERE id = :cart_id";
                 break;
+                
             case 'subtract':
                 $sql = "UPDATE carts SET product_quantity = GREATEST(product_quantity - 1, 0) WHERE id = :cart_id";
                 break;
@@ -64,3 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo json_encode(['success' => false, 'message' => 'Método inválido']);
 }
+// Verificação de existência do item: Antes de realizar a ação, verifique se o item existe no carrinho:
+    $check_sql = "SELECT id FROM carts WHERE id = :cart_id";
+    $check_stmt = $db->prepare($check_sql);
+    $check_stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
+    $check_stmt->execute();
+    if (!$check_stmt->fetch()) {
+        throw new Exception('Item não encontrado no carrinho');
+    }
+
+    
