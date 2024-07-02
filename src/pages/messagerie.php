@@ -39,45 +39,64 @@ require_once ('../elements/header.php');
         <a href="../pages/messagerie.php"><img src="../img/illustration/new_message.png">Nouveau message</a>
 
         <?php 
-        foreach ($conversations as $conversation) {
-            if($conversation['user_id_1'] === $user_id){
-                $conversation_user_id = $conversation['user_id_2'];
-            }
-            else{
-                $conversation_user_id = $conversation['user_id_1'];
-            }
-        
+$chats = [];
+foreach ($conversations as $conversation) {
+    if ($conversation['user_id_1'] === $user_id) {
+        $conversation_user_id = $conversation['user_id_2'];
+        if (!in_array($conversation_user_id, $chats)) {
+            $chats[] = $conversation_user_id;
+        }
+    } else {
+        $conversation_user_id = $conversation['user_id_1'];
+        if (!in_array($conversation_user_id, $chats)) {
+            $chats[] = $conversation_user_id;
+        }
+    }
+}
+
+foreach ($chats as $chat) {
 
 
-            // Afficher les informations de l'utilisateur dans votre interface
-            echo '<a href="../pages/messagerie.php?with_user_id='.$conversation_user_id.'#ancre_dernier_message">';
-            echo '<div class="messagerie_conversation_title';
-            if (isset($_GET['with_user_id']) && $_GET['with_user_id'] == $conversation_user_id) {
-                echo ' selected';
-            }
-            $sql = "SELECT id, first_name, last_name, avatar FROM users WHERE id = :conversation_user_id";
+    $sql = "SELECT * FROM messages WHERE sender_user_id = :conversation_user_id AND receiver_user_id = :user_id AND message_read = 0";
             $query = $db->prepare($sql);
-            $query->bindValue(':conversation_user_id', $conversation_user_id);
+            $query->bindValue(':conversation_user_id', $chat);
+            $query->bindValue(':user_id', $user_id);
             $query->execute();
-            $conversation_user_infos = $query->fetch(PDO::FETCH_ASSOC);
+            $unread_message = $query->fetch(PDO::FETCH_ASSOC);
             
-            if (empty($conversation_user_infos['avatar'])) {
-                $conversation_user_infos['avatar'] = "../img/upload_avatars/default_avatar.png";
-            }
 
 
-
-
-
-            echo '">';
-            echo '<div class="messagerie_conversation_avatar">';
-            echo '<img class="conversation_avatar" alt="Avatar de '.$conversation_user_infos['first_name'].'" src="'.$conversation_user_infos['avatar'].'">';
-            echo '</div>';
-            echo '<div class="messagerie_conversation_name">';
-            echo ucfirst($conversation_user_infos['first_name']) . ' ' . ucfirst($conversation_user_infos['last_name']);
-            echo '</div></div></a>';}
+    // Afficher les informations de l'utilisateur dans votre interface
+    echo '<a href="../pages/messagerie.php?with_user_id='.$chat.'#ancre_dernier_message">';
+    echo '<div class="messagerie_conversation_title';
+    if (isset($_GET['with_user_id']) && $_GET['with_user_id'] == $chat) {
+        echo ' selected';
         
-        ?>
+    }
+    if($unread_message){echo ' unread';}
+
+    // Préparation et exécution de la requête SQL pour récupérer les informations de l'utilisateur
+    $sql = "SELECT id, first_name, last_name, avatar FROM users WHERE id = :conversation_user_id";
+    $query = $db->prepare($sql);
+    $query->bindValue(':conversation_user_id', $chat);
+    $query->execute();
+    $conversation_user_infos = $query->fetch(PDO::FETCH_ASSOC);
+
+    
+    
+    if (empty($conversation_user_infos['avatar'])) {
+        $conversation_user_infos['avatar'] = "../img/upload_avatars/default_avatar.png";
+    }
+
+    echo '">';
+    echo '<div class="messagerie_conversation_avatar">';
+    echo '<img class="conversation_avatar" alt="Avatar de '.$conversation_user_infos['first_name'].'" src="'.$conversation_user_infos['avatar'].'">';
+    echo '</div>';
+    echo '<div class="messagerie_conversation_name">';
+    echo ucfirst($conversation_user_infos['first_name']) . ' ' . ucfirst($conversation_user_infos['last_name']);
+    echo '</div></div></a>';
+}
+?>
     </div>
 
 
