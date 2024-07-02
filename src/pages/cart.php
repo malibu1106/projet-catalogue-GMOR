@@ -23,7 +23,7 @@ $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/produits.css">
+    <link rel="stylesheet" href="../CSS/cart.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Ícones do Bootstrap -->
@@ -33,6 +33,7 @@ $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
     <title>cart</title>
 </head>
 <body>
+    <h1>Récapitulatif de vos commandes</h1>
     
 <?php    
     if(empty($cartResults)){
@@ -42,6 +43,29 @@ $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
         echo '<h2>Your cart has <span id="cart-total">' . $result_count['total_product'] . '</span> products</h2>';
         echo'<section class="affichage_des_produits">';
 // Boucle pour afficher chaque résultat
+ foreach($cartResults as $cartResult){
+
+echo '<article class="">
+<figure class="">
+    <img class="" src="'. $cartResult['image_1'].'" alt="php name ici">
+    <div class="recap">
+    <figcaption class="">'. $cartResult['brand'].'</figcaption>
+    <figcaption class="">'. $cartResult['color'].'</figcaption>
+    <figcaption class="">'. $cartResult['size'].'</figcaption>
+    <figcaption class="">'. $cartResult['price'].'</figcaption>
+    <figcaption class="">'. $cartResult['product_quantity'].'</figcaption>
+    
+
+    <//Boutons d’accouplement pour ajouter des produits >
+
+   <div class="btn_action" style="display: flex; width: 50px;">
+        <a href=" ?id=$_GET["id"]"><img src="../img/illustration/add_produce.png " alt="add produce"></a>
+        <a href=" ?id=$_GET["id"]"><img src="../img/illustration/remove_produce.png" alt="remove produce"></a>
+        <a href="../tools/cart_delete.php?id=$_GET["id"]"><img src="../img/illustration/delete.png" alt="delete produce"></a>
+    </div>
+    </div>
+</figure>
+</article>';
 foreach($cartResults as $cartResult){
     echo '<article class="">
     <figure class="">
