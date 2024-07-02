@@ -49,11 +49,11 @@ $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
 echo '<article class="">
 <figure class="">
     <img class="" src="'. $cartResult['image_1'].'" alt="php name ici">
-    <figcaption class="">'. $cartResult['brand'].'</figcaption>
-    <figcaption class="">'. $cartResult['color'].'</figcaption>
-    <figcaption class="">'. $cartResult['size'].'</figcaption>
-    <figcaption class="">'. $cartResult['price'].'</figcaption>
-    <figcaption class="">'. $cartResult['product_quantity'].'</figcaption>
+    <figcaption class="">products: '. $cartResult['brand'].'</figcaption>
+    <figcaption class="">color: '. $cartResult['color'].'</figcaption>
+    <figcaption class="">size: '. $cartResult['size'].'</figcaption>
+    <figcaption class="">price: '. $cartResult['price']. '</figcaption>
+    <figcaption class="">quantity: '. $cartResult['product_quantity'].' unit.</figcaption> 
     
 
     <//Boutons d’accouplement pour ajouter des produits >
