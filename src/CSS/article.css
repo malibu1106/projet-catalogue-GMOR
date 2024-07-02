@@ -64,10 +64,18 @@
 .description {
     width: 100%;
     text-align: center;
-    height: 40vh;
     display:flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.description-produit {
+    margin-top: 20px;
+}
+
+.description p {
+    margin-top: 25px;
+    margin-bottom: 30px;
 }
 
 .btn-tailles {
@@ -86,10 +94,12 @@
 
 .btn-tailles button:hover{
     outline: solid 2px rgb(220, 220, 220);
+    background-color: rgb(220, 220, 220);
 }
 
 .btn-tailles button.clicked {
     outline: solid 2px rgb(220, 220, 220);
+    background-color: rgb(220, 220, 220);
 }
 
 .btn-tailles button:focus {
@@ -112,6 +122,10 @@
     margin-top: 40px;
 }
 
+.photos-suggestions img {
+    cursor: pointer;
+}
+
 footer {
     margin-top: 70px;
 }
@@ -125,8 +139,9 @@ footer {
     }
 
     .miniatures img {
-        width: auto; 
+        max-width: 100px; 
         max-height: 100%; 
+        object-fit: cover;
         cursor: pointer;
         transition: transform 0.1s ease-in-out;
     }
@@ -144,11 +159,36 @@ footer {
     .description {
         width: 40%;
         margin-bottom: 15%;
+        height: 40vh;
+    }
+
+    .description-produit {
+        display:flex;
+        width: 100%;
+        justify-content: center;
+        margin-top: 15px;
+        margin-bottom: 30px;
+    }
+
+    #descr-produit1 {
+        width: 70%;
+    }
+
+    #descr-produit2 {
+        width: 70%;
     }
 
     .photo-pcp img {
         width: 350px; /* Taille fixe de l'image principale */
         height: 583px; /* Ajustement automatique de la hauteur */
         cursor: pointer;
+    }
+
+    .photos-suggestions img {
+        transition: transform 0.1s ease-in-out;
+    }
+
+    .photos-suggestions img:hover {
+        transform: scale(1.03);
     }
 }

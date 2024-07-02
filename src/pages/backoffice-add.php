@@ -130,7 +130,7 @@ if ($_POST && isset($_POST["ref"]) && isset($_POST["brand"]) && isset($_POST["si
     <?php require_once('../elements/header.php'); ?>
     <main class="backofficeadd-container">
         <article class="backofficeadd-card">
-            <h1>AJOUTER UN PRODUIT</h1>
+            <h1 class="title-mod">AJOUTER UN PRODUIT</h1>
             <?php if (!empty($error_messages)): ?>
                 <div class="error-messages">
                     <?php foreach ($error_messages as $message): ?>
