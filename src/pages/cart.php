@@ -14,6 +14,18 @@ $requete_count = $db->prepare($sql_count);
 $requete_count->execute();
 $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
 
+$sql_total = "SELECT SUM(c.product_quantity * p.price) AS total_price FROM carts c JOIN products p ON c.product_id = p.id";
+$stmt_total = $db->prepare($sql_total);
+$stmt_total->execute();
+$result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
+
+// echo json_encode([
+//     'success' => true, 
+//     'new_quantity' => $result['product_quantity'] ?? 0,
+//     'cart_total' => $result_total['total_product'] ?? 0,
+//     'total_price' => number_format($result_total['total_price'], 2)
+// ]);
+
 ?>
 
 
@@ -40,7 +52,7 @@ $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
         
     }else{
         echo '<h2>Your cart has <span id="cart-total"> ' . $result_count['total_product'] . ' </span> products</h2>';
-        echo '<h3>Total: $<span id="cart-price-total">0.00</span></h3>';
+        echo '<h3>Total: $<span id="cart-price-total">' . $result_total['total_price'] . '</span></h3>';
         echo'<section class="affichage_des_produits">';
 // Boucle pour afficher chaque résultat
 foreach($cartResults as $cartResult){
