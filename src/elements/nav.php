@@ -46,22 +46,22 @@
 
     <ul class="menu hideMenuBurger" id="menuBurger">
         <li>
-            <a href="#">Lien 1</a>
+            <a href="#">Robes</a>
         </li>
         <li>
-            <a href="#">Lien 2</a>
+            <a href="#">T-shirts</a>
         </li>
         <li>
-            <a href="#">Lien 3</a>
+            <a href="#">Pantalons</a>
         </li>
         <li>
-            <a href="#">Lien 4</a>
+            <a href="#">Vestes</a>
         </li>
         <li>
-            <a href="#">Lien 5</a>
+            <a href="#">Pulls</a>
         </li>
         <li>
-            <a href="#">Lien 6</a>
+            <a href="#">Hommes</a>
         </li>
     </ul>
 
