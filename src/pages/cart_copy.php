@@ -23,7 +23,7 @@ $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/produits.css">
+    <link rel="stylesheet" href="../CSS/cart.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Ícones do Bootstrap -->
@@ -39,23 +39,26 @@ $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
         echo 'not the product in this cart.';
         
     }else{
-        echo '<h2>Your cart has <span id="cart-total">' . $result_count['total_product'] . '</span> products</h2>';
+        echo '<h2>Your cart has <span id="cart-total"> ' . $result_count['total_product'] . ' </span> products</h2>';
         echo'<section class="affichage_des_produits">';
 // Boucle pour afficher chaque résultat
 foreach($cartResults as $cartResult){
+   
     echo '<article class="">
     <figure class="">
         <img class="" src="'. $cartResult['image_1'].'" alt="php name ici">
-        <figcaption class="">product: '. $cartResult['brand'].'</figcaption>
-        <figcaption class="">color: '. $cartResult['color'].'</figcaption>
-        <figcaption class="">size: '. $cartResult['size'].'</figcaption>
-        <figcaption class="">price: '.number_format($cartResult['price'] ?? 0, 2). '</figcaption>
-        <figcaption class="product-quantity" data-id="'. $cartResult['id'] .'">quantity: '. $cartResult['product_quantity'].' unit.</figcaption> 
-        
-        <div class="btn_action" style="display: flex; width: 100px;">
-            <button class="cart-action" data-action="add" data-id="'. $cartResult['id'] .'"><img src="../img/illustration/add_produce.png " alt="add produce"></button>
-            <button class="cart-action" data-action="subtract" data-id="'. $cartResult['id'] .'"><img src="../img/illustration/remove_produce.png" alt="remove produce"></button>
-            <button class="cart-action" data-action="delete" data-id="'. $cartResult['id'] .'"><img src="../img/illustration/delete.png" alt="delete produce"></button>
+        <div class="recap">
+            <figcaption class="">product: '. $cartResult['brand'].'</figcaption>
+            <figcaption class="">color: '. $cartResult['color'].'</figcaption>
+            <figcaption class="">size: '. $cartResult['size'].'</figcaption>
+            <figcaption class="">price: '.number_format($cartResult['price'] ?? 0, 2). '</figcaption>
+            <figcaption class="product-quantity" data-id="'. $cartResult['id'] .'">quantity: '. $cartResult['product_quantity'].' unit.</figcaption> 
+            
+            <div class="btn_action">
+                <button class="cart-action" data-action="add" data-id="'. $cartResult['id'] .'"><img src="../img/illustration/add_produce.png " alt="add produce"></button>
+                <button class="cart-action" data-action="subtract" data-id="'. $cartResult['id'] .'"><img src="../img/illustration/remove_produce.png" alt="remove produce"></button>
+                <button class="cart-action" data-action="delete" data-id="'. $cartResult['id'] .'"><img src="../img/illustration/delete.png" alt="delete produce"></button>
+            </div>
         </div>
     </figure>
     </article>';    
