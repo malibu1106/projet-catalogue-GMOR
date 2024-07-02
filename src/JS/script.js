@@ -65,3 +65,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+
+// Code permettant de selectionner toutes les checkbox a l'aide de celle en haut du tableau
+document.addEventListener("DOMContentLoaded", function () {
+    // Sélectionne la checkbox avec l'ID "selectAllProducts" et la stocke dans une constante
+    const selectAllProducts = document.getElementById("selectAllProducts");
+    
+    // Sélectionne toutes les checkboxes ayant le nom "delete_ids[]" et les stocke dans une constante
+    const deleteCheckboxes = document.querySelectorAll('input[name="delete_ids[]"]');
+
+    // Ajoute un écouteur d'événement "change" à la checkbox "selectAllProducts"
+    selectAllProducts.addEventListener("change", function () {
+        // Pour chaque checkbox dans "deleteCheckboxes"
+        deleteCheckboxes.forEach((checkbox) => {
+            // Change l'état "checked" de chaque checkbox pour qu'il corresponde à celui de "selectAllProducts"
+            checkbox.checked = selectAllProducts.checked;
+        });
+    });
+});
+
