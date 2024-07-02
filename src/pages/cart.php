@@ -52,7 +52,7 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
         
     }else{
         echo '<h2>Your cart has <span id="cart-total"> ' . $result_count['total_product'] . ' </span> products</h2>';
-        echo '<h3>Total: $<span id="cart-price-total">' . $result_total['total_price'] . '</span></h3>';
+        echo '<h2>Total: <span id="cart-price-total">' . $result_total['total_price'] . '</span>€</h2>';
         echo'<section class="affichage_des_produits">';
 // Boucle pour afficher chaque résultat
 foreach($cartResults as $cartResult){
