@@ -30,7 +30,7 @@ session_start();?>
 
         <div class="container">
                 <div class="card">
-                    <img class="" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name ici">
+                    <img class="" src="../img/temporaire/vente1.jpg" alt="php name ici">
                     <div class="intro">
                         <h1 class="text-h1">Robe d'Été - 26.90€</h1>
                         <p class="text-p">
@@ -42,7 +42,7 @@ session_start();?>
 
         <div class="container">
                 <div class="card">
-                    <img class="" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name ici">
+                    <img class="" src="../img/temporaire/vente3.jpg" alt="php name ici">
                     <div class="intro">
                     <h1 class="text-h1">Robe d'Été - 26.90€</h1>
                         <p class="text-p">
@@ -54,7 +54,7 @@ session_start();?>
 
         <div class="container">
                 <div class="card">
-                    <img class="" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name ici">
+                    <img class="" src="../img/temporaire/vente1.jpg" alt="php name ici">
                     <div class="intro">
                     <h1 class="text-h1">Robe d'Été - 26.90€</h1>
                         <p class="text-p">
@@ -66,7 +66,7 @@ session_start();?>
 
         <div class="container">
                 <div class="card">
-                    <img class="" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name ici">
+                    <img class="" src="../img/temporaire/vente3.jpg" alt="php name ici">
                     <div class="intro">
                     <h1 class="text-h1">Robe d'Été - 26.90€</h1>
                         <p class="text-p">
@@ -78,7 +78,7 @@ session_start();?>
 
         <div class="container">
                 <div class="card">
-                    <img class="" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name ici">
+                    <img class="" src="../img/temporaire/vente1.jpg" alt="php name ici">
                     <div class="intro">
                     <h1 class="text-h1">Robe d'Été - 26.90€</h1>
                         <p class="text-p">
@@ -90,7 +90,7 @@ session_start();?>
 
         <div class="container">
                 <div class="card">
-                    <img class="" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name ici">
+                    <img class="" src="../img/temporaire/vente3.jpg" alt="php name ici">
                     <div class="intro">
                     <h1 class="text-h1">Robe d'Été - 26.90€</h1>
                         <p class="text-p">

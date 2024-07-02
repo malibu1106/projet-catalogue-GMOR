@@ -26,10 +26,10 @@ session_start();?>
 <section id="container-pcp">
     <article class="photos-article">
         <figure class="photo-pcp">
-        <img id="thumbnail" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
+        <img id="thumbnail" src="../img/temporaire/vente3.jpg" alt="php name">
         </figure>
         <figure class="miniatures">
-            <img class="miniature" src="../img/temporaire/ninja-cosmico.jpeg" alt="php name">
+            <img class="miniature" src="../img/temporaire/vente1.jpg" alt="php name">
             <img  class="miniature" src="../img/temporaire/photo1.jpg" alt="php name">
             <img class="miniature" src="../img/temporaire/test.jpg" alt="php name">
         </figure>
