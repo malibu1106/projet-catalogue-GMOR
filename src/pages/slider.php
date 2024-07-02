@@ -6,29 +6,29 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item">
-      <img src="../img/temporaire/model-image-login.jpg" height="700px" class="d-block w-100" alt="Description of Image 1" style="object-fit: cover;">
+      <img src="../img/temporaire/slide1.jpg" height="700px" class="d-block w-100" alt="Description of Image 1" style="object-fit: cover;">
       <div class="container">
         <div class="carousel-caption">
-          <h1>Laissez vos enfants créer leurs propres aventures avec Playmobil</h1>
-          <p class="opacity-75">Consultez notre pack exclusif Playmobil</p>
+          <h1>Soldes Exceptionnelles : Jusqu'à -50% sur Toute la Collection Printemps-Été</h1>
+          <p class="opacity-75">Consultez les articles concernés par cette offre</p>
         </div>
       </div>
     </div>
     <div class="carousel-item active">
-      <img src="../img/temporaire/model-image-login.jpg" height="700px" class="d-block w-100" alt="Description of Image 2" style="object-fit: cover;">
+      <img src="../img/temporaire/slide2.jpg" height="700px" class="d-block w-100" alt="Description of Image 2" style="object-fit: cover;">
       <div class="container">
         <div class="carousel-caption">
-          <h1>Laissez libre cours à leur imagination avec nos jeux de construction</h1>
-          <p>Consultez notre meilleure vente LEGO</p>
+          <h1>Offres Spéciales : Votre Troisième Article à -50% sur nos Sélections de Vêtements</h1>
+          <p>Consultez les sélections concernées par cette offre</p>
         </div>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="../img/temporaire/model-image-login.jpg" height="700px" class="d-block w-100" alt="Description of Image 3" style="object-fit: cover;">
+      <img src="../img/temporaire/slide3.jpg" height="700px" class="d-block w-100" alt="Description of Image 3" style="object-fit: cover;">
       <div class="container">
         <div class="carousel-caption">
-          <h1>Éveillez leurs sens avec nos jeux d'éveil en bois</h1>
-          <p>Consultez notre jeu favori</p>
+          <h1>Promotions Flash : Des Remises Imbattables Chaque Jour sur vos Marques Préférées</h1>
+          <p>Consultez les articles concernés par cette offre</p>
         </div>
       </div>
     </div>
@@ -44,7 +44,6 @@
 </div>
 <style>
   .carousel-caption h1 {
-    background-color: rgba(191, 44, 44, 0.5);
     padding: 15px;
   }
 

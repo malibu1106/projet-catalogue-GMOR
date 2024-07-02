@@ -72,11 +72,20 @@ ul#menuBurger {
     text-align: center;
     z-index: 100;
     transition: top 0.4s linear;
-    font-size: 1.4em;
+    font-size: 1.2em;
 }
 
 #menuBurger li {
-    margin: 15px auto;
+    margin: 25px auto;
+}
+
+#menuBurger li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#menuBurger li a:hover {
+    text-decoration: underline;
 }
 
 .hideMenuBurger {
@@ -94,7 +103,7 @@ ul.menu {
 #menuBurgerIcon {
     cursor: pointer;
     line-height: 50px;
-    transition: transform 1s;
+    transition: transform 0.5s;
 }
 
 .rotateIcon {
@@ -364,7 +373,7 @@ body {
     ul#menuBurger {
         position: absolute;
         left: 0;
-        width: 15vw;
+        width: 250px;
         height: auto;
         background-color: white;
         text-align: center;

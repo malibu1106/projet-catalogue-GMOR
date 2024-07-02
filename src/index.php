@@ -29,7 +29,7 @@ session_start();?>
             <div class="container-photos-1">
                 <div class="photo-grande">
                     <div class="image-container">
-                        <img src="img/temporaire/photo1.jpg">
+                        <img src="img/temporaire/vente1.jpg">
                         <div class="overlay">
                             <p>Consultez cet article</p>
                         </div>
@@ -37,7 +37,7 @@ session_start();?>
                 </div>
                 <div class="photo-petite">
                     <div class="image-container">
-                        <img src="img/temporaire/ninja-cosmico.jpeg">
+                        <img src="img/temporaire/vente2.jpg">
                         <div class="overlay">
                             <p>Consultez cet article</p>
                         </div>
@@ -49,7 +49,7 @@ session_start();?>
             <div class="container-photos-1">
                 <div class="photo-grande">
                     <div class="image-container">
-                        <img src="img/temporaire/photo1.jpg">
+                        <img src="img/temporaire/vente4.jpg">
                         <div class="overlay">
                             <p>Consultez cet article</p>
                         </div>
@@ -57,7 +57,7 @@ session_start();?>
                 </div>
                 <div class="photo-petite">
                     <div class="image-container">
-                        <img src="img/temporaire/ninja-cosmico.jpeg">
+                        <img src="img/temporaire/vente3.jpg">
                         <div class="overlay">
                             <p>Consultez cet article</p>
                         </div>
@@ -69,24 +69,28 @@ session_start();?>
     <section id="categories">
         <h1>Trouvez votre <span>bonheur</span> parmi nos articles</h1>
             <article class="rond-categorie">
-               <img src="img/temporaire/robe.png">
+               <img src="img/illustration/robe.png">
                <p>Robes</p>
             </article>
             <article class="rond-categorie">
-               <img src="img/temporaire/tshirt.png">
+               <img src="img/illustration/tshirt.png">
                <p>T-shirts</p>
             </article>
             <article class="rond-categorie">
-               <img src="img/temporaire/pantalon.png">
+               <img src="img/illustration/pantalon.png">
                <p>Pantalons</p>
             </article>
             <article class="rond-categorie">
-               <img src="img/temporaire/veste.png">
+               <img src="img/illustration/veste.png">
                <p>Vestes</p>
             </article>
             <article class="rond-categorie">
-               <img src="img/temporaire/ninja-cosmico.jpeg">
+               <img src="img/illustration/pull.jpg">
                <p>Pulls</p>
+            </article>
+            <article class="rond-categorie">
+               <img src="img/illustration/polo.png">
+               <p>Collection Hommes</p>
             </article>
     </section>
 <?php require_once ('elements/footer.php');?>
