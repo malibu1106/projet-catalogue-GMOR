@@ -40,6 +40,7 @@ $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
         
     }else{
         echo '<h2>Your cart has <span id="cart-total"> ' . $result_count['total_product'] . ' </span> products</h2>';
+        echo '<h3>Total: $<span id="cart-price-total">0.00</span></h3>';
         echo'<section class="affichage_des_produits">';
 // Boucle pour afficher chaque résultat
 foreach($cartResults as $cartResult){
@@ -55,9 +56,9 @@ foreach($cartResults as $cartResult){
             <figcaption class="product-quantity" data-id="'. $cartResult['id'] .'">quantity: '. $cartResult['product_quantity'].' unit.</figcaption> 
             
             <div class="btn_action">
-                <button class="cart-action" data-action="add" data-id="'. $cartResult['id'] .'"><img src="../img/illustration/add_produce.png " alt="add produce"></button>
-                <button class="cart-action" data-action="subtract" data-id="'. $cartResult['id'] .'"><img src="../img/illustration/remove_produce.png" alt="remove produce"></button>
-                <button class="cart-action" data-action="delete" data-id="'. $cartResult['id'] .'"><img src="../img/illustration/delete.png" alt="delete produce"></button>
+                <button class="cart-action" data-action="add" data-id="'. $cartResult['id'] .' " aria-label="Add one unit"><img src="../img/illustration/add_produce.png " alt="add produce"></button>
+                <button class="cart-action" data-action="subtract" data-id="'. $cartResult['id'] .'" aria-label="Subtract un unity"><img src="../img/illustration/remove_produce.png" alt="remove produce"></button>
+                <button class="cart-action" data-action="delete" data-id="'. $cartResult['id'] .'" aria-label="Removes the product"><img src="../img/illustration/delete.png" alt="delete produce"></button>
             </div>
         </div>
     </figure>
