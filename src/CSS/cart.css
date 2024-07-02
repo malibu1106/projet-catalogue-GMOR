@@ -16,7 +16,7 @@
     align-items: flex-end;
 }
 
-.btn_action a img {
+.btn_action button img {
     min-width: 20px;
 }
 

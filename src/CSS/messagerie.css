@@ -12,6 +12,7 @@
     margin-top: 10px;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .messagerie_conversation_avatar {
@@ -22,7 +23,7 @@
 
 .messagerie_conversation_avatar img {
     width: 40px;
-    margin: 5px;
+    margin: 8px 5px;
 }
 
 .messagerie_conversation_name {
@@ -57,6 +58,10 @@
     width: 80%;
     max-width: 1000px;
     margin: auto;
+}
+
+#start_chat {
+    margin-left: 20%;
 }
 
 
@@ -96,8 +101,17 @@
     position: relative;
 }
 
-.unread {
-    outline: solid red 1px;
+.unread {}
+
+.unread::before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    top: 5px;
+    right: 5px;
+    width: 12px;
+    height: 12px;
+    background-color: red;
 }
 
 .message_received {

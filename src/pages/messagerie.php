@@ -100,15 +100,10 @@ foreach ($chats as $chat) {
     </div>
 
 
-
-
-
-
-
     <div class="messagerie_main" id="messagerie_main">
         <?php 
         if(!isset($_GET['with_user_id'])){
-            echo 'Envoyer un message à :<br>';
+            echo '<div id="start_chat">Démarrer une conversation avec ';
 
             $sql = "SELECT id, first_name, last_name FROM users WHERE id != :id";
             $query = $db->prepare($sql);
@@ -120,21 +115,12 @@ foreach ($chats as $chat) {
             // echo'</pre>';
 
             echo '<select id="user_list">';
+            echo '<option selected disabled></option>';
             foreach ($usersList as $user) {
                 echo '<option value="' . $user['id'] . '">' . ucfirst(strtolower($user['last_name'])) . ' ' . ucfirst(strtolower($user['first_name'])) . '</option>';
 
             }
-            echo '</select>';
-            
-
-
-
-
-
-
-
-
-
+            echo '</select></div>';    
 
 
         } else {
@@ -143,6 +129,17 @@ foreach ($chats as $chat) {
             $query->bindValue(':conversation_user_id', $_GET['with_user_id']);
             $query->execute();
             $conversation_user_with = $query->fetch(PDO::FETCH_ASSOC);
+
+
+            // Marquer tous les messages de cette conversation comme lus
+        if (isset($_GET['with_user_id'])) {
+            $with_user_id = $_GET['with_user_id'];
+            $sql = "UPDATE messages SET message_read = 1 WHERE receiver_user_id = :user_id AND sender_user_id = :with_user_id AND message_read = 0";
+            $query = $db->prepare($sql);
+            $query->bindValue(':user_id', $user_id);
+            $query->bindValue(':with_user_id', $with_user_id);
+            $query->execute();
+        }
 
 
             $sql = "SELECT * FROM messages 
@@ -154,6 +151,10 @@ foreach ($chats as $chat) {
             $query->bindValue(':user_id', $user_id);
             $query->execute();
             $conversation_user_with_messages = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            
+        
+        
 
             foreach($conversation_user_with_messages as $message) {
                 if ($message['sender_user_id'] === $user_id) {
@@ -178,17 +179,7 @@ foreach ($chats as $chat) {
     </div>
 
 
-    <?php
-        // Marquer tous les messages de cette conversation comme lus
-        if (isset($_GET['with_user_id'])) {
-            $with_user_id = $_GET['with_user_id'];
-            $sql = "UPDATE messages SET message_read = 1 WHERE receiver_user_id = :user_id AND sender_user_id = :with_user_id AND message_read = 0";
-            $query = $db->prepare($sql);
-            $query->bindValue(':user_id', $user_id);
-            $query->bindValue(':with_user_id', $with_user_id);
-            $query->execute();
-        }
-        ?>
+    
 
 
 
