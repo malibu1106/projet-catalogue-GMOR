@@ -18,6 +18,16 @@ if (isset($_POST['new_sender_id']) && isset($_POST['new_receiver_id'])) {
         $query->bindValue(':message_content', $message);
         $query->execute();}
 
+
+        $sql = "INSERT INTO conversations (user_id_1, user_id_2) VALUES (:user_id_1, :user_id_2)";
+        $query = $db->prepare($sql);
+        $query->bindValue(':user_id_1', $new_sender_id);
+        $query->bindValue(':user_id_2', $new_receiver_id);
+        $query->execute();
+
+
+
+
         header("Location: ../pages/messagerie.php?with_user_id=" . urlencode($new_receiver_id) . "#ancre_dernier_message");
 
     }
