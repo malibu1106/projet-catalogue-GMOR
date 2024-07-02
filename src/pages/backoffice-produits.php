@@ -2,6 +2,18 @@
 session_start();
 require_once("../elements/connect.php");
 
+
+    // Gestion de la suppression multiple
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_ids']) && is_array($_POST['delete_ids'])) {
+        $ids = implode(',', array_map('intval', $_POST['delete_ids']));
+        $sql = "DELETE FROM products WHERE id IN ($ids)";
+        $query = $db->prepare($sql);
+        $query->execute();
+        header("Location: backoffice-produits.php");
+        exit();
+    }
+
+
     $sql ="SELECT * FROM products";
 
     $requete = $db->prepare($sql);
@@ -34,7 +46,7 @@ require_once("../elements/connect.php");
                 </a>
             </div>
 
-            <div class="table-responsive">
+            <form method="POST" action="backoffice-produits.php" class="table-responsive">
                 <table class="table table-striped table-hover mt-3 mb-5">
                     <thead>
                         <tr>
@@ -51,6 +63,7 @@ require_once("../elements/connect.php");
                             <th>Promotion</th>
                             <th>Catégorie</th>
                             <th>Description</th>
+                            <th scope="col"><input type="checkbox" id="selectAllProducts"></th>
                         </tr>
                     </thead>
                     <?php foreach($resulta as $produit): ?>
@@ -74,13 +87,15 @@ require_once("../elements/connect.php");
                             <td><?= $produit['discount'] ?></td>
                             <td><?= $produit['category'] ?></td>
                             <td class="backoff-short-desc"><?= $produit['content'] ?></td>
+                            <td><input type="checkbox" name="delete_ids[]" value="<?= $produit['id'] ?>"></td>
                         </tr>
                     
-                        <!-- Répétez cette structure pour chaque produit -->
+                        <!-- le foreach plus haut repetera cette structure pour chaque produit -->
                     </tbody>
                     <?php endforeach; ?>
                 </table>
-            </div>
+                <button type="submit" class="btn btn-danger mb-5">Supprimer les articles sélectionnés</button>
+            </form>
         </article>
     </main>
     <?php require_once ('../elements/footer.php');?>
