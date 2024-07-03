@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $check_stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
     $check_stmt->execute();
     if (!$check_stmt->fetch()) {
-        throw new Exception('Item não encontrado no carrinho');
+       
     }
 
     
