@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once ('../elements/header.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../CSS/backoffice-style.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+    
     <title>Document</title>
 </head>
 <body class="backofficegeneral-bg">
@@ -25,7 +32,7 @@
                 </div>
                 <div class="card-title">Utilisateurs</div>
                 <div class="card-content">Gérez les rôles et les permissions des utilisateurs de votre plateforme.</div>
-                <button class="card-action">Gérer les utilisateurs</button>
+               <a href="../pages/backoffice-utilisateurs.php"><button class="card-action">Gérer les utilisateurs</button></a>
             </div>
             <div class="card" id="products">
                 <div class="card-icon"><img src="/img/illustration/product-icon-free.png" alt=""></div>
@@ -36,6 +43,9 @@
                 <div class="card-content">Ajoutez, modifiez ou supprimez des produits de votre catalogue.</div>
                 <a href="backoffice-produits.php"><button class="card-action">Gérer les produits</button></a>
             </div>
+            <?php 
+            if ($_SESSION['user']['group'] === 'admin') {
+                echo '
             <div class="card" id="messages">
                 <div class="card-icon"><img src="/img/illustration/message-icon.png" alt=""></div>
                 <div class="img-card-general" >
@@ -44,7 +54,9 @@
                 <div class="card-title">Messagerie</div>
                 <div class="card-content">Consultez et répondez aux messages des utilisateurs et clients.</div>
                <a href="../pages/choose_messages_users_admin.php"><button class="card-action">Accéder à la messagerie</button></a>
-            </div>
+            </div> ';
+            }
+            ?>
             <div class="card" id="orders">
                 <div class="card-icon"><img src="/img/illustration/delivery-icon.png" alt=""></div>
                 <div class="img-card-general" >
