@@ -23,7 +23,7 @@ function handleImageUpload($file) {
     }
 
     if ($filesize > 1024 * 1024) {
-        $error_messages[] = "Fichier trop volumineux";
+        $error_messages[] = "Fichier trop grand max 1024*1024";
     }
 
     $newname = md5(uniqid()) . ".$extension";
@@ -34,7 +34,7 @@ function handleImageUpload($file) {
     }
 
     chmod($newfilename, 0644);
-    return "img/upload_model/$newname"; // Retourne le chemin relatif
+    return "/img/upload_model/$newname"; // Retourne le chemin relatif
 }
 
 $imagePaths = ["", "", "", ""]; // Initialisation des variables pour les chemins des images
