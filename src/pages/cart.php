@@ -3,19 +3,39 @@ session_start();
 require_once("../elements/connect.php");
 require_once("../elements/header.php");
 
-// $sql = "SELECT * FROM products";
-$sql = "SELECT c.id AS cart_id, c.*,  p.*, u.*  FROM  carts c LEFT JOIN products p  ON p.id = c.product_id LEFT JOIN users u ON c.user_id = u.id ";
+// Verifique se o usuário está logado
+if (!isset($_SESSION['user']['id'])) {
+    // Redirecione para a página de login ou mostre uma mensagem de erro
+    echo "Você precisa estar logado para ver o carrinho.";
+    exit();
+}
+
+$user_id = $_SESSION['user']['id'];
+
+$sql = "SELECT c.id AS cart_id, c.*,  p.*, u.*  
+        FROM  carts c 
+        LEFT JOIN products p ON p.id = c.product_id 
+        LEFT JOIN users u ON c.user_id = u.id 
+        WHERE c.user_id = :user_id";
+
 $requete = $db->prepare($sql);
+$requete->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $requete->execute();
 $cartResults = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-$sql_count = "SELECT SUM(`product_quantity`) AS total_product FROM `carts`";
+// Modificar as outras consultas para incluir o user_id
+$sql_count = "SELECT SUM(`product_quantity`) AS total_product FROM `carts` WHERE user_id = :user_id";
 $requete_count = $db->prepare($sql_count);
+$requete_count->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $requete_count->execute();
 $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
 
-$sql_total = "SELECT SUM(c.product_quantity * p.price) AS total_price FROM carts c JOIN products p ON c.product_id = p.id";
+$sql_total = "SELECT SUM(c.product_quantity * p.price) AS total_price 
+              FROM carts c 
+              JOIN products p ON c.product_id = p.id 
+              WHERE c.user_id = :user_id";
 $stmt_total = $db->prepare($sql_total);
+$stmt_total->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt_total->execute();
 $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
 
