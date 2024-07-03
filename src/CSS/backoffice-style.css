@@ -529,7 +529,7 @@ h1 {
     transform: translateX(-50%);
     width: 340px;
     height: 310px;
-    background: rgb(191, 204, 13);
+    background: rgb(15, 15, 15);
 }
 .profil-circle .imgBx img {
     position: absolute;
@@ -564,7 +564,7 @@ h1 {
 
 .profil-roles-container {
     flex-grow: 1;
-    max-height: 30px; /* Ajustez selon vos besoins */
+    max-height: 30px;
     overflow-y: auto;
     margin-right: 10px;
 }
@@ -631,7 +631,10 @@ h1 {
 }
 
 /*BACKOFFICE PROFIL UTILISATEUR*/
-
+.backoffice-profil {
+    background-image: url(../img/temporaire/White-abstract-background-design-Graphics-27460023-1.jpg);
+    padding: 100px;
+}
 
 
 

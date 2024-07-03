@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once("../elements/connect.php");
-require_once ('../elements/header.php');
 
 // Récupération de tous les utilisateurs
 $sql = "SELECT * FROM users";
@@ -39,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
 </head>
 <body class="bg-backoff-users">
     <?php require_once ('../elements/header.php');?>
-    <main class="backoffice-profil">
+    <main>
         <div class="container">
             <h1 class="text-center mb-4"><i class="fas fa-users icon-users-panel"></i> Gestion des Utilisateurs</h1>
             
@@ -72,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
                     <div class="profil-card">
                         <div class="profil-circle">
                             <div class="imgBx">
-                                <img src="/img/temporaire/No-trep.png" alt="Photo de profil">
+                                <img src="<?php echo htmlspecialchars($user['avatar']); ?>" alt="Photo de profil">
                             </div>
                         </div>
                         <div class="profil-content">
