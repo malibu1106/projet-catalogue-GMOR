@@ -21,38 +21,54 @@ date_default_timezone_set('Europe/Paris');
 <audio style="display:none" id="notificationSound" src="../sounds/notification.mp3" preload="auto"></audio>
 
 <?php
-$user_id = 4;
 require_once("../elements/connect.php");
 
-$sql = "SELECT * FROM conversations WHERE user_id_1 = :user_id OR user_id_2 = :user_id";
-$query = $db->prepare($sql);
-$query->bindValue(':user_id', $user_id);
-$query->execute();
-$conversations = $query->fetchAll(PDO::FETCH_ASSOC);
+$user_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-require_once ('../elements/debug.php');
-require_once ('../elements/header.php');
+if ($user_id > 0) {
+    $sql = "SELECT * FROM conversations WHERE user_id_1 = :user_id OR user_id_2 = :user_id";
+    $query = $db->prepare($sql);
+    $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    $query->execute();
+    $conversations = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    require_once('../elements/debug.php');
+    require_once('../elements/header.php');
+
+    $sql = "SELECT * FROM users WHERE id = :user_id";
+    $query = $db->prepare($sql);
+    $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    $query->execute();
+    $as_user_infos = $query->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <section class="messagerie">
-    <div class="messagerie_menu">
-        
+    <div class="messagerie_menu"> Messages de <?= ucfirst($as_user_infos['first_name']) ?> <?= ucfirst($as_user_infos['last_name']) ?>
 
         <?php 
-$chats = [];
-foreach ($conversations as $conversation) {
-    if ($conversation['user_id_1'] === $user_id) {
-        $conversation_user_id = $conversation['user_id_2'];
-        if (!in_array($conversation_user_id, $chats)) {
-            $chats[] = $conversation_user_id;
+
+
+        $chats = [];
+        foreach ($conversations as $conversation) {
+            if ($conversation['user_id_1'] === $user_id) {
+                $conversation_user_id = $conversation['user_id_2'];
+            } else {
+                $conversation_user_id = $conversation['user_id_1'];
+            }
+
+            if (!in_array($conversation_user_id, $chats)) {
+                $chats[] = $conversation_user_id;
+            }
         }
-    } else {
-        $conversation_user_id = $conversation['user_id_1'];
-        if (!in_array($conversation_user_id, $chats)) {
-            $chats[] = $conversation_user_id;
-        }
-    }
+
+
+        ?>
+
+<?php
+} else {
+    echo "Identifiant utilisateur non valide.";
 }
+
 
 foreach ($chats as $chat) {
 
@@ -73,7 +89,7 @@ foreach ($chats as $chat) {
         echo ' selected';
         
     }
-    if($unread_message){echo ' unread';}
+    
 
     // Préparation et exécution de la requête SQL pour récupérer les informations de l'utilisateur
     $sql = "SELECT id, first_name, last_name, avatar FROM users WHERE id = :conversation_user_id";
@@ -96,7 +112,7 @@ foreach ($chats as $chat) {
     echo ucfirst($conversation_user_infos['first_name']) . ' ' . ucfirst($conversation_user_infos['last_name']);
     echo '</div></div></a>';
 }
-?>
+?><a href="../pages/choose_messages_users_admin.php">retour</a>
     </div>
 
 
