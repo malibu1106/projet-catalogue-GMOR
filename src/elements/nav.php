@@ -1,3 +1,4 @@
+
 <nav>
 <div class="menuButtonsContainer">
     <span id="menuBurgerIcon">☰</span>
@@ -11,8 +12,18 @@
                 <a href="../pages/profil.php">
                     <img class="userMenuIcon" src="../img/illustration/account.png">
                 </a>
-            </li>      
+            </li> ';
 
+            if ($_SESSION['user']['group'] === 'admin' || $_SESSION['user']['group'] === 'sub_admin') {
+                echo '
+                <li>
+                <a href="../pages/backoffice-general.php">
+                    <img class="userMenuIcon" src="../img/illustration/settings_back.png">
+                </a>
+                </li>';
+            }     
+
+            echo '
             <li>
                 <a href="../pages/messagerie.php">
                     <img class="userMenuIcon" src="../img/illustration/message.png">
