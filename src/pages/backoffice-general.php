@@ -43,7 +43,7 @@
                 </div>
                 <div class="card-title">Messagerie</div>
                 <div class="card-content">Consultez et répondez aux messages des utilisateurs et clients.</div>
-                <button class="card-action">Accéder à la messagerie</button>
+               <a href="../pages/choose_messages_users_admin.php"><button class="card-action">Accéder à la messagerie</button></a>
             </div>
             <div class="card" id="orders">
                 <div class="card-icon"><img src="/img/illustration/delivery-icon.png" alt=""></div>
