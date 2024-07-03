@@ -23,7 +23,7 @@ function handleImageUpload($file) {
     }
 
     if ($filesize > 1024 * 1024) {
-        $error_messages[] = "Fichier trop volumineux";
+        $error_messages[] = "Fichier trop grand max 1024*1024";
     }
 
     $newname = md5(uniqid()) . ".$extension";
