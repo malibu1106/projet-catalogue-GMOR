@@ -1,4 +1,5 @@
 <?php
+// Inicia a sessão e inclui arquivos necessários
 session_start();
 require_once("../elements/connect.php");
 require_once("../elements/header.php");
@@ -12,6 +13,7 @@ if (!isset($_SESSION['user']['id'])) {
 
 $user_id = $_SESSION['user']['id'];
 
+// Consulta SQL para obter os itens do carrinho do usuário
 $sql = "SELECT c.id AS cart_id, c.*,  p.*, u.*  
         FROM  carts c 
         LEFT JOIN products p ON p.id = c.product_id 
@@ -23,13 +25,14 @@ $requete->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $requete->execute();
 $cartResults = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-// Modificar as outras consultas para incluir o user_id
+// Consulta para obter o total de produtos no carrinho
 $sql_count = "SELECT SUM(`product_quantity`) AS total_product FROM `carts` WHERE user_id = :user_id";
 $requete_count = $db->prepare($sql_count);
 $requete_count->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $requete_count->execute();
 $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
 
+// Consulta para calcular o preço total do carrinho
 $sql_total = "SELECT SUM(c.product_quantity * p.price) AS total_price 
               FROM carts c 
               JOIN products p ON c.product_id = p.id 
@@ -67,36 +70,42 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
 <body>
     
 <?php    
+
+// Verifica se o carrinho está vazio
     if(empty($cartResults)){
         echo 'not the product in this cart.';
         
     }else{
+        // Exibe o total de produtos e o preço total
         echo '<h2>Your cart has <span id="cart-total"> ' . $result_count['total_product'] . ' </span> products</h2>';
         echo '<h2>Total: <span id="cart-price-total">' . $result_total['total_price'] . '</span>€</h2>';
         echo'<section class="affichage_des_produits">';
-// Boucle pour afficher chaque résultat
-foreach($cartResults as $cartResult){
-   
-    echo '<article class="">
-    <figure class="">
-        <img class="" src="'. $cartResult['image_1'].'" alt="php name ici">
+
+        // Boucle pour afficher chaque résultat
+    foreach($cartResults as $cartResult){
+        // Exibe os detalhes do produto e botões de ação
+    echo '<article data-cart-id="'. $cartResult['cart_id'] .'">
+    <figure>
+                <!-- Detalhes do produto e botões -->
+        <img src="'. $cartResult['image_1'].'" alt="'. $cartResult['brand'] .'">
         <div class="recap">
-            <figcaption class="">product: '. $cartResult['brand'].'</figcaption>
-            <figcaption class="">color: '. $cartResult['color'].'</figcaption>
-            <figcaption class="">size: '. $cartResult['size'].'</figcaption>
-            <figcaption class="">price: '.number_format($cartResult['price'] ?? 0, 2). '</figcaption>
-            <figcaption class="product-quantity" data-id="'. $cartResult['cart_id'] .'">quantity: '. $cartResult['product_quantity'].' unit.</figcaption> 
+            <figcaption>product: '. $cartResult['brand'].'</figcaption>
+            <figcaption>color: '. $cartResult['color'].'</figcaption>
+            <figcaption>size: '. $cartResult['size'].'</figcaption>
+            <figcaption class="product-price">price: '.number_format($cartResult['price'], 2). '€</figcaption>
+            <figcaption class="product-quantity" data-id="'. $cartResult['cart_id'] .'">quantity: '. $cartResult['product_quantity'].' unit.'. ($cartResult['product_quantity'] !== 1 ? 's' : '') .'</figcaption> 
             
             <div class="btn_action">
-                <button class="cart-action" data-action="add" data-id="'. $cartResult['cart_id'] .' " aria-label="Add one unit"><img src="../img/illustration/add_produce.png " alt="add produce"></button>
-                <button class="cart-action" data-action="subtract" data-id="'. $cartResult['cart_id'] .'" aria-label="Subtract un unity"><img src="../img/illustration/remove_produce.png" alt="remove produce"></button>
-                <button class="cart-action" data-action="delete" data-id="'. $cartResult['cart_id'] .'" aria-label="Removes the product"><img src="../img/illustration/delete.png" alt="delete produce"></button>
+                <button class="cart-action" data-action="add" data-id="'. $cartResult['cart_id'] .'" aria-label="Adicionar uma unidade"><img src="../img/illustration/add_produce.png" alt="adicionar produto"></button>
+                <button class="cart-action" data-action="subtract" data-id="'. $cartResult['cart_id'] .'" aria-label="Subtrair uma unidade"><img src="../img/illustration/remove_produce.png" alt="remover produto"></button>
+                <button class="cart-action" data-action="delete" data-id="'. $cartResult['cart_id'] .'" aria-label="Remover o produto"><img src="../img/illustration/delete.png" alt="deletar produto"></button>
             </div>
         </div>
     </figure>
     </article>';    
- }
 }
+}
+     // Exibe informações de depuração (sessão, contagem e resultados do carrinho)
     echo '<pre>';
     print_r($_SESSION);
     echo '</pre>';
@@ -111,8 +120,11 @@ foreach($cartResults as $cartResult){
 </section>
 
 <?php require_once ('../elements/footer.php');?>
+
+<!-- // Script JavaScript para manipulação do carrinho -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    // Adiciona event listeners aos botões de ação do carrinho
     const cartActions = document.querySelectorAll('.cart-action');
     
     cartActions.forEach(button => {
@@ -124,35 +136,64 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function updateCart(action, cartId) {
-    fetch('../tools/action_cart/update_cart.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'cart_id=' + cartId + '&action=' + action
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            const quantityElement = document.querySelector(`.product-quantity[data-id="${cartId}"]`);
-            if (quantityElement) {
-                if (action === 'delete') {
-                    quantityElement.closest('article').remove();
-                } else {
-                    quantityElement.textContent = `quantity: ${data.new_quantity} unit.`;
-                }
+        fetch('../tools/action_cart/update_cart.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'cart_id=' + cartId + '&action=' + action
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                updateCartDisplay(data, action, cartId);
+            } else {
+                console.error('Erro ao atualizar o carrinho:', data.message);
             }
-            // Met à jour le total des produits et le prix du panier
-            document.getElementById('cart-total').textContent = data.cart_total;
-            document.getElementById('cart-price-total').textContent = data.total_price;
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+    }
+
+    function updateCartDisplay(data, action, cartId) {
+        const cartItem = document.querySelector(`article[data-cart-id="${cartId}"]`);
+        if (!cartItem) return;
+
+        if (action === 'delete') {
+            cartItem.remove();
         } else {
-            alert('Erro ao atualizar o carrinho');
+            const quantityElement = cartItem.querySelector('.product-quantity');
+            const priceElement = cartItem.querySelector('.product-price');
+            
+            if (quantityElement) {
+                quantityElement.textContent = `quantidade: ${data.new_quantity} unidade${data.new_quantity !== 1 ? 's' : ''}`;
+            }
+            
+            if (priceElement) {
+                const totalItemPrice = (data.new_quantity * data.item_price).toFixed(2);
+                priceElement.textContent = `preço: ${totalItemPrice}€`;
+            }
         }
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-    });
-}
+
+        // Atualiza o total de itens no carrinho
+        const cartTotalElement = document.getElementById('cart-total');
+        if (cartTotalElement) {
+            cartTotalElement.textContent = data.cart_total;
+        }
+
+        // Atualiza o preço total
+        const cartPriceTotalElement = document.getElementById('cart-price-total');
+        if (cartPriceTotalElement) {
+            cartPriceTotalElement.textContent = data.total_price;
+        }
+
+        // Se o carrinho estiver vazio, exibe uma mensagem
+        const productSection = document.querySelector('.affichage_des_produits');
+        if (data.cart_total == 0 && productSection) {
+            productSection.innerHTML = '<h2>Seu carrinho está vazio.</h2>';
+        }
+    }
 });
 </script>
 </body>
