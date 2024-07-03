@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode([
             'success' => true,
             'new_quantity' => $result['product_quantity'] ?? 0,
-            'cart_total' => $result_total['cart_total'] ?? 0,
+            'cart_total' => $result_total['total_product'] ?? 0,
             'total_price' => number_format($result_total['total_price'] ?? 0, 2)
         ]);
 

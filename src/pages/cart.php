@@ -122,8 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     quantityElement.textContent = `quantity: ${data.new_quantity} unit.`;
                 }
             }
-            // Atualiza o total do carrinho
+            // Met à jour le total des produits et le prix du panier
             document.getElementById('cart-total').textContent = data.cart_total;
+            document.getElementById('cart-price-total').textContent = data.total_price;
         } else {
             alert('Erro ao atualizar o carrinho');
         }
