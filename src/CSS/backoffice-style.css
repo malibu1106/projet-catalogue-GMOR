@@ -430,7 +430,7 @@ textarea {
 
 
 
-/*BACKOFFICE-UTILISATEUR*/
+/*BACKOFFICE-UTILISATEURS*/
 .bg-backoff-users{
     background-image: url(/img/temporaire/White-abstract-background-design-Graphics-27460023-1.jpg);
 }
@@ -526,6 +526,100 @@ h1 {
     margin-bottom: 2rem;
 }
 
+/*BACKOFFICE PROFIL UTILISATEUR*/
+.backoffice-profil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(#777,#222);
+}
+
+.profil-card {
+    position: relative;
+    width: 340px;
+    height: 450px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.profil-circle{
+    position: absolute;
+    top: -190px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 500px;
+    background: #333;
+    clip-path: circle();
+}
+.profil-circle::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -16px;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    box-shadow: 0 0 0 20px rgba(255, 0, 0, 0.5);
+    border-radius: 50%;
+    z-index: 3;
+}
+.profil-circle .imgBx {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 340px;
+    height: 310px;
+    background: rgb(191, 204, 13);
+}
+.profil-circle .imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+.profil-circle .imgBx:hover img{
+    
+}
+.profil-content {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 140px;
+    padding: 20px 30px;
+    font-family: "Poppins", sans-serif;
+}
+.fa-linkedin {
+    background: #0077b5;
+    color: #fff;
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+.profil-name {
+    font-weight: bold;
+    font-size: 1.4em;
+    color: #333;
+    margin-top: 7px;
+}
+.fa-envelope-open{
+    color: rgb(184, 0, 0);
+}
+.profil-roles {
+    font-size: 14px;
+    font-weight: 400;
+    color: #e91e63;
+}
+.mailIcon{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 
 
