@@ -4,7 +4,7 @@ require_once("../elements/connect.php");
 require_once("../elements/header.php");
 
 // $sql = "SELECT * FROM products";
-$sql = "SELECT * FROM  carts c LEFT JOIN products p  ON p.id = c.product_id LEFT JOIN users u ON c.user_id = u.id ";
+$sql = "SELECT c.id AS cart_id, c.*,  p.*, u.*  FROM  carts c LEFT JOIN products p  ON p.id = c.product_id LEFT JOIN users u ON c.user_id = u.id ";
 $requete = $db->prepare($sql);
 $requete->execute();
 $cartResults = $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -13,6 +13,18 @@ $sql_count = "SELECT SUM(`product_quantity`) AS total_product FROM `carts`";
 $requete_count = $db->prepare($sql_count);
 $requete_count->execute();
 $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
+
+$sql_total = "SELECT SUM(c.product_quantity * p.price) AS total_price FROM carts c JOIN products p ON c.product_id = p.id";
+$stmt_total = $db->prepare($sql_total);
+$stmt_total->execute();
+$result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
+
+// echo json_encode([
+//     'success' => true, 
+//     'new_quantity' => $result['product_quantity'] ?? 0,
+//     'cart_total' => $result_total['total_product'] ?? 0,
+//     'total_price' => number_format($result_total['total_price'], 2)
+// ]);
 
 ?>
 
@@ -40,6 +52,7 @@ $result_count = $requete_count->fetch(PDO::FETCH_ASSOC);
         
     }else{
         echo '<h2>Your cart has <span id="cart-total"> ' . $result_count['total_product'] . ' </span> products</h2>';
+        echo '<h2>Total: <span id="cart-price-total">' . $result_total['total_price'] . '</span>€</h2>';
         echo'<section class="affichage_des_produits">';
 // Boucle pour afficher chaque résultat
 foreach($cartResults as $cartResult){
@@ -52,12 +65,12 @@ foreach($cartResults as $cartResult){
             <figcaption class="">color: '. $cartResult['color'].'</figcaption>
             <figcaption class="">size: '. $cartResult['size'].'</figcaption>
             <figcaption class="">price: '.number_format($cartResult['price'] ?? 0, 2). '</figcaption>
-            <figcaption class="product-quantity" data-id="'. $cartResult['id'] .'">quantity: '. $cartResult['product_quantity'].' unit.</figcaption> 
+            <figcaption class="product-quantity" data-id="'. $cartResult['cart_id'] .'">quantity: '. $cartResult['product_quantity'].' unit.</figcaption> 
             
             <div class="btn_action">
-                <button class="cart-action" data-action="add" data-id="'. $cartResult['id'] .'"><img src="../img/illustration/add_produce.png " alt="add produce"></button>
-                <button class="cart-action" data-action="subtract" data-id="'. $cartResult['id'] .'"><img src="../img/illustration/remove_produce.png" alt="remove produce"></button>
-                <button class="cart-action" data-action="delete" data-id="'. $cartResult['id'] .'"><img src="../img/illustration/delete.png" alt="delete produce"></button>
+                <button class="cart-action" data-action="add" data-id="'. $cartResult['cart_id'] .' " aria-label="Add one unit"><img src="../img/illustration/add_produce.png " alt="add produce"></button>
+                <button class="cart-action" data-action="subtract" data-id="'. $cartResult['cart_id'] .'" aria-label="Subtract un unity"><img src="../img/illustration/remove_produce.png" alt="remove produce"></button>
+                <button class="cart-action" data-action="delete" data-id="'. $cartResult['cart_id'] .'" aria-label="Removes the product"><img src="../img/illustration/delete.png" alt="delete produce"></button>
             </div>
         </div>
     </figure>
@@ -109,8 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     quantityElement.textContent = `quantity: ${data.new_quantity} unit.`;
                 }
             }
-            // Atualiza o total do carrinho
+            // Met à jour le total des produits et le prix du panier
             document.getElementById('cart-total').textContent = data.cart_total;
+            document.getElementById('cart-price-total').textContent = data.total_price;
         } else {
             alert('Erro ao atualizar o carrinho');
         }
