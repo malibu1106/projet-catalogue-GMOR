@@ -4,7 +4,7 @@ require_once("../elements/connect.php");
 require_once("../elements/header.php");
 
 // $sql = "SELECT * FROM products";
-$sql = "SELECT * FROM  carts c LEFT JOIN products p  ON p.id = c.product_id LEFT JOIN users u ON c.user_id = u.id ";
+$sql = "SELECT c.id AS cart_id, c.*,  p.*, u.*  FROM  carts c LEFT JOIN products p  ON p.id = c.product_id LEFT JOIN users u ON c.user_id = u.id ";
 $requete = $db->prepare($sql);
 $requete->execute();
 $cartResults = $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -65,12 +65,12 @@ foreach($cartResults as $cartResult){
             <figcaption class="">color: '. $cartResult['color'].'</figcaption>
             <figcaption class="">size: '. $cartResult['size'].'</figcaption>
             <figcaption class="">price: '.number_format($cartResult['price'] ?? 0, 2). '</figcaption>
-            <figcaption class="product-quantity" data-id="'. $cartResult['id'] .'">quantity: '. $cartResult['product_quantity'].' unit.</figcaption> 
+            <figcaption class="product-quantity" data-id="'. $cartResult['cart_id'] .'">quantity: '. $cartResult['product_quantity'].' unit.</figcaption> 
             
             <div class="btn_action">
-                <button class="cart-action" data-action="add" data-id="'. $cartResult['id'] .' " aria-label="Add one unit"><img src="../img/illustration/add_produce.png " alt="add produce"></button>
-                <button class="cart-action" data-action="subtract" data-id="'. $cartResult['id'] .'" aria-label="Subtract un unity"><img src="../img/illustration/remove_produce.png" alt="remove produce"></button>
-                <button class="cart-action" data-action="delete" data-id="'. $cartResult['id'] .'" aria-label="Removes the product"><img src="../img/illustration/delete.png" alt="delete produce"></button>
+                <button class="cart-action" data-action="add" data-id="'. $cartResult['cart_id'] .' " aria-label="Add one unit"><img src="../img/illustration/add_produce.png " alt="add produce"></button>
+                <button class="cart-action" data-action="subtract" data-id="'. $cartResult['cart_id'] .'" aria-label="Subtract un unity"><img src="../img/illustration/remove_produce.png" alt="remove produce"></button>
+                <button class="cart-action" data-action="delete" data-id="'. $cartResult['cart_id'] .'" aria-label="Removes the product"><img src="../img/illustration/delete.png" alt="delete produce"></button>
             </div>
         </div>
     </figure>
