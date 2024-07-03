@@ -1,5 +1,5 @@
 <?php
-require_once("../elements/connect.php");
+require_once("../../elements/connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validação e sanitização de entrada
