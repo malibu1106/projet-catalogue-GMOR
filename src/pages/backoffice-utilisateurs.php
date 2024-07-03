@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("../elements/connect.php");
+require_once ('../elements/header.php');
 
 // Récupération de tous les utilisateurs
 $sql = "SELECT * FROM users";
@@ -34,10 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../CSS/backoffice-style.css">
-    <style>
-
-
-    </style>
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body class="bg-backoff-users">
     <?php require_once ('../elements/header.php');?>
