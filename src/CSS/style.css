@@ -76,7 +76,7 @@ ul#menuBurger {
 }
 
 #menuBurger li {
-    margin: 25px auto;
+    margin: 20px auto;
 }
 
 #menuBurger li a {
@@ -139,7 +139,7 @@ ul.menu {
     width: calc(100% - 30px);
     border: none;
     text-align: center;
-    background-color: rgb(250, 250, 250);
+    background-color: rgb(252, 252, 252);
 }
 
 .researchBar input:focus {
@@ -373,7 +373,6 @@ body {
     ul#menuBurger {
         position: absolute;
         left: 0;
-        width: 250px;
         height: auto;
         background-color: white;
         text-align: center;

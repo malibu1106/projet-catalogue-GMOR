@@ -86,3 +86,54 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
+
+/* BACKOFFICE-UTILISATEUR */
+// Animation pour les cartes utilisateurs
+document.addEventListener('DOMContentLoaded', function() {
+    const userCards = document.querySelectorAll('.user-card');
+    userCards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 50);
+        }, index * 100);
+    });
+
+    // Filtrage des utilisateurs
+    const nameFilter = document.getElementById('nameFilter');
+    const firstNameFilter = document.getElementById('firstNameFilter');
+    const groupFilter = document.getElementById('groupFilter');
+    const userCardContainers = document.querySelectorAll('.user-card-container');
+
+    function filterUsers() {
+        const nameValue = nameFilter.value.toLowerCase();
+        const firstNameValue = firstNameFilter.value.toLowerCase();
+        const groupValue = groupFilter.value.toLowerCase();
+
+        userCardContainers.forEach(container => {
+            const card = container.querySelector('.user-card');
+            const name = card.querySelector('.card-title').textContent.toLowerCase();
+            const roles = Array.from(card.querySelectorAll('.role-badge')).map(badge => badge.textContent.toLowerCase());
+
+            const nameMatch = name.includes(nameValue);
+            const firstNameMatch = name.includes(firstNameValue);
+            const groupMatch = groupValue === '' || roles.includes(groupValue);
+
+            if (nameMatch && firstNameMatch && groupMatch) {
+                container.style.display = '';
+            } else {
+                container.style.display = 'none';
+            }
+        });
+    }
+
+    nameFilter.addEventListener('input', filterUsers);
+    firstNameFilter.addEventListener('input', filterUsers);
+    groupFilter.addEventListener('change', filterUsers);
+});
+    // Filtrage des utilisateurs FIN

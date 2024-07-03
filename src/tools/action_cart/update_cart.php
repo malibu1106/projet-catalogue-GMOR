@@ -1,5 +1,5 @@
 <?php
-require_once("../elements/connect.php");
+require_once("../../elements/connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validação e sanitização de entrada
@@ -16,8 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         switch($action) {
             case 'add':
-                $sql = "UPDATE carts SET product_quantity = product_quantity + 1 WHERE id = :cart_id";
+                $sql = "UPDATE carts SET product_quantity = LEAST(product_quantity + 1, 99) WHERE id = :cart_id";
                 break;
+                
             case 'subtract':
                 $sql = "UPDATE carts SET product_quantity = GREATEST(product_quantity - 1, 0) WHERE id = :cart_id";
                 break;
@@ -53,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode([
             'success' => true,
             'new_quantity' => $result['product_quantity'] ?? 0,
-            'cart_total' => $result_total['cart_total'] ?? 0,
+            'cart_total' => $result_total['total_product'] ?? 0,
             'total_price' => number_format($result_total['total_price'] ?? 0, 2)
         ]);
 
@@ -64,3 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo json_encode(['success' => false, 'message' => 'Método inválido']);
 }
+// Verificação de existência do item: Antes de realizar a ação, verifique se o item existe no carrinho:
+    $check_sql = "SELECT id FROM carts WHERE id = :cart_id";
+    $check_stmt = $db->prepare($check_sql);
+    $check_stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
+    $check_stmt->execute();
+    if (!$check_stmt->fetch()) {
+       
+    }
+
+    

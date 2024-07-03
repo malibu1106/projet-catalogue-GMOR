@@ -1,5 +1,16 @@
 <?php
-session_start();?>
+session_start();
+require_once("../elements/connect.php");
+require_once ('../elements/debug.php');
+
+$category = isset($_GET['category']) ? $_GET['category'] : '';
+
+$sql = "SELECT * FROM products WHERE category = ?";
+$stmt = $db->prepare($sql);
+$stmt->bindParam(1, $category, PDO::PARAM_STR);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +26,9 @@ session_start();?>
     
 </head>
 <body>
-<?php require_once ('../elements/debug.php');?>
-
-<?php require_once ('../elements/header.php');?>
+     <?php
+     require_once ('../elements/header.php');
+     ?>
 
         <div class="retour-accueil">
         <a href="../index.php">Accueil</a>
@@ -27,80 +38,26 @@ session_start();?>
         </div>
 
         <section class="affichage_des_produits">
-
+        <?php 
+        foreach($result as $row) { 
+        ?>
         <div class="container">
+            <a href="article.php?id=<?php echo htmlspecialchars($row['id']); ?>">
                 <div class="card">
-                    <img class="" src="../img/temporaire/vente1.jpg" alt="php name ici">
+                    <img class="" src="<?php echo htmlspecialchars($row['image_1']); ?>" alt="<?php echo htmlspecialchars($row['brand']); ?>">
                     <div class="intro">
-                        <h1 class="text-h1">Robe d'Été - 26.90€</h1>
+                        <h1 class="text-h1"><?php echo htmlspecialchars($row['brand']); ?> - <?php echo htmlspecialchars($row['price']); ?>€</h1>
                         <p class="text-p">
-                            Courte description du produit.
+                        <?php echo htmlspecialchars($row['content']); ?>
                         </p>
                     </div>
                 </div>
+            </a>
         </div>
-
-        <div class="container">
-                <div class="card">
-                    <img class="" src="../img/temporaire/vente3.jpg" alt="php name ici">
-                    <div class="intro">
-                    <h1 class="text-h1">Robe d'Été - 26.90€</h1>
-                        <p class="text-p">
-                            Courte description du produit.
-                        </p>
-                    </div>
-                </div>
-        </div>
-
-        <div class="container">
-                <div class="card">
-                    <img class="" src="../img/temporaire/vente1.jpg" alt="php name ici">
-                    <div class="intro">
-                    <h1 class="text-h1">Robe d'Été - 26.90€</h1>
-                        <p class="text-p">
-                            Courte description du produit.
-                        </p>
-                    </div>
-                </div>
-        </div>
-
-        <div class="container">
-                <div class="card">
-                    <img class="" src="../img/temporaire/vente3.jpg" alt="php name ici">
-                    <div class="intro">
-                    <h1 class="text-h1">Robe d'Été - 26.90€</h1>
-                        <p class="text-p">
-                            Courte description du produit.
-                        </p>
-                    </div>
-                </div>
-        </div>
-
-        <div class="container">
-                <div class="card">
-                    <img class="" src="../img/temporaire/vente1.jpg" alt="php name ici">
-                    <div class="intro">
-                    <h1 class="text-h1">Robe d'Été - 26.90€</h1>
-                        <p class="text-p">
-                            Courte description du produit.
-                        </p>
-                    </div>
-                </div>
-        </div>
-
-        <div class="container">
-                <div class="card">
-                    <img class="" src="../img/temporaire/vente3.jpg" alt="php name ici">
-                    <div class="intro">
-                    <h1 class="text-h1">Robe d'Été - 26.90€</h1>
-                        <p class="text-p">
-                            Courte description du produit.
-                        </p>
-                    </div>
-                </div>
-        </div>
-
-</section>
+        <?php
+        }
+        ?>
+        </section>
 
 <?php require_once ('../elements/footer.php');?>
 

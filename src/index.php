@@ -68,30 +68,36 @@ session_start();?>
     </section>
     <section id="categories">
         <h1>Trouvez votre <span>bonheur</span> parmi nos articles</h1>
+            <a href="pages/produits.php?category=Robe">
             <article class="rond-categorie">
                <img src="img/illustration/robe.png">
                <p>Robes</p>
             </article>
+            </a>
+            <a href="pages/produits.php?category=T-shirt">
             <article class="rond-categorie">
                <img src="img/illustration/tshirt.png">
                <p>T-shirts</p>
             </article>
+            </a>
+            <a href="pages/produits.php?category=Pantalon">
             <article class="rond-categorie">
                <img src="img/illustration/pantalon.png">
                <p>Pantalons</p>
             </article>
+            </a>
+            <a href="pages/produits.php?category=Veste">
             <article class="rond-categorie">
                <img src="img/illustration/veste.png">
                <p>Vestes</p>
             </article>
+            </a>
+            <a href="pages/produits.php?category=pull">
             <article class="rond-categorie">
                <img src="img/illustration/pull.jpg">
                <p>Pulls</p>
             </article>
-            <article class="rond-categorie">
-               <img src="img/illustration/polo.png">
-               <p>Collection Hommes</p>
-            </article>
+            </a>
     </section>
 <?php require_once ('elements/footer.php');?>
 
