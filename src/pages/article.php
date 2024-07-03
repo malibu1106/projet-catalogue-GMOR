@@ -1,5 +1,27 @@
 <?php
-session_start();?>
+session_start();
+
+require_once("../elements/connect.php");
+
+$product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+if ($product_id > 0) {
+    $sql = "SELECT * FROM products WHERE id = ?";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(1, $product_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$product) {
+        echo "Produit non trouvé.";
+        exit;
+    }
+} else {
+    echo "ID de produit invalide.";
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,29 +48,29 @@ session_start();?>
 <section id="container-pcp">
     <article class="photos-article">
         <figure class="photo-pcp">
-        <img id="thumbnail" src="../img/temporaire/vente3.jpg" alt="php name">
+        <img id="thumbnail" src="<?php echo htmlspecialchars($product['image_1']); ?>" alt="php name">
         </figure>
         <figure class="miniatures">
-            <img class="miniature" src="../img/temporaire/vente1.jpg" alt="php name">
-            <img  class="miniature" src="../img/temporaire/photo1.jpg" alt="php name">
-            <img class="miniature" src="../img/temporaire/test.jpg" alt="php name">
+            <img class="miniature" src="<?php echo htmlspecialchars($product['image_2']); ?>" alt="php name">
+            <img  class="miniature" src="<?php echo htmlspecialchars($product['image_3']); ?>" alt="php name">
+            <img class="miniature" src="<?php echo htmlspecialchars($product['image_4']); ?>" alt="php name">
         </figure>
     </article>
 
     <div id="fullscreen-container">
         <span id="close-btn">&times;</span>
-        <img id="fullscreen-image" src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
+        <img id="fullscreen-image" src="<?php echo htmlspecialchars($product['image_1']); ?>" alt="php name">
     </div>
 
     <article class="description">
-        <h4>NOM DE L'ARTICLE</h4>
-        <h5>26.90€</h5>
+        <h4><?php echo htmlspecialchars($product['brand']); ?></h4>
+        <h5><?php echo htmlspecialchars($product['price']); ?>€</h5>
         <p>Tailles :</p>
         <div class="btn-tailles">
         <button>XS</button><button>S</button><button>M</button><button>L</button>
         </div>
         <div class="description-produit">
-        <p id="descr-produit1"></p>
+        <p id="descr-produit1"><?php echo htmlspecialchars($product['content']); ?></p>
         <p id="descr-produit2"></p>
         </div>
         <div class="add-to-cart">
