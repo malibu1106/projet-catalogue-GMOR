@@ -380,6 +380,7 @@ textarea {
     min-height: 250px;
     position: relative;
     padding-top: 60px;
+    max-width: 350px;
 }
 .card:hover {
     transform: translateY(-10px);
