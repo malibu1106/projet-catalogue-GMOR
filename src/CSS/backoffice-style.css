@@ -437,6 +437,7 @@ textarea {
 /*BACKOFFICE-UTILISATEURS*/
 .bg-backoff-users{
     background-image: url(/img/temporaire/White-abstract-background-design-Graphics-27460023-1.jpg);
+    background-attachment: fixed;
 }
 .container {
     padding-top: 2rem;
@@ -633,7 +634,26 @@ h1 {
 /*BACKOFFICE PROFIL UTILISATEUR*/
 .backoffice-profil {
     background-image: url(../img/temporaire/White-abstract-background-design-Graphics-27460023-1.jpg);
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 100px;
+}
+.edit-profil {
+    max-width: 400px;
+}
+.profil-name {
+    font-family: "poppins", sans-serif;
+}
+.btn-mod-profil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 200px;
 }
 
 

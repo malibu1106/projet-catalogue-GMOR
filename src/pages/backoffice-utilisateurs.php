@@ -36,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
     <link rel="stylesheet" href="../CSS/backoffice-style.css">
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
-<body class="bg-backoff-users">
+<body>
     <?php require_once ('../elements/header.php');?>
-    <main>
+    <main class="bg-backoff-users">
         <div class="container">
             <h1 class="text-center mb-4"><i class="fas fa-users icon-users-panel"></i> Gestion des Utilisateurs</h1>
             
