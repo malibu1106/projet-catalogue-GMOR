@@ -49,9 +49,9 @@ $results = $search_name->fetchAll(PDO::FETCH_ASSOC);
 
 
 // debug
-// echo '<pre>';
-// print_r($results);
-// echo '</pre>';
+echo '<pre>';
+print_r($results);
+echo '</pre>';
 ?>
 
 
@@ -99,8 +99,13 @@ else{
 
         echo '<article class="">
                 <figure class="">
-                    <img class="" src="'. $result['image_1'].'" alt="php name ici">
+                    <a href="article.php?id='.$result['id'] .'"><img class="" src="'. $result['image_1'].'" alt="php name ici"></a>
                     <figcaption class="">'.$result['brand'].'</figcaption>
+                    <figcaption>color: '. $result['color'].'</figcaption>
+                    <figcaption>size: '. $result['size'].'</figcaption>
+                    <figcaption class="product-price">price: '.number_format($result['price'], 2). '€</figcaption>
+                    
+
                 </figure>
         </article>';
     }

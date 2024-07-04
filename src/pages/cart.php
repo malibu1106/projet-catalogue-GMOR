@@ -2,7 +2,7 @@
 // Inicia a sessão e inclui arquivos necessários
 session_start();
 require_once("../elements/connect.php");
-require_once("../elements/header.php");
+
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['user']['id'])) {
@@ -68,7 +68,7 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
     <title>cart</title>
 </head>
 <body>
-    
+<?php require_once("../elements/header.php");?>
 <?php    
 
 // Verifica se o carrinho está vazio
