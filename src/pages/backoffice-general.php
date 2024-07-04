@@ -25,6 +25,7 @@ require_once ('../elements/header.php');
         
 
         <div class="backoff-general-panel">
+        <?php if (strpos($_SESSION['user']['group'], 'admin') !== false) {echo'
             <div class="card" id="users">
                 <div class="card-icon"><img src="/img/illustration/free-user-group.png" alt=""></div>
                 <div class="img-card-general" >
@@ -33,7 +34,7 @@ require_once ('../elements/header.php');
                 <div class="card-title">Utilisateurs</div>
                 <div class="card-content">Gérez les rôles et les permissions des utilisateurs de votre plateforme.</div>
                <a href="../pages/backoffice-utilisateurs.php"><button class="card-action">Gérer les utilisateurs</button></a>
-            </div>
+            </div>';}?>
             <div class="card" id="products">
                 <div class="card-icon"><img src="/img/illustration/product-icon-free.png" alt=""></div>
                 <div class="img-card-general" >

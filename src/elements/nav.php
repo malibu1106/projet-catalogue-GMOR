@@ -1,4 +1,3 @@
-
 <nav>
 <div class="menuButtonsContainer">
     <span id="menuBurgerIcon">☰</span>
@@ -22,11 +21,20 @@
                 </a>
                 </li>';
             }     
-
+            require_once("connect.php");
+            $sql = "SELECT * FROM messages WHERE receiver_user_id = :user_id AND message_read = 0";
+            $query = $db->prepare($sql);            
+            $query->bindValue(':user_id', $_SESSION['user']['id']);
+            $query->execute();
+            $unread = $query->fetch(PDO::FETCH_ASSOC);
             echo '
             <li>
-                <a href="../pages/messagerie.php">
-                    <img class="userMenuIcon" src="../img/illustration/message.png">
+                <a href="../pages/messagerie.php">';
+                if($unread){echo '<img class="userMenuIcon" src="../img/illustration/message_unread.png">';}
+                else{echo '<img class="userMenuIcon" src="../img/illustration/message.png">';}
+                    
+                    
+                    echo'
                 </a>
             </li>
             <li>
@@ -57,22 +65,19 @@
 
     <ul class="menu hideMenuBurger" id="menuBurger">
         <li>
-            <a href="#">Robes</a>
+            <a href="pages/produits.php?category=Robe">Robes</a>
         </li>
         <li>
-            <a href="#">T-shirts</a>
+            <a href="pages/produits.php?category=T-shirt">T-shirts</a>
         </li>
         <li>
-            <a href="#">Pantalons</a>
+            <a href="pages/produits.php?category=Pantalon">Pantalons</a>
         </li>
         <li>
-            <a href="#">Vestes</a>
+            <a href="pages/produits.php?category=Veste">Vestes</a>
         </li>
         <li>
-            <a href="#">Pulls</a>
-        </li>
-        <li>
-            <a href="#">Hommes</a>
+            <a href="pages/produits.php?category=pull">Pulls</a>
         </li>
     </ul>
 
