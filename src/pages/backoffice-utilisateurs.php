@@ -93,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
                                 </div>
                                 <a href="mailto:<?= htmlspecialchars($user['email']) ?>" class="email-icon">
                                     <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                                    <i class="fa fa-address-book" aria-hidden="true"></i>
                                 </a>
                             </div>
                             <div>

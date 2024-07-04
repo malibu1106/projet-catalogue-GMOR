@@ -584,6 +584,9 @@ h1 {
 .fa-envelope-open {
     color: rgb(184, 0, 0);
 }
+.fa-address-book {
+    color: rgb(0, 81, 255);
+}
 .profil-roles {
     display: flex;
     flex-wrap: wrap;
