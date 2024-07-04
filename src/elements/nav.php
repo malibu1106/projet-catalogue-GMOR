@@ -1,4 +1,3 @@
-
 <nav>
 <div class="menuButtonsContainer">
     <span id="menuBurgerIcon">☰</span>
@@ -57,22 +56,19 @@
 
     <ul class="menu hideMenuBurger" id="menuBurger">
         <li>
-            <a href="#">Robes</a>
+            <a href="pages/produits.php?category=Robe">Robes</a>
         </li>
         <li>
-            <a href="#">T-shirts</a>
+            <a href="pages/produits.php?category=T-shirt">T-shirts</a>
         </li>
         <li>
-            <a href="#">Pantalons</a>
+            <a href="pages/produits.php?category=Pantalon">Pantalons</a>
         </li>
         <li>
-            <a href="#">Vestes</a>
+            <a href="pages/produits.php?category=Veste">Vestes</a>
         </li>
         <li>
-            <a href="#">Pulls</a>
-        </li>
-        <li>
-            <a href="#">Hommes</a>
+            <a href="pages/produits.php?category=pull">Pulls</a>
         </li>
     </ul>
 
