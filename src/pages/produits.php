@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once("../elements/connect.php");
-require_once ('../elements/debug.php');
+
 
 $category = isset($_GET['category']) ? $_GET['category'] : '';
 

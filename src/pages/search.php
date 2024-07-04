@@ -81,7 +81,7 @@ $results = $search_name->fetchAll(PDO::FETCH_ASSOC);
     
 </head>
 <body>
-<?php require_once ('../elements/debug.php');?>
+
 
 <?php require_once ('../elements/header.php');
 
