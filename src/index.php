@@ -1,5 +1,6 @@
 <?php
-session_start();?>
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,11 +17,10 @@ session_start();?>
 </head>
 <body>
 
-
-
-<?php require_once ('elements/header.php');?>
-
-<?php require_once ('pages/slider.php');?>
+<?php
+require_once ('elements/debug.php');
+require_once ('elements/header.php');
+require_once ('pages/slider.php');?>
 
 <section id="container-global">
         <h1>Découvrez nos&nbsp;<span>meilleures ventes</span>&nbsp;du mois</h1>
@@ -67,31 +67,31 @@ session_start();?>
     </section>
     <section id="categories">
         <h1>Trouvez votre <span>bonheur</span> parmi nos articles</h1>
-            <a href="pages/produits.php?category=Robe">
+            <a href="pages/produits.php?category=Robe" style="text-decoration: none; color: inherit;">
             <article class="rond-categorie">
                <img src="img/illustration/robe.png">
                <p>Robes</p>
             </article>
             </a>
-            <a href="pages/produits.php?category=T-shirt">
+            <a href="pages/produits.php?category=T-shirt" style="text-decoration: none; color: inherit;">
             <article class="rond-categorie">
                <img src="img/illustration/tshirt.png">
                <p>T-shirts</p>
             </article>
             </a>
-            <a href="pages/produits.php?category=Pantalon">
+            <a href="pages/produits.php?category=Pantalon" style="text-decoration: none; color: inherit;">
             <article class="rond-categorie">
                <img src="img/illustration/pantalon.png">
                <p>Pantalons</p>
             </article>
             </a>
-            <a href="pages/produits.php?category=Veste">
+            <a href="pages/produits.php?category=Veste" style="text-decoration: none; color: inherit;">
             <article class="rond-categorie">
                <img src="img/illustration/veste.png">
                <p>Vestes</p>
             </article>
             </a>
-            <a href="pages/produits.php?category=pull">
+            <a href="pages/produits.php?category=pull" style="text-decoration: none; color: inherit;">
             <article class="rond-categorie">
                <img src="img/illustration/pull.jpg">
                <p>Pulls</p>
@@ -100,7 +100,11 @@ session_start();?>
     </section>
 <?php require_once ('elements/footer.php');?>
 
-    
+<style>
+    #menuBurgerIcon {
+        display: none;
+    }
+</style>
 </body>
 </html>
 

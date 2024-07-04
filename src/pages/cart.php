@@ -73,11 +73,13 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
 
 // Verifica se o carrinho está vazio
     if(empty($cartResults)){
-        echo 'not the product in this cart.';
+        echo '<h2>Not the product in this cart.</h2>';
+        echo ' <h2><a href="produits.php">Select your products here.</a></h2> ';
         
     }else{
         // Exibe o total de produtos e o preço total
         echo '<h2>Your cart has <span id="cart-total"> ' . $result_count['total_product'] . ' </span> products</h2>';
+        
         echo '<h2>Total: <span id="cart-price-total">' . $result_total['total_price'] . '</span>€</h2>';
         echo'<section class="affichage_des_produits">';
 

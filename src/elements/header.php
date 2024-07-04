@@ -1,8 +1,10 @@
 <header>
-<?php require_once ('nav.php');?>
+<?php // Déclarez la variable comme globale
+require_once 'nav.php';
+?>
     <div class="logo">
 
-            <img class="logo_index" src="../img/illustration/logo-online-training.png">
+           <a href="../index.php"><img class="logo_index" src="../img/illustration/logo-online-training.png"></a>
 
     </div>  
     <div class="researchBar">
