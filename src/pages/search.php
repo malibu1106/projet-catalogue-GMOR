@@ -1,4 +1,7 @@
 <?php
+session_start();
+require_once("../../elements/connect.php");
+
 if (!isset($_GET["search"])) {
      // Redirige vers la page d’accueil si le paramètre de recherche n’est pas défini
     header("Location: index.php");
@@ -52,7 +55,7 @@ $results = $search_name->fetchAll(PDO::FETCH_ASSOC);
 // echo '<pre>';
 // print_r($results);
 // echo '</pre>';
-// ?>
+?>
 
 
 
@@ -106,7 +109,12 @@ else{
                     <figcaption class="product-price">price: '.number_format($result['price'], 2). '€</figcaption>
                     
                     <div class="add-to-cart">
-                    <button class="btn btn-dark" type="button";>Ajouter au panier</button>
+                    <button class="btn btn-dark" type="submit";>Ajouter au panier</button>
+                    <form action="../../tools/action_cart/insert_cart.php" method="POST">
+                    <input type="hidden" name="product_id" value="'.  $result['id'] ;'">
+                    <input type="hidden" name="user_id" value="'.  isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';'">
+                    
+                    </form>
                     </div>
 
                 </figure>
