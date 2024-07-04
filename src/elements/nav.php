@@ -2,7 +2,7 @@
 <nav>
 <div class="menuButtonsContainer">
     <span id="menuBurgerIcon">☰</span>
-    <span id="debugButton" style="font-size:1em">Debug</span>
+    
     
 
         <ul class="menu" id="userMenu">
@@ -14,7 +14,7 @@
                 </a>
             </li> ';
 
-            if ($_SESSION['user']['group'] === 'admin' || $_SESSION['user']['group'] === 'sub_admin') {
+            if (strpos($_SESSION['user']['group'], 'admin') !== false || strpos($_SESSION['user']['group'], 'sub') !== false) {
                 echo '
                 <li>
                 <a href="../pages/backoffice-general.php">

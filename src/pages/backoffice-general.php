@@ -44,7 +44,7 @@ require_once ('../elements/header.php');
                 <a href="backoffice-produits.php"><button class="card-action">Gérer les produits</button></a>
             </div>
             <?php 
-            if ($_SESSION['user']['group'] === 'admin') {
+            if (strpos($_SESSION['user']['group'], 'admin') !== false) {
                 echo '
             <div class="card" id="messages">
                 <div class="card-icon"><img src="/img/illustration/message-icon.png" alt=""></div>
