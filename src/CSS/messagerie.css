@@ -7,9 +7,9 @@
 
 
 .messagerie_conversation_title {
-    height: 10%;
+    height: 40px;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 8px;
     display: flex;
     align-items: center;
     position: relative;
@@ -31,7 +31,41 @@
     width: 80%;
 }
 
+.msgListeH1 {
+    text-align: center;
+    margin: 50px;
+}
 
+.messagesListe {
+    text-align: center;
+    margin: 50px auto;
+    max-width: 1400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.user_msg_card {
+    width: 220px;
+    height: 70px;
+    justify-content: center;
+    display: flex;
+    line-height: 70px;
+    margin: 5px;
+    outline: solid black 1px;
+    background: rgba(223, 222, 243, 1);
+    border-radius: 4px;
+    font-size: 1.2em;
+    font-weight: 500;
+    transition: font-size 1s;
+}
+
+.user_msg_card:hover {
+    outline: solid black 2px;
+    background: rgba(136, 131, 226, 1);
+    font-size: 1.3em;
+}
 
 .messagerie_menu {
     width: 20%;

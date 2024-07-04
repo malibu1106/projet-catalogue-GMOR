@@ -115,6 +115,8 @@ ul.menu {
     flex-direction: row;
     align-items: center;
     height: 50px;
+    width: 100%;
+    justify-content: flex-end;
 }
 
 #userMenu img {

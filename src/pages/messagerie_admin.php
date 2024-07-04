@@ -43,7 +43,8 @@ if ($user_id > 0) {
 ?>
 
 <section class="messagerie">
-    <div class="messagerie_menu"> Messages de <?= ucfirst($as_user_infos['first_name']) ?> <?= ucfirst($as_user_infos['last_name']) ?>
+    <div class="messagerie_menu"><a href="../pages/choose_messages_users_admin.php"><img alt="Retour" src="../img/illustration/back.png">Retour</a>
+    Messages de <?= ucfirst($as_user_infos['first_name']) ?> <?= ucfirst($as_user_infos['last_name']) ?>
 
         <?php 
 
@@ -112,7 +113,7 @@ foreach ($chats as $chat) {
     echo ucfirst($conversation_user_infos['first_name']) . ' ' . ucfirst($conversation_user_infos['last_name']);
     echo '</div></div></a>';
 }
-?><a href="../pages/choose_messages_users_admin.php">retour</a>
+?>
     </div>
 
 

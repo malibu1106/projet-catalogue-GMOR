@@ -82,18 +82,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <a href="<?= htmlspecialchars($user['linkedin'] ?? '#') ?>" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                 <h3 class="profil-name"><?= htmlspecialchars($user['first_name'] . ' ' . $user['last_name']) ?></h3>
                 <div class="mailIcon">
-                    <h4 class="profil-roles"><?= htmlspecialchars($user['group']) ?></h4>
+                    <div class="profil-roles-container">
+                        <div class="profil-roles">
+                            <?php
+                            $user_roles = explode(',', $user['group']);
+                            foreach ($user_roles as $role):
+                            ?>
+                                <span class="role-badge"><?= htmlspecialchars(trim($role)) ?></span>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
                     <a href="mailto:<?= htmlspecialchars($user['email']) ?>">
                         <i class="fa fa-envelope-open" aria-hidden="true"></i>
                     </a>
                 </div>
-                <button id="editProfileBtn" class="btn btn-primary mt-3">Modifier le profil</button>
+                <button id="editProfileBtn" class="btn-mod-profil btn btn-primary mt-3">Modifier le profil</button>
             </div>
         </div>
 
         <!-- Formulaire de modification (initialement caché) -->
         <div id="editProfileForm" style="display: none;">
-            <form method="POST" enctype="multipart/form-data">
+            <form method="POST" class="edit-profil" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="linkedin" class="form-label">Lien LinkedIn</label>
                     <input type="url" class="form-control" id="linkedin" name="linkedin" value="<?= htmlspecialchars($user['Linkedin'] ?? '') ?>">

@@ -28,13 +28,20 @@ $query->execute();
 $usersList = $query->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
-    <h1> voir les messages de </h1>
+<h1 class="msgListeH1"> Accéder aux messages de </h1>
+<div class="messagesListe">
+    
     <?php
     foreach($usersList as $user){
-        echo'<a href="../pages/messagerie_admin.php?id='.$user['id'].'">test</a>';
-        echo $user['first_name'];
+        echo'<a href="../pages/messagerie_admin.php?id='.$user['id'].'">
+        <div class="user_msg_card">';
+        echo ucfirst($user['first_name']).' '.ucfirst($user['last_name']);
+        echo'</div>';
+        echo'</a>';
+        
         echo'<br>';
     }
     ?>
+</div>
 </body>
 </html>

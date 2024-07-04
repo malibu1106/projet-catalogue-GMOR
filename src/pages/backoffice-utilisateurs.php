@@ -36,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
     <link rel="stylesheet" href="../CSS/backoffice-style.css">
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
-<body class="bg-backoff-users">
+<body>
     <?php require_once ('../elements/header.php');?>
-    <main>
+    <main class="bg-backoff-users">
         <div class="container">
             <h1 class="text-center mb-4"><i class="fas fa-users icon-users-panel"></i> Gestion des Utilisateurs</h1>
             
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
                         <select id="groupFilter" class="form-select">
                             <option value="">Tous les groupes</option>
                             <?php
-                            $all_roles = ['admin', 'sub-admin', 'utilisateur', 'formateur', 'apprenant', 'gestion commercial', 'logistique', 'comptable', 'vendeur'];
+                            $all_roles = ['admin', 'sub', 'utilisateur', 'formateur', 'apprenant', 'gestion commercial', 'logistique', 'comptable', 'vendeur'];
                             foreach ($all_roles as $role) {
                                 echo "<option value=\"$role\">" . ucfirst($role) . "</option>";
                             }
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
                                     <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
                                     <div class="role-checkboxes">
                                         <?php
-                                        $roles = ['admin', 'sub-admin', 'utilisateur', 'formateur', 'apprenant', 'gestion commercial', 'logistique', 'comptable', 'vendeur'];
+                                        $roles = ['admin', 'sub', 'utilisateur', 'formateur', 'apprenant', 'gestion commercial', 'logistique', 'comptable', 'vendeur'];
                                         $user_roles = explode(',', $user['group']);
                                         foreach ($roles as $role):
                                         ?>
