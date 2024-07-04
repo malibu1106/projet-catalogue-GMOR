@@ -8,6 +8,7 @@ $query = $db->prepare($sql);
 $query->execute();
 $users = $query->fetchAll(PDO::FETCH_ASSOC);
 
+
 // Traitement du formulaire de mise à jour des rôles
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
     $user_id = $_POST['user_id'];
@@ -71,7 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
                     <div class="profil-card">
                         <div class="profil-circle">
                             <div class="imgBx">
-                                <img src="<?php echo htmlspecialchars($user['avatar']); ?>" alt="Photo de profil">
+                                <?php
+                                $avatar = !empty($user['avatar']) ? htmlspecialchars($user['avatar']) : '../img/illustration/img_not_found.png';
+                                ?>
+                                <img src="<?= $avatar ?>" alt="Photo de profil">
                             </div>
                         </div>
                         <div class="profil-content">

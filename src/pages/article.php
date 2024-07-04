@@ -37,8 +37,6 @@ if ($product_id > 0) {
     
 </head>
 <body>
-<?php require_once ('../elements/debug.php');?>
-
 <?php require_once ('../elements/header.php');?>
 
     <div class="retour-accueil">

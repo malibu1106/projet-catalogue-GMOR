@@ -71,9 +71,9 @@ require_once("../elements/connect.php");
                         <!-- Exemple en brute a modifier avec du php pour rajouter nos produits de la BDD -->
                         <tr>
                             <td>
-                                <button class="btn btn-sm btn-primary" title="Voir"><i class="bi bi-eye"></i></button>
-                                <button class="btn btn-sm btn-warning" title="Modifier"><a href="backoffice-modif.php?id=<?= $produit["id"] ?>"><i class="bi bi-pencil"></i></button>
-                                <button class="btn btn-sm btn-danger" title="Supprimer"><a href="../tools/delete.php?id=<?= $produit["id"] ?>"><i class="bi bi-trash"></i></button>
+                                <a class="btn btn-sm btn-primary btn-space" title="Voir" href="article.php?id=<?= $produit["id"] ?>"><i class="bi bi-eye"></i>
+                                <a class="btn btn-sm btn-warning btn-space" title="Modifier" href="backoffice-modif.php?id=<?= $produit["id"] ?>"><i class="bi bi-pencil"></i>
+                                <a class="btn btn-sm btn-danger btn-space" title="Supprimer" href="../tools/delete.php?id=<?= $produit["id"] ?>"><i class="bi bi-trash"></i>
                             </td>
                             <td><?= $produit['ref'] ?></td>
                             <td><?= $produit['brand'] ?></td>
