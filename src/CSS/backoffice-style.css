@@ -631,6 +631,9 @@ h1 {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+.btn-space {
+    margin: 2px;
+}
 
 
 
