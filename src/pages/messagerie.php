@@ -30,7 +30,6 @@ $query->bindValue(':user_id', $user_id);
 $query->execute();
 $conversations = $query->fetchAll(PDO::FETCH_ASSOC);
 
-require_once ('../elements/debug.php');
 require_once ('../elements/header.php');
 ?>
 

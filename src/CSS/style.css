@@ -4,25 +4,10 @@
 @import "fonts.css";
 
 body {
-    background-color: rgb(252, 252, 252)!important;
+    background-color: rgb(252, 252, 252) !important;
 }
 
-/*DEBUG*/
-#debugButton {
-    cursor: pointer;
-    line-height: 50px;
-    font-size: 2em;
-}
 
-#debug {
-    width: 100vw;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    background: rgba(255, 0, 0, 1);
-    display: none;
-    z-index: 15000;
-}
 
 /*HEADER*/
 
@@ -315,7 +300,7 @@ body {
 }
 
 .rond-categorie p {
-    display:flex;
+    display: flex;
     justify-content: center;
     margin-top: 15px;
     font-size: 1.2em;
@@ -371,7 +356,7 @@ body {
     }
 }
 
-@media screen and (min-width: 1024px){
+@media screen and (min-width: 1024px) {
     ul#menuBurger {
         position: absolute;
         left: 0;
@@ -381,21 +366,25 @@ body {
         z-index: 100;
         transition: top 0.4s linear;
         font-size: 1.4em;
-        padding:0;
+        padding: 0;
     }
 }
+
 /*LOGIN & INSCRIPTION.PHP*/
 .login-body {
     background-image: url(/img/temporaire/model-image-login.jpg);
     background-position: left 20% top 25%;
 }
+
 .register-body {
     background-image: url(/img/temporaire/model-image-login.jpg);
     background-position: left 20% top 25%;
 }
-.bg-body-secondary{
+
+.bg-body-secondary {
     background-color: rgba(255, 255, 255, 0) !important;
 }
+
 .logo-register {
     max-width: 500px;
     margin-top: 100px;
@@ -406,6 +395,7 @@ body {
     text-decoration: underline;
     transition: 0.5s ease-in-out;
 }
+
 .registerbtn:hover {
     transition: 0.5s ease-in-out;
     color: #ff0505;

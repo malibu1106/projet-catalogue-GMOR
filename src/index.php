@@ -18,7 +18,6 @@ session_start();
 <body>
 
 <?php
-require_once ('elements/debug.php');
 require_once ('elements/header.php');
 require_once ('pages/slider.php');?>
 

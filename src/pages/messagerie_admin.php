@@ -32,7 +32,6 @@ if ($user_id > 0) {
     $query->execute();
     $conversations = $query->fetchAll(PDO::FETCH_ASSOC);
 
-    require_once('../elements/debug.php');
     require_once('../elements/header.php');
 
     $sql = "SELECT * FROM users WHERE id = :user_id";
