@@ -98,13 +98,16 @@ else{
     foreach ($results as $result){
 
         echo '<article class="">
-                <figure class="">
+                <figure class="card">
                     <a href="article.php?id='.$result['id'] .'"><img class="" src="'. $result['image_1'].'" alt="php name ici"></a>
                     <figcaption class="">'.$result['brand'].'</figcaption>
                     <figcaption>color: '. $result['color'].'</figcaption>
                     <figcaption>size: '. $result['size'].'</figcaption>
                     <figcaption class="product-price">price: '.number_format($result['price'], 2). '€</figcaption>
                     
+                    <div class="add-to-cart">
+                    <button class="btn btn-dark" type="button";>Ajouter au panier</button>
+                    </div>
 
                 </figure>
         </article>';
