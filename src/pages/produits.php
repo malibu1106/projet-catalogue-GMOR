@@ -26,9 +26,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC); ?>
     
 </head>
 <body>
-     <?php
-     require_once ('../elements/header.php');
-     ?>
+    <?php
+    require_once ('../elements/header.php');
+    ?>
 
         <div class="retour-accueil">
         <a href="../index.php">Accueil</a>
