@@ -169,12 +169,12 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
             const priceElement = cartItem.querySelector('.product-price');
             
             if (quantityElement) {
-                quantityElement.textContent = `quantidade: ${data.new_quantity} unidade${data.new_quantity !== 1 ? 's' : ''}`;
+                quantityElement.textContent = `quantity: ${data.new_quantity} unit ${data.new_quantity !== 1 ? 's' : ''}`;
             }
             
             if (priceElement) {
                 const totalItemPrice = (data.new_quantity * data.item_price).toFixed(2);
-                priceElement.textContent = `preço: ${totalItemPrice}€`;
+                priceElement.textContent = `price: ${totalItemPrice}€`;
             }
         }
 
