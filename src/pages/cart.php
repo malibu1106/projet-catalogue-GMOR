@@ -89,7 +89,7 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
     echo '<article data-cart-id="'. $cartResult['cart_id'] .'">
     <figure>
                 <!-- Detalhes do produto e botões -->
-        <img src="'. $cartResult['image_1'].'" alt="'. $cartResult['brand'] .'">
+        <a href="article.php?id='. $cartResult['product_id'] .'"><img src="'. $cartResult['image_1'].'" alt="'. $cartResult['brand'] .'"></a>
         <div class="recap">
             <figcaption>product: '. $cartResult['brand'].'</figcaption>
             <figcaption>color: '. $cartResult['color'].'</figcaption>

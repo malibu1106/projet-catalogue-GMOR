@@ -49,10 +49,10 @@ $results = $search_name->fetchAll(PDO::FETCH_ASSOC);
 
 
 // debug
-echo '<pre>';
-print_r($results);
-echo '</pre>';
-?>
+// echo '<pre>';
+// print_r($results);
+// echo '</pre>';
+// ?>
 
 
 
