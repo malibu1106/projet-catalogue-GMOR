@@ -1,7 +1,6 @@
 <?php 
 session_start();
 require_once("../elements/connect.php");
-require_once ('../elements/header.php');
 
     // Gestion de la suppression multiple
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_ids']) && is_array($_POST['delete_ids'])) {
