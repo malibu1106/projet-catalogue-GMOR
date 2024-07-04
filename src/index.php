@@ -1,5 +1,12 @@
 <?php
-session_start();
+    session_start();
+    require_once("elements/connect.php");
+
+    $sql = "SELECT * FROM products";
+    $requete = $db->prepare($sql);
+    $requete->execute();
+    $produits = $requete->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,77 +30,73 @@ require_once ('pages/slider.php');?>
 
 <section id="container-global">
         <h1>Découvrez nos&nbsp;<span>meilleures ventes</span>&nbsp;du mois</h1>
-        <article class="container-photos-haut">
-            <div class="container-photos-1">
+
+        <article class="article-produits">
+            <section class="random-produits">
+                <?php 
+                    //random
+                    shuffle($produits);
+
+                    $counter = 0;
+
+                    foreach ($produits as $produit) {
+                        if ($counter < 4) {
+                            if (!empty($produit['image_1'])) {
+                                $imagePath = $produit['image_1'];
+                            } else {
+                                $imagePath = '/img/illustration/img_not_found.png';
+                            }
+                ?>
                 <div class="photo-grande">
                     <div class="image-container">
-                        <img src="img/temporaire/vente1.jpg">
+                        <img src="<?= htmlspecialchars($imagePath); ?>" alt="Image de <?= htmlspecialchars($produit['brand']); ?>">
                         <div class="overlay">
-                            <p>Consultez cet article</p>
+                            <a class="no-deco" href="/pages/article.php?id=<?= $produit["id"] ?>"><p>Consultez cet article</p></a>
                         </div>
                     </div>
                 </div>
-                <div class="photo-petite">
-                    <div class="image-container">
-                        <img src="img/temporaire/vente2.jpg">
-                        <div class="overlay">
-                            <p>Consultez cet article</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <?php 
+                    $counter++;
+                        } else {
+                            break;
+                        }
+                    }
+                ?>
+            </section>
         </article>
-        <article class="container-photos-bas">
-            <div class="container-photos-1">
-                <div class="photo-grande">
-                    <div class="image-container">
-                        <img src="img/temporaire/vente4.jpg">
-                        <div class="overlay">
-                            <p>Consultez cet article</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="photo-petite">
-                    <div class="image-container">
-                        <img src="img/temporaire/vente3.jpg">
-                        <div class="overlay">
-                            <p>Consultez cet article</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
+
+
     </section>
     <section id="categories">
         <h1>Trouvez votre <span>bonheur</span> parmi nos articles</h1>
             <a href="pages/produits.php?category=Robe" style="text-decoration: none; color: inherit;">
             <article class="rond-categorie">
-               <img src="img/illustration/robe.png">
-               <p>Robes</p>
+                <img src="img/illustration/robe.png">
+                <p>Robes</p>
             </article>
             </a>
             <a href="pages/produits.php?category=T-shirt" style="text-decoration: none; color: inherit;">
             <article class="rond-categorie">
-               <img src="img/illustration/tshirt.png">
-               <p>T-shirts</p>
+                <img src="img/illustration/tshirt.png">
+                <p>T-shirts</p>
             </article>
             </a>
             <a href="pages/produits.php?category=Pantalon" style="text-decoration: none; color: inherit;">
             <article class="rond-categorie">
-               <img src="img/illustration/pantalon.png">
-               <p>Pantalons</p>
+                <img src="img/illustration/pantalon.png">
+                <p>Pantalons</p>
             </article>
             </a>
             <a href="pages/produits.php?category=Veste" style="text-decoration: none; color: inherit;">
             <article class="rond-categorie">
-               <img src="img/illustration/veste.png">
-               <p>Vestes</p>
+                <img src="img/illustration/veste.png">
+                <p>Vestes</p>
             </article>
             </a>
             <a href="pages/produits.php?category=pull" style="text-decoration: none; color: inherit;">
             <article class="rond-categorie">
-               <img src="img/illustration/pull.jpg">
-               <p>Pulls</p>
+                <img src="img/illustration/pull.jpg">
+                <p>Pulls</p>
             </article>
             </a>
     </section>
