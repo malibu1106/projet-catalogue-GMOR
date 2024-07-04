@@ -7,9 +7,9 @@
 
 
 .messagerie_conversation_title {
-    height: 10%;
+    height: 40px;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 8px;
     display: flex;
     align-items: center;
     position: relative;
@@ -47,7 +47,6 @@
 }
 
 .user_msg_card {
-    background: ;
     width: 220px;
     height: 70px;
     justify-content: center;

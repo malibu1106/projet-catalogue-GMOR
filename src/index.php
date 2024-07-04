@@ -15,7 +15,6 @@ session_start();?>
     
 </head>
 <body>
-<?php require_once ('elements/debug.php');?>
 
 
 
