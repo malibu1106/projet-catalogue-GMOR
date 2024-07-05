@@ -84,7 +84,7 @@ ul#menuBurger {
 }
 
 .showMenuBurger {
-    top: 50px;
+    top: 0;
 }
 
 ul.menu {
@@ -240,7 +240,6 @@ body {
 .no-deco {
     text-decoration: none;
     color: rgb(223, 223, 223);
-    font-weight: bold;
 }
 
 .image-container img {
