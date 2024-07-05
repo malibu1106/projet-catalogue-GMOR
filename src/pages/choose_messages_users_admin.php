@@ -18,7 +18,6 @@ date_default_timezone_set('Europe/Paris');
 </head>
 <body>
 <?php
-require_once ('../elements/debug.php');
 require_once ('../elements/header.php');
 require_once("../elements/connect.php");
 $sql = "SELECT * FROM users WHERE id != :admin_id";
