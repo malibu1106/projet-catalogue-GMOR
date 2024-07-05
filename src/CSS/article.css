@@ -182,6 +182,7 @@ footer {
         width: 350px; /* Taille fixe de l'image principale */
         height: 583px; /* Ajustement automatique de la hauteur */
         cursor: pointer;
+        object-fit: cover;
     }
 
     .photos-suggestions img {
