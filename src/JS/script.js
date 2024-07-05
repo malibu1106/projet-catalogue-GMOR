@@ -109,3 +109,34 @@ document.addEventListener('DOMContentLoaded', function () {
     groupFilter.addEventListener('change', filterUsers);
 });
 // Filtrage des utilisateurs FIN
+
+
+//BACKOFFICE-ADD.php TRIE PAR ORDRE CROISSANT/DÉCROISSANT
+document.addEventListener('DOMContentLoaded', function() {
+    const table = document.querySelector('table');
+    const headers = table.querySelectorAll('th[data-sort]');
+    let sortDirection = 1;
+
+    headers.forEach(header => {
+        header.addEventListener('click', function() {
+            const sortAttribute = this.getAttribute('data-sort');
+            const rowsArray = Array.from(table.querySelectorAll('tbody tr'));
+
+            rowsArray.sort((a, b) => {
+                const aText = a.querySelector(`td:nth-child(${Array.from(headers).indexOf(header) + 2})`).textContent.trim();
+                const bText = b.querySelector(`td:nth-child(${Array.from(headers).indexOf(header) + 2})`).textContent.trim();
+
+                if (!isNaN(parseFloat(aText)) && !isNaN(parseFloat(bText))) {
+                    return (parseFloat(aText) - parseFloat(bText)) * sortDirection;
+                } else {
+                    return aText.localeCompare(bText) * sortDirection;
+                }
+            });
+
+            sortDirection *= -1;
+            const tbody = table.querySelector('tbody');
+            tbody.innerHTML = '';
+            rowsArray.forEach(row => tbody.appendChild(row));
+        });
+    });
+});

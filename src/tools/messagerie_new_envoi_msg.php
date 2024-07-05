@@ -19,12 +19,21 @@ if (isset($_POST['new_sender_id']) && isset($_POST['new_receiver_id'])) {
         $query->execute();}
 
 
-        $sql = "INSERT INTO conversations (user_id_1, user_id_2) VALUES (:user_id_1, :user_id_2)";
+        $sql = "SELECT * FROM conversations 
+        WHERE (user_id_1 = :sender_id AND user_id_2 = :receiver_id) 
+           OR (user_id_1 = :receiver_id AND user_id_2 = :sender_id)";
         $query = $db->prepare($sql);
-        $query->bindValue(':user_id_1', $new_sender_id);
-        $query->bindValue(':user_id_2', $new_receiver_id);
+        $query->bindValue(':sender_id', $new_sender_id);
+        $query->bindValue(':receiver_id', $new_receiver_id);
         $query->execute();
-
+        $conversations = $query->fetchAll(PDO::FETCH_ASSOC);
+        if(!$conversations){
+            $sql = "INSERT INTO conversations (user_id_1, user_id_2) VALUES (:sender_id, :receiver_id)";
+        $query = $db->prepare($sql);
+        $query->bindValue(':sender_id', $new_sender_id);
+        $query->bindValue(':receiver_id', $new_receiver_id);
+        $query->execute();
+        }
 
 
 

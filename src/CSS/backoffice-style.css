@@ -634,6 +634,9 @@ h1 {
 .btn-space {
     margin: 2px;
 }
+.pointer{
+    cursor: pointer;
+}
 
 
 
