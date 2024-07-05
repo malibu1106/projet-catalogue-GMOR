@@ -20,6 +20,7 @@ if ($product_id > 0) {
     echo "ID de produit invalide.";
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +73,11 @@ if ($product_id > 0) {
         <p id="descr-produit2"></p>
         </div>
         <div class="add-to-cart">
-        <button class="btn btn-dark" type="button";>Ajouter au panier</button>
+            <form action="../tools/action_cart/insert_cart.php" method="POST">
+                <input type="hidden" name="product_id" value="<?php $product['id'];?>">
+                <input type="hidden" name="user_id" value="<?php (isset($_SESSION['id']) ? $_SESSION['id'] : '') ?>">
+                <button class="btn btn-dark" type="submit">Ajouter au panier</button>
+            </form>
         </div>
     </article>
 </section>
@@ -85,7 +90,15 @@ if ($product_id > 0) {
         <img src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
     </article>
 </section>
-        
+<?php
+ echo '<pre>';
+print_r($product);
+echo '</pre>';
+
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
+?>
 <script>
 
 //pour rendre la photo-pcp clicable et qu'elle s'affiche en fullscreen

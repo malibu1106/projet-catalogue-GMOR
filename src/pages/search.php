@@ -52,9 +52,13 @@ $results = $search_name->fetchAll(PDO::FETCH_ASSOC);
 
 
 // debug
-// echo '<pre>';
-// print_r($results);
-// echo '</pre>';
+echo '<pre>';
+print_r($results);
+echo '</pre>';
+
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
 ?>
 
 
@@ -111,7 +115,7 @@ else{
                     <div class="add-to-cart">
                     <form action="../../tools/action_cart/insert_cart.php" method="POST">
                         <input type="hidden" name="product_id" value="'.$result['id'].'">
-                        <input type="hidden" name="user_id" value="'.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '').'">
+                        <input type="hidden" name="user_id" value="'.(isset($_SESSION['id']) ? $_SESSION['id'] : '').'">
                         <button class="btn btn-dark" type="submit">Ajouter au panier</button>
                     </form>
                     </div>
