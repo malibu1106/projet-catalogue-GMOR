@@ -220,10 +220,10 @@ foreach ($chats as $chat) {
 
             messages.forEach(function(message) {
                 if (message.sender_user_id == <?= $user_id; ?>) {
-                    messageHtml += '<div class="message message_sent">';
-                } else {
-                    messageHtml += '<div class="message message_received">';
-                }
+        messageHtml += '<div class="message message_sent"><div class="message_trash"><a href="../tools/delete_msg.php?id=' + message.message_id + '"><img src="../img/illustration/delete.png"></a></div>';
+    } else {
+        messageHtml += '<div class="message message_received">';
+    }
 
                 if (message.message_type === 'image') {
                     messageHtml += '<img class="message_image" src="' + message.message_content + '">';
@@ -244,6 +244,7 @@ foreach ($chats as $chat) {
 
                 messageHtml += '<div class="message_time">' + (new Date(message.datetime)).toLocaleString() + '</div>';
                 messageHtml += '</div>';
+                
             });
 
             messageHtml += '<div id="ancre_dernier_message"></div>';
