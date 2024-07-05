@@ -12,13 +12,11 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/backoffice-style.css">
-    
-    
-    <title>Document</title>
+    <title>Backoffice-générale</title>
 </head>
-<body class="backofficegeneral-bg">
+<body>
     <?php require_once ('../elements/header.php');?>
-    <main>
+    <main class="backofficegeneral-bg">
         <article class="backgene-set">
             <div class="general-title">
                 <h1 class="backgene-title">Administrateur</h1>
@@ -34,7 +32,7 @@ session_start();
                 </div>
                 <div class="card-title">Utilisateurs</div>
                 <div class="card-content">Gérez les rôles et les permissions des utilisateurs de votre plateforme.</div>
-               <a href="../pages/backoffice-utilisateurs.php"><button class="card-action">Gérer les utilisateurs</button></a>
+                <a href="../pages/backoffice-utilisateurs.php"><button class="card-action">Gérer les utilisateurs</button></a>
             </div>';}?>
             <div class="card" id="products">
                 <div class="card-icon"><img src="/img/illustration/product-icon-free.png" alt=""></div>

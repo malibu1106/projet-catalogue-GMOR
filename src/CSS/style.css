@@ -12,7 +12,7 @@ body {
 /*HEADER*/
 
 .logo {
-    height: 90px;
+    height: 80px;
     position: fixed;
     top: 50px;
     z-index: 200;
@@ -41,7 +41,7 @@ nav {
 }
 
 .menuButtonsContainer {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -119,10 +119,9 @@ ul.menu {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin: 150px auto;
+    margin: 150px auto 20px auto;
     width: 90vw;
     max-width: 600px;
-    margin-bottom: 20px;
     border-bottom: solid black 1px;
 }
 
@@ -323,6 +322,16 @@ body {
 
 
 @media only screen and (min-width: 768px) {
+    /*HEADER*/
+    .logo {
+        top: 0px;
+    }
+    .researchBar form {
+        margin: 90px auto 20px auto;
+    }
+    .menuButtonsContainer {
+        background-color: rgba(255, 255, 255, 0);
+    }
 
     /* BODY*/
 
@@ -351,6 +360,17 @@ body {
 }
 
 @media screen and (min-width: 1024px) {
+        /*HEADER*/
+        .logo {
+            top: 0px;
+        }
+        .researchBar form {
+            margin: 90px auto 20px auto;
+        }
+        .menuButtonsContainer {
+            background-color: rgba(255, 255, 255, 0);
+        }
+
     ul#menuBurger {
         position: absolute;
         left: 0;
