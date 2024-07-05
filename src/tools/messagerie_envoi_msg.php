@@ -29,6 +29,28 @@ try {
 
             $response = ['status' => 'success'];
         }
+
+        $sql = "SELECT * FROM conversations 
+        WHERE (user_id_1 = :sender_id AND user_id_2 = :receiver_id) 
+           OR (user_id_1 = :receiver_id AND user_id_2 = :sender_id)";
+        $query = $db->prepare($sql);
+        $query->bindValue(':sender_id', $sender_id);
+        $query->bindValue(':receiver_id', $receiver_id);
+        $query->execute();
+        $conversations = $query->fetchAll(PDO::FETCH_ASSOC);
+        if(!$conversations){
+            $sql = "INSERT INTO conversations (user_id_1, user_id_2) VALUES (:sender_id, :receiver_id)";
+        $query = $db->prepare($sql);
+        $query->bindValue(':sender_id', $sender_id);
+        $query->bindValue(':receiver_id', $receiver_id);
+        $query->execute();
+        }
+
+
+
+
+
+
         
         // Vérifier si un fichier est envoyé
         elseif (isset($_FILES['fileInput']) && $_FILES['fileInput']['error'] == UPLOAD_ERR_OK && empty($_POST['conversation_message'])) {
