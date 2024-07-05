@@ -6,14 +6,14 @@ require_once("../../elements/connect.php");
 error_log("Session data: " . print_r($_SESSION, true));
 error_log("POST data: " . print_r($_POST, true));
 
-if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+if (!isset($_SESSION['user']['id']) || empty($_SESSION['user']['id'])) {
     error_log("User not logged in. Redirecting to login page.");
     header("Location: ../login.php");
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_id = $_SESSION['user_id'];
+    $user_id = $_SESSION['user']['id'];
     $product_id = $_POST['product_id'];
 
     // Verificar se o produto já está no carrinho do usuário
@@ -38,6 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 } else {
     error_log("Invalid request method.");
-    header("Location: ../index.php");
+    header("Location: ../../../index.php");
     exit;
 }
