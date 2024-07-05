@@ -5,6 +5,18 @@
     display: none;
 }
 
+.message {
+    position: relative;
+}
+
+.message_trash {
+    content: "";
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+}
 
 .messagerie_conversation_title {
     height: 40px;
@@ -130,7 +142,7 @@
     width: 80%;
     max-width: 460px;
     margin: 30px;
-    padding: 20px 16px;
+    padding: 24px 20px;
     border-radius: 10px;
     position: relative;
 }
