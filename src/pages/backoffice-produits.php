@@ -48,24 +48,25 @@ require_once("../elements/connect.php");
 
             <form method="POST" action="backoffice-produits.php" class="table-responsive">
                 <table class="table table-striped table-hover mt-3 mb-5">
-                    <thead>
-                        <tr>
-                            <th>Action</th>
-                            <th>Référence</th>
-                            <th>Marque</th>
-                            <th>Taille</th>
-                            <th>Couleur</th>
-                            <th>Motif</th>
-                            <th>Matière</th>
-                            <th>Genre</th>
-                            <th>Stock</th>
-                            <th>Prix</th>
-                            <th>Promotion</th>
-                            <th>Catégorie</th>
-                            <th>Description</th>
-                            <th scope="col"><input type="checkbox" id="selectAllProducts"></th>
-                        </tr>
-                    </thead>
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th class="pointer" data-sort="ref">Référence</th>
+                        <th class="pointer" data-sort="brand">Marque</th>
+                        <th class="pointer" data-sort="size">Taille</th>
+                        <th class="pointer" data-sort="color">Couleur</th>
+                        <th class="pointer" data-sort="pattern">Motif</th>
+                        <th class="pointer" data-sort="material">Matière</th>
+                        <th class="pointer" data-sort="gender">Genre</th>
+                        <th class="pointer" data-sort="stock">Stock</th>
+                        <th class="pointer" data-sort="price">Prix</th>
+                        <th class="pointer" data-sort="discount">Promotion</th>
+                        <th class="pointer" data-sort="category">Catégorie</th>
+                        <th class="pointer" data-sort="content">Description</th>
+                        <th scope="col"><input type="checkbox" id="selectAllProducts"></th>
+                    </tr>
+                </thead>
+
                     <?php foreach($resulta as $produit): ?>
                     <tbody>
                         <!-- Exemple en brute a modifier avec du php pour rajouter nos produits de la BDD -->
