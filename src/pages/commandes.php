@@ -32,47 +32,58 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
     <?php require_once ('../elements/header.php'); ?>
 
     <main class="bg-commandes">
-        <article class="backgene-set container mt-4">
+        <article class="container mt-4">
             <h1 class="backoff-comm-title mb-4">Gestion des Commandes</h1>
 
-            <div class="table-responsive">
-                <table class="table table-striped table-hover mt-3 mb-5">
-                    <thead>
-                        <tr>
-                            <th><a href="?sort_column=id&sort_order=<?= $sort_order == 'asc' ? 'desc' : 'asc' ?>">ID</a></th>
-                            <th><a href="?sort_column=first_name&sort_order=<?= $sort_order == 'asc' ? 'desc' : 'asc' ?>">Prénom</a></th>
-                            <th><a href="?sort_column=last_name&sort_order=<?= $sort_order == 'asc' ? 'desc' : 'asc' ?>">Nom</a></th>
-                            <th><a href="?sort_column=order_date&sort_order=<?= $sort_order == 'asc' ? 'desc' : 'asc' ?>">Date de commande</a></th>
-                            <th><a href="?sort_column=status&sort_order=<?= $sort_order == 'asc' ? 'desc' : 'asc' ?>">Statut</a></th>
-                            <th><a href="?sort_column=total_amount&sort_order=<?= $sort_order == 'asc' ? 'desc' : 'asc' ?>">Montant total</a></th>
-                            <th>Adresse de livraison</th>
-                            <th>Méthode de paiement</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <?php foreach($resulta as $commande): ?>
-                    <tbody>
-                        <tr>
-                            <td><?= $commande['id'] ?></td>
-                            <td><?= $commande['first_name'] ?></td>
-                            <td><?= $commande['last_name'] ?></td>
-                            <td><?= $commande['order_date'] ?></td>
-                            <td><?= $commande['status'] ?></td>
-                            <td><?= $commande['total_amount'] ?></td>
-                            <td><?= $commande['shipping_address'] ?></td>
-                            <td><?= $commande['payment_method'] ?></td>
-                            <td>
-                                <a class="btn btn-sm btn-primary btn-space" title="Voir" href="backoffice-commande-details.php?id=<?= $commande["id"] ?>"><i class="bi bi-eye"></i></a>
-                                <a class="btn btn-sm btn-warning btn-space" title="Modifier" href="backoffice-modif-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-pencil"></i></a>
-                                <a class="btn btn-sm btn-danger btn-space" title="Supprimer" href="../tools/delete-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-trash"></i></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <?php endforeach; ?>
-                </table>
+            <div class="row">
+                <?php foreach($resulta as $commande): ?>
+                <div class="col-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h5 class="card-title">Commande #<?= $commande['id'] ?></h5>
+                                    <p class="card-text"><strong>Client:</strong> <?= $commande['first_name'] . ' ' . $commande['last_name'] ?></p>
+                                    <p class="card-text"><strong>Date:</strong> <?= $commande['order_date'] ?></p>
+                                    <p class="card-text"><strong>Total:</strong> €<?= $commande['total_amount'] ?></p>
+                                    <p class="card-text"><strong>Adresse:</strong> <?= $commande['shipping_address'] ?></p>
+                                    <p class="card-text"><strong>Méthode de paiement:</strong> <?= $commande['payment_method'] ?></p>
+                                </div>
+                                <div class="text-end">
+                                    <a class="btn btn-sm btn-primary" title="Voir" href="backoffice-commande-details.php?id=<?= $commande["id"] ?>"><i class="bi bi-eye"></i></a>
+                                    <a class="btn btn-sm btn-warning" title="Modifier" href="backoffice-modif-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-pencil"></i></a>
+                                    <a class="btn btn-sm btn-danger" title="Supprimer" href="../tools/delete-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-trash"></i></a>
+                                </div>
+                            </div>
+                            <div class="progress mt-3">
+                                <?php 
+                                    $status = strtolower($commande['status']);
+                                    $progress = 0;
+                                    switch ($status) {
+                                        case 'en attente':
+                                            $progress = 25;
+                                            break;
+                                        case 'en traitement':
+                                            $progress = 50;
+                                            break;
+                                        case 'expédié':
+                                            $progress = 75;
+                                            break;
+                                        case 'livré':
+                                            $progress = 100;
+                                            break;
+                                    }
+                                ?>
+                                <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%;" aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100"><?= ucfirst($status) ?></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
             </div>
         </article>
     </main>
+
     <?php require_once ('../elements/footer.php'); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../JS/script.js" defer></script>

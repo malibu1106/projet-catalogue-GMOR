@@ -53,7 +53,7 @@ session_start();
                 </div>
                 <div class="card-title">Messagerie</div>
                 <div class="card-content">Consultez et répondez aux messages des utilisateurs et clients.</div>
-               <a href="../pages/choose_messages_users_admin.php"><button class="card-action">Accéder à la messagerie</button></a>
+                <a href="../pages/choose_messages_users_admin.php"><button class="card-action">Accéder à la messagerie</button></a>
             </div> ';
             }
             ?>
@@ -64,7 +64,7 @@ session_start();
                 </div>
                 <div class="card-title">Commandes</div>
                 <div class="card-content">Suivez et gérez les commandes en cours et l'historique des ventes.</div>
-                <button class="card-action">Voir les commandes</button>
+                <a href="commandes.php"><button class="card-action">Gérer les commandes</button></a>
             </div>
         </div>
         </article>

@@ -8,7 +8,6 @@ $query = $db->prepare($sql);
 $query->execute();
 $users = $query->fetchAll(PDO::FETCH_ASSOC);
 
-
 // Traitement du formulaire de mise à jour des rôles
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
     $user_id = $_POST['user_id'];
@@ -22,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
     header("Location: backoffice-utilisateurs.php");
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
-    <?php require_once ('../elements/header.php');?>
+    <?php require_once('../elements/header.php'); ?>
     <main class="bg-backoff-users">
         <div class="container">
             <h1 class="text-center mb-4"><i class="fas fa-users icon-users-panel"></i> Gestion des Utilisateurs</h1>
@@ -67,81 +65,80 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
             </div>
 
             <div class="row" id="userCards">
-            <?php foreach ($users as $user): ?>
-    <?php if ($user['id'] !== 1): ?>
-                    
-    <div class="col-md-4 user-card-container">
-        <div class="profil-card">
-            <div class="profil-circle">
-                <div class="imgBx">
-                    <img src="<?php echo htmlspecialchars($user['avatar']); ?>" alt="Photo de profil">
-                </div>
-            </div>
-            <div class="profil-content">
-                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                <h3 class="profil-name">
-                    <span class="profil-firstname"><?= htmlspecialchars($user['first_name']) ?></span>
-                    <span class="profil-lastname"><?= htmlspecialchars($user['last_name']) ?></span>
-                </h3>
-                <div class="roles-and-email">
-                    <div class="profil-roles-container">
-                        <div class="profil-roles">
-                            <?php
-                            $user_roles = explode(',', $user['group']);
-                            foreach ($user_roles as $role):
-                            ?>
-                                <span class="role-badge"><?= htmlspecialchars(trim($role)) ?></span>
-                            <?php endforeach; ?>
+                <?php foreach ($users as $user): ?>
+                    <?php if ($user['id'] !== 1): ?>
+                        <div class="col-md-4 user-card-container">
+                            <div class="profil-card">
+                                <div class="profil-circle">
+                                    <div class="imgBx">
+                                        <img src="<?php echo htmlspecialchars(!empty($user['avatar']) ? $user['avatar'] : '/img/illustration/img_not_found.png'); ?>" alt="Photo de profil">
+                                    </div>
+                                </div>
+                                <div class="profil-content">
+                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    <h3 class="profil-name">
+                                        <span class="profil-firstname"><?= htmlspecialchars($user['first_name']) ?></span>
+                                        <span class="profil-lastname"><?= htmlspecialchars($user['last_name']) ?></span>
+                                    </h3>
+                                    <div class="roles-and-email">
+                                        <div class="profil-roles-container">
+                                            <div class="profil-roles">
+                                                <?php
+                                                $user_roles = explode(',', $user['group']);
+                                                foreach ($user_roles as $role):
+                                                ?>
+                                                    <span class="role-badge"><?= htmlspecialchars(trim($role)) ?></span>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                        <a href="../pages/messagerie.php?with_user_id=<?= htmlspecialchars($user['id']) ?>">
+                                            <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                                        </a>&nbsp;
+                                        <a href="mailto:<?= htmlspecialchars($user['email']) ?>" class="email-icon">
+                                            <i class="fa fa-address-book" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <button class="btn-modif-role" data-bs-toggle="modal" data-bs-target="#editModal<?= $user['id'] ?>">Modifier role</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <a href="../pages/messagerie.php?with_user_id=<?= htmlspecialchars($user['id']) ?>">
-                        <i class="fa fa-envelope-open" aria-hidden="true"></i>
-                    </a>&nbsp;
-                    <a href="mailto:<?= htmlspecialchars($user['email']) ?>" class="email-icon">
-                        <i class="fa fa-address-book" aria-hidden="true"></i>
-                    </a>
-                </div>
-                <div>
-                    <button class="btn-modif-role" data-bs-toggle="modal" data-bs-target="#editModal<?= $user['id'] ?>">Modifier role</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal pour modifier les rôles -->
-    <div class="modal fade" id="editModal<?= $user['id'] ?>" tabindex="-1" aria-labelledby="editModalLabel<?= $user['id'] ?>" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel<?= $user['id'] ?>">Modifier les rôles de <?= htmlspecialchars($user['first_name'] . ' ' . $user['last_name']) ?></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST">
-                        <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
-                        <div class="role-checkboxes">
-                            <?php
-                            $roles = ['admin', 'sub', 'utilisateur', 'formateur', 'apprenant', 'gestion commercial', 'logistique', 'comptable', 'vendeur'];
-                            $user_roles = explode(',', $user['group']);
-                            foreach ($roles as $role):
-                            ?>
-                            <label>
-                                <input type="checkbox" name="roles[]" value="<?= $role ?>" <?= in_array($role, $user_roles) ? 'checked' : '' ?>>
-                                <?= ucfirst($role) ?>
-                            </label>
-                            <?php endforeach; ?>
+                        <!-- Modal pour modifier les rôles -->
+                        <div class="modal fade" id="editModal<?= $user['id'] ?>" tabindex="-1" aria-labelledby="editModalLabel<?= $user['id'] ?>" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editModalLabel<?= $user['id'] ?>">Modifier les rôles de <?= htmlspecialchars($user['first_name'] . ' ' . $user['last_name']) ?></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="POST">
+                                            <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+                                            <div class="role-checkboxes">
+                                                <?php
+                                                $roles = ['admin', 'sub', 'utilisateur', 'formateur', 'apprenant', 'gestion commercial', 'logistique', 'comptable', 'vendeur'];
+                                                $user_roles = explode(',', $user['group']);
+                                                foreach ($roles as $role):
+                                                ?>
+                                                <label>
+                                                    <input type="checkbox" name="roles[]" value="<?= $role ?>" <?= in_array($role, $user_roles) ? 'checked' : '' ?>>
+                                                    <?= ucfirst($role) ?>
+                                                </label>
+                                                <?php endforeach; ?>
+                                            </div>
+                                            <button type="submit" name="update_roles" class="btn btn-primary mt-3">Mettre à jour les rôles</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <button type="submit" name="update_roles" class="btn btn-primary mt-3">Mettre à jour les rôles</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php endif; ?>
-<?php endforeach; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </main>
-    
+
     <?php require_once("../elements/footer.php") ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../JS/script.js"></script>
