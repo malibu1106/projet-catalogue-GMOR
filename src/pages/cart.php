@@ -2,7 +2,7 @@
 // Inicia a sessão e inclui arquivos necessários
 session_start();
 require_once("../elements/connect.php");
-require_once("../elements/header.php");
+
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['user']['id'])) {
@@ -68,7 +68,7 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
     <title>cart</title>
 </head>
 <body>
-    
+<?php require_once("../elements/header.php");?>
 <?php    
 
 // Verifica se o carrinho está vazio
@@ -89,7 +89,7 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
     echo '<article data-cart-id="'. $cartResult['cart_id'] .'">
     <figure>
                 <!-- Detalhes do produto e botões -->
-        <img src="'. $cartResult['image_1'].'" alt="'. $cartResult['brand'] .'">
+        <a href="article.php?id='. $cartResult['product_id'] .'"><img src="'. $cartResult['image_1'].'" alt="'. $cartResult['brand'] .'"></a>
         <div class="recap">
             <figcaption>product: '. $cartResult['brand'].'</figcaption>
             <figcaption>color: '. $cartResult['color'].'</figcaption>
@@ -169,12 +169,12 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
             const priceElement = cartItem.querySelector('.product-price');
             
             if (quantityElement) {
-                quantityElement.textContent = `quantidade: ${data.new_quantity} unidade${data.new_quantity !== 1 ? 's' : ''}`;
+                quantityElement.textContent = `quantity: ${data.new_quantity} unit ${data.new_quantity !== 1 ? 's' : ''}`;
             }
             
             if (priceElement) {
                 const totalItemPrice = (data.new_quantity * data.item_price).toFixed(2);
-                priceElement.textContent = `preço: ${totalItemPrice}€`;
+                priceElement.textContent = `price: ${totalItemPrice}€`;
             }
         }
 

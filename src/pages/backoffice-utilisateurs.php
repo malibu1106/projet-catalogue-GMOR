@@ -8,6 +8,7 @@ $query = $db->prepare($sql);
 $query->execute();
 $users = $query->fetchAll(PDO::FETCH_ASSOC);
 
+
 // Traitement du formulaire de mise à jour des rôles
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
     $user_id = $_POST['user_id'];
