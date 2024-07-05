@@ -2,11 +2,12 @@
 session_start();
 require_once("../elements/connect.php");
 
-
 $error_messages = [];
+$redirect = false; // Initialisation de la variable $redirect
 
 // Fonction pour gérer l'upload des images et retourner le chemin relatif
 function handleImageUpload($file) {
+    global $error_messages; // Utilisation de la variable globale $error_messages
     $allowed = [
         "jpg" => "image/jpeg",
         "jpeg" => "image/jpeg",
@@ -20,10 +21,12 @@ function handleImageUpload($file) {
 
     if (!array_key_exists($extension, $allowed) || !in_array($filetype, $allowed)) {
         $error_messages[] = "Erreur : le format du fichier est incorrect";
+        return null; // Retourne null en cas d'erreur
     }
 
     if ($filesize > 1024 * 1024) {
         $error_messages[] = "Fichier trop grand max 1024*1024";
+        return null; // Retourne null en cas d'erreur
     }
 
     $newname = md5(uniqid()) . ".$extension";
@@ -31,6 +34,7 @@ function handleImageUpload($file) {
 
     if (!move_uploaded_file($file["tmp_name"], $newfilename)) {
         $error_messages[] = "L'upload a échoué";
+        return null; // Retourne null en cas d'erreur
     }
 
     chmod($newfilename, 0644);
@@ -42,7 +46,10 @@ $imagePaths = ["", "", "", ""]; // Initialisation des variables pour les chemins
 // Traitement des fichiers uploadés
 for ($i = 1; $i <= 4; $i++) {
     if (isset($_FILES["image_$i"]) && $_FILES["image_$i"]["error"] === 0) {
-        $imagePaths[$i-1] = handleImageUpload($_FILES["image_$i"]);
+        $imagePath = handleImageUpload($_FILES["image_$i"]);
+        if ($imagePath !== null) {
+            $imagePaths[$i-1] = $imagePath;
+        }
     }
 }
 
@@ -90,31 +97,27 @@ if ($_POST && isset($_POST["ref"]) && isset($_POST["brand"]) && isset($_POST["si
         $query->bindValue(":image_4", $imagePaths[3]);
 
         // Exécution de la requête
-    $redirect = false;
-
-    if ($query->execute()) {
-        require_once("../elements/disconnect.php");
-        $redirect = true;
-        $redirect_url = "backoffice-produits.php";
-    } else {
-        $error_messages[] = "Erreur lors de l'exécution de la requête.";
-        // ... afficher les détails de l'erreur ...
-            print_r($query->errorInfo()); // Affiche les détails de l'erreur
+        if ($query->execute()) {
+            require_once("../elements/disconnect.php");
+            $redirect = true;
+            $redirect_url = "backoffice-produits.php";
+        } else {
+            $error_messages[] = "Erreur lors de l'exécution de la requête.";
+            // Affiche les détails de l'erreur
+            print_r($query->errorInfo());
         }
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage(); // Affiche les erreurs PDO
     }
-    } else if ($_POST) {
-        var_dump($_POST); // Affiche le contenu de $_POST pour le débogage
-        // die("Erreur veuillez réessayer");
-    }
+} else if ($_POST) {
+    var_dump($_POST); // Affiche le contenu de $_POST pour le débogage
+}
 
-    if ($redirect) {
-        header("Location: " . $redirect_url);
-        exit();
-    }
+if ($redirect) {
+    header("Location: " . $redirect_url);
+    exit();
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -123,114 +126,115 @@ if ($_POST && isset($_POST["ref"]) && isset($_POST["brand"]) && isset($_POST["si
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../CSS/backoffice-style.css">
     <link rel="stylesheet" href="../CSS/style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/backoffice-style.css">
+    <title>backoffice-add</title>
 </head>
-<body class="backofficeadd-body">
+<body>
     <?php require_once('../elements/header.php'); ?>
-    <main class="backofficeadd-container">
-        <article class="backofficeadd-card">
-            <h1 class="title-mod">AJOUTER UN PRODUIT</h1>
-            <?php if (!empty($error_messages)): ?>
-                <div class="error-messages">
-                    <?php foreach ($error_messages as $message): ?>
-                        <p><?php echo htmlspecialchars($message); ?></p>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
-            <form method="POST" enctype="multipart/form-data">
-                <div class="backofficeadd-line">
-                    <p class="rem-bts">Référence du produit:</p>
-                    <input type="text" name="ref" required>
-                </div>
-                <div class="backofficeadd-line">
-                    <p class="rem-bts">Nom du produit:</p>
-                    <input type="text" name="brand" required>
-                </div>
-                <div class="backofficeadd-line">
-                    <p class="rem-bts">Taille: </p>
-                    <select name="size" id="size" required>
-                        <option value="">Sélectionnez une taille</option>
-                        <option value="XS">XS</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                    </select>
-                </div>
-                <div class="backofficeadd-line">
-                    <p class="rem-bts">Couleur: </p>
-                    <div id="custom-select" class="custom-select">
-                        <select name="color" id="color" required>
-                            <option value="">Sélectionnez une couleur</option>
-                            <option value="bleu">bleu</option>
-                            <option value="rouge">rouge</option>
+    <div class="backofficeadd-body">
+        <main class="backofficeadd-container">
+            <article class="backofficeadd-card">
+                <h1 class="title-mod">AJOUTER UN PRODUIT</h1>
+                <?php if (!empty($error_messages)): ?>
+                    <div class="error-messages">
+                        <?php foreach ($error_messages as $message): ?>
+                            <p><?php echo htmlspecialchars($message); ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="backofficeadd-line">
+                        <p class="rem-bts">Référence du produit:</p>
+                        <input type="text" name="ref" required>
+                    </div>
+                    <div class="backofficeadd-line">
+                        <p class="rem-bts">Nom du produit:</p>
+                        <input type="text" name="brand" required>
+                    </div>
+                    <div class="backofficeadd-line">
+                        <p class="rem-bts">Taille: </p>
+                        <select name="size" id="size" required>
+                            <option value="">Sélectionnez une taille</option>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
                         </select>
                     </div>
-                </div>
-                <div class="backofficeadd-line">
-                    <p class="rem-bts">Motif: </p>
-                    <div id="custom-select" class="custom-select">
-                        <select name="pattern" id="pattern" required>
-                            <option value="">Sélectionnez un motif</option>
-                            <option value="rayure">Rayure</option>
-                            <option value="losange">Losange</option>
-                            <option value="carre">Carré</option>
+                    <div class="backofficeadd-line">
+                        <p class="rem-bts">Couleur: </p>
+                        <div id="custom-select" class="custom-select">
+                            <select name="color" id="color" required>
+                                <option value="">Sélectionnez une couleur</option>
+                                <option value="bleu">Bleu</option>
+                                <option value="rouge">Rouge</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="backofficeadd-line">
+                        <p class="rem-bts">Motif: </p>
+                        <div id="custom-select" class="custom-select">
+                            <select name="pattern" id="pattern" required>
+                                <option value="">Sélectionnez un motif</option>
+                                <option value="rayure">Rayure</option>
+                                <option value="losange">Losange</option>
+                                <option value="carre">Carré</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="backofficeadd-line">
+                        <p class="rem-bts">Matière: </p>
+                        <div id="custom-select" class="custom-select">
+                            <select name="material" id="material" required>
+                                <option value="">Sélectionnez un materiel</option>
+                                <option value="coton">Coton</option>
+                                <option value="polyestere">Polyestere</option>
+                                <option value="cuir">Cuir</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="backofficeadd-line">
+                        <p class="rem-bts">Genre: </p>
+                        <div id="custom-select" class="custom-select">
+                            <select name="gender" id="gender" required>
+                                <option value="">Sélectionnez un genre</option>
+                                <option value="homme">Homme</option>
+                                <option value="femme">Femme</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="backofficeadd-line">
+                        <p class="rem-bts">Stock:</p>
+                        <input type="number" name="stock" min="0" required>
+                    </div>
+                    <div class="backofficeadd-line">
+                        <p class="rem-bts">Prix:</p>
+                        <input type="number" name="price" min="0" step="0.01" required>
+                    </div>
+                    <div class="backofficeadd-line">
+                        <p class="rem-bts">Promotion:</p>
+                        <input type="number" name="discount">
+                    </div>
+                    <div class="backofficeadd-line">
+                        <p class="rem-bts">Catégorie:</p>
+                        <select name="category" id="category" required>
+                            <option value="">Sélectionnez une catégorie</option>
+                            <option value="T-shirt">T-shirt</option>
+                            <option value="Pull">Pull</option>
+                            <option value="Veste">Veste</option>
+                            <option value="Pantalon">Pantalon</option>
+                            <option value="Jupe">Jupe</option>
+                            <option value="Bottes">Bottes</option>
+                            <option value="Robe">Robe</option>
                         </select>
                     </div>
-                </div>
-                <div class="backofficeadd-line">
-                    <p class="rem-bts">Matière: </p>
-                    <div id="custom-select" class="custom-select">
-                        <select name="material" id="material" required>
-                            <option value="">Sélectionnez un materiel</option>
-                            <option value="coton">Coton</option>
-                            <option value="polyestere">Polyestere</option>
-                            <option value="cuir">Cuir</option>
-                        </select>
+                    <div>
+                        <p class="rem-bts">Description:</p>
+                        <textarea name="content" id="description" required></textarea>
                     </div>
-                </div>
-                <div class="backofficeadd-line">
-                    <p class="rem-bts">Genre: </p>
-                    <div id="custom-select" class="custom-select">
-                        <select name="gender" id="gender" required>
-                            <option value="">Sélectionnez un genre</option>
-                            <option value="homme">Homme</option>
-                            <option value="femme">Femme</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="backofficeadd-line">
-                    <p class="rem-bts">Stock:</p>
-                    <input type="number" name="stock" min="0" required>
-                </div>
-                <div class="backofficeadd-line">
-                    <p class="rem-bts">Prix:</p>
-                    <input type="number" name="price" min="0" step="0.01" required>
-                </div>
-                <div class="backofficeadd-line">
-                    <p class="rem-bts">Promotion:</p>
-                    <input type="number" name="discount">
-                </div>
-                <div class="backofficeadd-line">
-                    <p class="rem-bts">Catégorie:</p>
-                    <select name="category" id="category" required>
-                        <option value="">Sélectionnez une catégorie</option>
-                        <option value="T-shirt">T-shirt</option>
-                        <option value="Pull">Pull</option>
-                        <option value="Veste">Veste</option>
-                        <option value="Pantalon">Pantalon</option>
-                        <option value="Jupe">Jupe</option>
-                        <option value="Bottes">Bottes</option>
-                        <option value="Robe">Robe</option>
-                    </select>
-                </div>
-                <div>
-                    <p class="rem-bts">Description:</p>
-                    <textarea name="content" id="description" required></textarea>
-                </div>
-                <p class="img-text-center">Télécharger images:</p>
+                    <p class="img-text-center">Télécharger images:</p>
                     <div class="image-upload">
                         <div class="image-upload-container">
                             <input type="file" name="image_1" id="image1" accept="image/*" style="display: none;">
@@ -253,12 +257,13 @@ if ($_POST && isset($_POST["ref"]) && isset($_POST["brand"]) && isset($_POST["si
                             <div class="image-preview" id="preview4"></div>
                         </div>
                     </div>
-                <div class="backoff-center-btn">
-                    <button type="submit" class="submit-btn">Ajouter le Produit</button>
-                </div>
-            </form>
-        </article>
-    </main>
+                    <div class="backoff-center-btn">
+                        <button type="submit" class="submit-btn">Ajouter le Produit</button>
+                    </div>
+                </form>
+            </article>
+        </main>
+    </div>
 
     <script type="text/javascript" src="../JS/script.js" defer></script>
     <?php require_once('../elements/footer.php'); ?>
