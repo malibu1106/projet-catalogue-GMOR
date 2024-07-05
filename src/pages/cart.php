@@ -7,7 +7,8 @@ require_once("../elements/connect.php");
 // Verifique se o usuário está logado
 if (!isset($_SESSION['user']['id'])) {
     // Redirecione para a página de login ou mostre uma mensagem de erro
-    echo "Você precisa estar logado para ver o carrinho.";
+    echo "<h2>You must be logged in to view the cart.</h2>";
+    echo "<h3>click <a href='../tools/login.php'>here</a> to connect.</h3>";
     exit();
 }
 
