@@ -622,6 +622,13 @@ h1 {
     width: 200px;
 }
 
+/*BACKOFFICE-COMMANDES*/
+.bg-commandes{
+    background-image: url(/img/temporaire/vecteezy.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 
 
 

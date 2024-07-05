@@ -37,7 +37,7 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
 
             <div class="row">
                 <?php foreach($resulta as $commande): ?>
-                <div class="col-12 mb-4">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
