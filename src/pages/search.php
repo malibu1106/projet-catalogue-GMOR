@@ -159,9 +159,9 @@ function displayProduct($products) {
 
             function updateSelection() {
                 if (selectedColor && selectedSize) {
-                    infoElement.textContent = `Selecionado: Cor ${selectedColor}, Tamanho ${selectedSize}`;
+                    infoElement.textContent = `Selected: Colour ${selectedColor}, Size ${selectedSize}`;
                 } else {
-                    infoElement.textContent = 'Por favor, selecione uma cor e um tamanho.';
+                    infoElement.textContent = 'Please select a color and size.';
                 }
             }
 
