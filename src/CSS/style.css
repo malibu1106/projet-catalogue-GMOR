@@ -15,7 +15,7 @@ body {
     height: 80px;
     position: fixed;
     top: 50px;
-    z-index: 200;
+    z-index: 200000;
     background: white;
     width: 100vw;
 }
@@ -29,6 +29,7 @@ body {
 
 .logo img {
     height: 70px;
+    margin: auto;
 }
 
 /*NAV*/
@@ -228,7 +229,7 @@ body {
     cursor: pointer;
 }
 
-.random-produits{
+.random-produits {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -237,6 +238,7 @@ body {
     gap: 70px;
     margin: 0px 20px;
 }
+
 .no-deco {
     text-decoration: none;
     color: rgb(223, 223, 223);
@@ -322,13 +324,16 @@ body {
 
 
 @media only screen and (min-width: 768px) {
+
     /*HEADER*/
     .logo {
         top: 0px;
     }
+
     .researchBar form {
         margin: 90px auto 20px auto;
     }
+
     .menuButtonsContainer {
         background-color: rgba(255, 255, 255, 0);
     }
@@ -354,22 +359,25 @@ body {
     }
 
     /*Index*/
-    .random-produits{
+    .random-produits {
         margin: 0px 150px;
     }
 }
 
 @media screen and (min-width: 1024px) {
-        /*HEADER*/
-        .logo {
-            top: 0px;
-        }
-        .researchBar form {
-            margin: 90px auto 20px auto;
-        }
-        .menuButtonsContainer {
-            background-color: rgba(255, 255, 255, 0);
-        }
+
+    /*HEADER*/
+    .logo {
+        top: 0px;
+    }
+
+    .researchBar form {
+        margin: 90px auto 20px auto;
+    }
+
+    .menuButtonsContainer {
+        background-color: rgba(255, 255, 255, 0);
+    }
 
     ul#menuBurger {
         position: absolute;
@@ -383,8 +391,8 @@ body {
         padding: 0;
     }
 
-        /*Index*/
-    .random-produits{
+    /*Index*/
+    .random-produits {
         margin: 0px 150px;
     }
 
