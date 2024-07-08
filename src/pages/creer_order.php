@@ -41,7 +41,7 @@ $total_amount = $result_total['total_amount'];
 
 // Insere o pedido na tabela orders
 $sql = "INSERT INTO orders (user_id, order_date, status, total_amount, shipping_address, payment_method) 
-        VALUES (:user_id, NOW(), 'em andamento', :total_amount, :shipping_address, :payment_method)";
+        VALUES (:user_id, NOW(), 'en attente', :total_amount, :shipping_address, :payment_method)";
 
 $stmt = $db->prepare($sql);
 $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);

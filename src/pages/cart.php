@@ -88,23 +88,25 @@ if(empty($cartResults)){
     foreach($cartResults as $cartResult){
         // Affiche les détails du produit et les boutons d'action
         echo '<article data-cart-id="'. $cartResult['cart_id'] .'">
-    <figure>
-                <!-- Detalhes do produto e botões -->
-        <a href="article.php?id='. $cartResult['product_id'] .'" class:"recap"><img src="'. $cartResult['image_1'].'" alt="'. $cartResult['brand'] .'"></a>
-        <div class="recap">
-            <figcaption>product: '. $cartResult['brand'].'</figcaption>
-            <figcaption>color: '. $cartResult['color'].'</figcaption>
-            <figcaption>size: '. $cartResult['size'].'</figcaption>
-            <figcaption class="product-price">price: '.number_format($cartResult['price'], 2). '€</figcaption>
-            <figcaption class="product-quantity" data-id="'. $cartResult['cart_id'] .'">quantity: '. $cartResult['product_quantity'].' unit.'. ($cartResult['product_quantity'] !== 1 ? 's' : '') .'</figcaption> 
-            
-            <div class="btn_action">
-                <button class="cart-action" data-action="add" data-id="'. $cartResult['cart_id'] .'" aria-label="Adicionar uma unidade"><img src="../img/illustration/add_produce.png" alt="adicionar produto"></button>
-                <button class="cart-action" data-action="subtract" data-id="'. $cartResult['cart_id'] .'" aria-label="Subtrair uma unidade"><img src="../img/illustration/remove_produce.png" alt="remover produto"></button>
-                <button class="cart-action" data-action="delete" data-id="'. $cartResult['cart_id'] .'" aria-label="Remover o produto"><img src="../img/illustration/delete.png" alt="deletar produto"></button>
+    <div>
+        <figure >
+                    <!-- Detalhes do produto e botões -->
+            <a href="article.php?id='. $cartResult['product_id'] .'" class="card"><img src="'. $cartResult['image_1'].'" alt="'. $cartResult['brand'] .'"></a>
+            <div class="recap">
+                <figcaption>product: '. $cartResult['brand'].'</figcaption>
+                <figcaption>color: '. $cartResult['color'].'</figcaption>
+                <figcaption>size: '. $cartResult['size'].'</figcaption>
+                <figcaption class="product-price">price: '.number_format($cartResult['price'], 2). '€</figcaption>
+                <figcaption class="product-quantity" data-id="'. $cartResult['cart_id'] .'">quantity: '. $cartResult['product_quantity'].' unit.'. ($cartResult['product_quantity'] !== 1 ? 's' : '') .'</figcaption>
+        
+                <div class="btn_action">
+                    <button class="cart-action" data-action="add" data-id="'. $cartResult['cart_id'] .'" aria-label="Adicionar uma unidade"><img src="../img/illustration/add_produce.png" alt="adicionar produto"></button>
+                    <button class="cart-action" data-action="subtract" data-id="'. $cartResult['cart_id'] .'" aria-label="Subtrair uma unidade"><img src="../img/illustration/remove_produce.png" alt="remover produto"></button>
+                    <button class="cart-action" data-action="delete" data-id="'. $cartResult['cart_id'] .'" aria-label="Remover o produto"><img src="../img/illustration/delete.png" alt="deletar produto"></button>
+                </div>
             </div>
-        </div>
-    </figure>
+        </figure>
+    </div>
     </article>';    
 }
 }
