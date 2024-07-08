@@ -22,8 +22,8 @@ function handleImageUpload($file) {
         $error_messages[] = "Erreur : le format du fichier est incorrect";
     }
 
-    if ($filesize > 1024 * 1024) {
-        $error_messages[] = "Fichier trop grand max 1024*1024";
+    if ($filesize > 4096 * 4096) {
+        $error_messages[] = "Fichier trop grand max 4096*4096";
     }
 
     $newname = md5(uniqid()) . ".$extension";
