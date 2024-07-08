@@ -35,6 +35,7 @@
 
 .messagerie_conversation_avatar img {
     width: 40px;
+    border-radius: 50%;
     margin: 8px 5px;
 }
 
@@ -147,7 +148,6 @@
     position: relative;
 }
 
-.unread {}
 
 .unread::before {
     content: "";
