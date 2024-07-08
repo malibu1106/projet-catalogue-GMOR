@@ -65,19 +65,19 @@
 
     <ul class="menu hideMenuBurger" id="menuBurger">
         <li>
-            <a href="pages/produits.php?category=Robe">Robes</a>
+            <a href="../pages/produits.php?category=Robe">Robes</a>
         </li>
         <li>
-            <a href="pages/produits.php?category=T-shirt">T-shirts</a>
+            <a href="../pages/produits.php?category=T-shirt">T-shirts</a>
         </li>
         <li>
-            <a href="pages/produits.php?category=Pantalon">Pantalons</a>
+            <a href="../pages/produits.php?category=Pantalon">Pantalons</a>
         </li>
         <li>
-            <a href="pages/produits.php?category=Veste">Vestes</a>
+            <a href="../pages/produits.php?category=Veste">Vestes</a>
         </li>
         <li>
-            <a href="pages/produits.php?category=pull">Pulls</a>
+            <a href="../pages/produits.php?category=pull">Pulls</a>
         </li>
     </ul>
 
