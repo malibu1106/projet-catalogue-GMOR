@@ -124,8 +124,10 @@
 
 .photos-suggestions img {
     cursor: pointer;
-    max-width: 350px;
+    max-width: 250px;
     max-height: 400px;
+    min-height: 400px;
+    object-fit: cover;
 }
 
 footer {
@@ -160,7 +162,7 @@ footer {
 
     .description {
         width: 40%;
-        margin-bottom: 15%;
+        margin-bottom: 150px;
         height: 40vh;
     }
 
