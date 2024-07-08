@@ -82,7 +82,7 @@ if ($_POST) {
             }
 
             chmod($newfilename, 0644);
-            $imagePath = "img/upload_model/$newname"; // Chemin relatif à stocker dans la base de données
+            $imagePath = "/img/upload_model/$newname"; // Chemin relatif à stocker dans la base de données
         }
 
         // Construction de la requête SQL
@@ -183,7 +183,7 @@ function handleImageUpload($file) {
     }
 
     chmod($newfilename, 0644);
-    return "img/upload_model/$newname"; // Retourne le chemin relatif
+    return "/img/upload_model/$newname"; // Retourne le chemin relatif
 }
 ?>
 
