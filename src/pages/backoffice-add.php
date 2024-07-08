@@ -24,8 +24,8 @@ function handleImageUpload($file) {
         return null; // Retourne null en cas d'erreur
     }
 
-    if ($filesize > 1024 * 1024) {
-        $error_messages[] = "Fichier trop grand max 1024*1024";
+    if ($filesize > 4096 * 4096) {
+        $error_messages[] = "Fichier trop grand max 4096*4096";
         return null; // Retourne null en cas d'erreur
     }
 

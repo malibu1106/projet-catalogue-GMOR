@@ -70,7 +70,7 @@ if ($_POST) {
                 die("Erreur : le format du fichier est incorrect");
             }
 
-            if ($filesize > 1024 * 1024) {
+            if ($filesize > 4096 * 4096) {
                 die("Fichier trop volumineux");
             }
 
@@ -171,7 +171,7 @@ function handleImageUpload($file) {
         die("Erreur : le format du fichier est incorrect");
     }
 
-    if ($filesize > 1024 * 1024) {
+    if ($filesize > 4096 * 4096) {
         die("Fichier trop volumineux");
     }
 
