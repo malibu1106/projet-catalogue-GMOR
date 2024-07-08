@@ -130,7 +130,7 @@ ul.menu {
     width: calc(100% - 30px);
     border: none;
     text-align: center;
-    background-color: rgb(252, 252, 252);
+    background-color: transparent!important;
 }
 
 .researchBar input:focus {
