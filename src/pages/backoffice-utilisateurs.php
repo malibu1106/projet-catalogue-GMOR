@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
                                     </div>
                                 </div>
                                 <div class="profil-content">
-                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    <a href="<?= htmlspecialchars($user['Linkedin']) ?>"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                                     <h3 class="profil-name">
                                         <span class="profil-firstname"><?= htmlspecialchars($user['first_name']) ?></span>
                                         <span class="profil-lastname"><?= htmlspecialchars($user['last_name']) ?></span>
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
                                             <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
                                             <div class="role-checkboxes">
                                                 <?php
-                                                $roles = ['admin', 'sub', 'utilisateur', 'formateur', 'apprenant', 'gestion commercial', 'logistique', 'comptable', 'vendeur'];
+                                                $roles = ['admin', 'sub', 'formateur', 'apprenant', 'gestion commercial', 'logistique', 'comptable', 'vendeur', 'utilisateur'];
                                                 $user_roles = explode(',', $user['group']);
                                                 foreach ($roles as $role):
                                                 ?>

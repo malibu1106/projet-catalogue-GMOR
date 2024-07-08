@@ -70,7 +70,7 @@ if ($_POST) {
                 die("Erreur : le format du fichier est incorrect");
             }
 
-            if ($filesize > 1024 * 1024) {
+            if ($filesize > 4096 * 4096) {
                 die("Fichier trop volumineux");
             }
 
@@ -82,13 +82,18 @@ if ($_POST) {
             }
 
             chmod($newfilename, 0644);
-            $imagePath = "img/upload_model/$newname"; // Chemin relatif à stocker dans la base de données
+            $imagePath = "/img/upload_model/$newname"; // Chemin relatif à stocker dans la base de données
         }
 
         // Construction de la requête SQL
         $sql = 'UPDATE products SET ref=:ref, brand=:brand, size=:size, color=:color, 
                 pattern=:pattern, material=:material, gender=:gender, stock=:stock, 
                 price=:price, discount=:discount, category=:category, content=:content';
+
+        // Ajout de l'image principale dans la requête SQL si une nouvelle image est téléchargée
+        if ($imagePath !== $produit['image_1']) {
+            $sql .= ', image_1=:image_1';
+        }
 
         // Vérification et gestion des images facultatives
         if (isset($_FILES["image_2"]) && $_FILES["image_2"]["error"] === 0) {
@@ -126,6 +131,11 @@ if ($_POST) {
         $query->bindValue(":content", $content, PDO::PARAM_STR);
         $query->bindValue(":id", $id, PDO::PARAM_INT);
 
+        // Bind de l'image principale si une nouvelle image est téléchargée
+        if ($imagePath !== $produit['image_1']) {
+            $query->bindValue(":image_1", $imagePath, PDO::PARAM_STR);
+        }
+
         // Bind des valeurs pour les images facultatives si elles existent
         if (isset($imagePath2)) {
             $query->bindValue(":image_2", $imagePath2, PDO::PARAM_STR);
@@ -157,7 +167,7 @@ if ($_POST) {
 // Fonction pour gérer l'upload des images et retourner le chemin relatif
 function handleImageUpload($file) {
     $allowed = [
-        "jpg" => "image/jpeg",
+        "jpg" => "image/jpg",
         "jpeg" => "image/jpeg",
         "png" => "image/png"
     ];
@@ -171,7 +181,7 @@ function handleImageUpload($file) {
         die("Erreur : le format du fichier est incorrect");
     }
 
-    if ($filesize > 1024 * 1024) {
+    if ($filesize > 4096 * 4096) {
         die("Fichier trop volumineux");
     }
 
@@ -183,9 +193,10 @@ function handleImageUpload($file) {
     }
 
     chmod($newfilename, 0644);
-    return "img/upload_model/$newname"; // Retourne le chemin relatif
+    return "/img/upload_model/$newname"; // Chemin relatif à stocker dans la base de données
 }
 ?>
+
 
 
 <!DOCTYPE html>

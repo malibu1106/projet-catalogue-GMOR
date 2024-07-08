@@ -89,9 +89,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <select name="pattern">
                 <option value="">Tous les motifs</option>
-                <option value="Rayures" <?php if($pattern == 'Rayures') echo 'selected'; ?>>Rayures</option>
-                <option value="Losanges" <?php if($pattern == 'Losanges') echo 'selected'; ?>>Losanges</option>
-                <option value="Carrés" <?php if($pattern == 'Carrés') echo 'selected'; ?>>Carrés</option>
+                <option value="rayure" <?php if($pattern == 'rayure') echo 'selected'; ?>>Rayures</option>
+                <option value="losange" <?php if($pattern == 'losange') echo 'selected'; ?>>Losanges</option>
+                <option value="carre" <?php if($pattern == 'carre') echo 'selected'; ?>>Carrés</option>
             </select>
 
             <select name="material">
