@@ -20,7 +20,6 @@ body {
     right: 0;
     margin: auto;
     z-index: 200000;
-    background: white;
 
 }
 
@@ -40,8 +39,9 @@ body {
 /*NAV*/
 nav {
     display: flex;
-    height: 50px;
+    height: 80px;
     position: fixed;
+    background: white;
     width: 100%;
     top: 0;
     z-index: 250;
