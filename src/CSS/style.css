@@ -34,6 +34,11 @@ body {
 .logo img {
     height: 70px;
     margin: auto;
+    background-color: white;
+}
+
+.logo_index img {
+    z-index: 500;
 }
 
 /*NAV*/
@@ -72,7 +77,6 @@ ul#menuBurger {
     height: auto;
     background-color: white;
     text-align: center;
-    z-index: 100;
     transition: top 0.4s linear;
     font-size: 1.2em;
 }

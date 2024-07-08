@@ -118,12 +118,16 @@
     display:flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    gap: 45px;
+    gap: 50px;
     margin-top: 40px;
 }
 
 .photos-suggestions img {
     cursor: pointer;
+    max-width: 250px;
+    max-height: 400px;
+    min-height: 400px;
+    object-fit: cover;
 }
 
 footer {
@@ -158,7 +162,7 @@ footer {
 
     .description {
         width: 40%;
-        margin-bottom: 15%;
+        margin-bottom: 150px;
         height: 40vh;
     }
 
