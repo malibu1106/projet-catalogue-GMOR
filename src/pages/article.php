@@ -91,11 +91,26 @@ if ($product_id > 0) {
 </section>
 
 <section id="suggestions">
+<?php
+    // Récupération aléatoire de produits autres que celui affiché
+    $sql = "SELECT * FROM products WHERE id != ? ORDER BY RAND() LIMIT 3";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(1, $product_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $suggestions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+
     <h2>Vous aimerez aussi...</h2>
     <article class="photos-suggestions">
-        <img src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
-        <img src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
-        <img src="../img/temporaire/crescendo-aos-poucos.jpeg" alt="php name">
+        <?php if ($suggestions && $stmt->rowCount() > 0): ?>
+            <?php foreach ($suggestions as $suggestion): ?>
+                <a href="/pages/article.php?id=<?= htmlspecialchars($suggestion["id"]); ?>">
+                    <img src="<?= htmlspecialchars($suggestion['image_1']); ?>" alt="<?= htmlspecialchars($suggestion['brand']); ?>">
+                </a>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Aucune suggestion pour le moment.</p>
+        <?php endif; ?>
     </article>
 </section>
 <?php
