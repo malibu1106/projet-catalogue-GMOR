@@ -4,7 +4,7 @@ require_once 'nav.php';
 ?>
     <div class="logo">
 
-           <a href="../index.php"><img class="logo_index" src="../img/illustration/logo-online-training.png"></a>
+        <a href="../index.php"><img class="logo_index" src="../img/illustration/logo-online-training.png"></a>
 
     </div>  
     <div class="researchBar">
