@@ -183,7 +183,7 @@ function handleImageUpload($file) {
     }
 
     chmod($newfilename, 0644);
-    return "img/upload_model/$newname"; // Retourne le chemin relatif
+    return "/img/upload_model/$newname"; // Retourne le chemin relatif
 }
 ?>
 
