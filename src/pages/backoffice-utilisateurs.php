@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_roles'])) {
                         <select id="groupFilter" class="form-select">
                             <option value="">Tous les groupes</option>
                             <?php
-                            $all_roles = ['admin', 'sub', 'utilisateur', 'formateur', 'apprenant', 'gestion commercial', 'logistique', 'comptable', 'vendeur'];
+                            $all_roles = ['admin', 'sub', 'formateur', 'apprenant', 'gestion commercial', 'logistique', 'comptable', 'vendeur', 'utilisateur'];
                             foreach ($all_roles as $role) {
                                 echo "<option value=\"$role\">" . ucfirst($role) . "</option>";
                             }
