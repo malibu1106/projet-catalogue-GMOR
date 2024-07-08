@@ -79,7 +79,6 @@ if ($product_id > 0) {
         </div>
         <div class="description-produit">
         <p id="descr-produit1"><?php echo htmlspecialchars($product['content']); ?></p>
-        <p id="descr-produit2"></p>
         </div>
         <div class="add-to-cart">
             <form action="../tools/action_cart/insert_cart.php" method="POST">
