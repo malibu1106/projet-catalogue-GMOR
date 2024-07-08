@@ -100,7 +100,7 @@ if ($product_id > 0) {
     </article>
 </section>
 <?php
- echo '<pre>';
+echo '<pre>';
 print_r($product);
 echo '</pre>';
 
