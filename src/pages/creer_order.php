@@ -10,6 +10,18 @@ if (!isset($_SESSION['user']['id'])) {
 
 $user_id = $_SESSION['user']['id'];
 
+// Verifica se o carrinho está vazio
+$sql_check_cart = "SELECT COUNT(*) FROM carts WHERE user_id = :user_id";
+$stmt_check_cart = $db->prepare($sql_check_cart);
+$stmt_check_cart->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+$stmt_check_cart->execute();
+$cart_count = $stmt_check_cart->fetchColumn();
+
+if ($cart_count == 0) {
+    echo json_encode(['success' => false, 'message' => 'O carrinho está vazio']);
+    exit;
+}
+
 // Recebe os dados do pedido
 $data = json_decode(file_get_contents('php://input'), true);
 
@@ -29,7 +41,7 @@ $total_amount = $result_total['total_amount'];
 
 // Insere o pedido na tabela orders
 $sql = "INSERT INTO orders (user_id, order_date, status, total_amount, shipping_address, payment_method) 
-        VALUES (:user_id, NOW(), 'en attente', :total_amount, :shipping_address, :payment_method)";
+        VALUES (:user_id, NOW(), 'em andamento', :total_amount, :shipping_address, :payment_method)";
 
 $stmt = $db->prepare($sql);
 $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
