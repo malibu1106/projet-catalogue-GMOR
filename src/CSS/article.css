@@ -118,12 +118,14 @@
     display:flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    gap: 45px;
+    gap: 50px;
     margin-top: 40px;
 }
 
 .photos-suggestions img {
     cursor: pointer;
+    max-width: 350px;
+    max-height: 400px;
 }
 
 footer {
