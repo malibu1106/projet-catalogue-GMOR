@@ -47,13 +47,22 @@ if ($product_id > 0) {
 <section id="container-pcp">
     <article class="photos-article">
         <figure class="photo-pcp">
-        <img id="thumbnail" src="<?php echo htmlspecialchars($product['image_1']); ?>" alt="php name">
+            <img id="thumbnail" src="<?php echo htmlspecialchars($product['image_1']); ?>" alt="php name">
         </figure>
+        
+        <?php if (!empty($product['image_2']) || !empty($product['image_3']) || !empty($product['image_4'])): ?>
         <figure class="miniatures">
-            <img class="miniature" src="<?php echo htmlspecialchars($product['image_2']); ?>" alt="php name">
-            <img  class="miniature" src="<?php echo htmlspecialchars($product['image_3']); ?>" alt="php name">
-            <img class="miniature" src="<?php echo htmlspecialchars($product['image_4']); ?>" alt="php name">
+            <?php if (!empty($product['image_2'])): ?>
+                <img class="miniature" src="<?php echo htmlspecialchars($product['image_2']); ?>" alt="php name">
+            <?php endif; ?>
+            <?php if (!empty($product['image_3'])): ?>
+                <img class="miniature" src="<?php echo htmlspecialchars($product['image_3']); ?>" alt="php name">
+            <?php endif; ?>
+            <?php if (!empty($product['image_4'])): ?>
+                <img class="miniature" src="<?php echo htmlspecialchars($product['image_4']); ?>" alt="php name">
+            <?php endif; ?>
         </figure>
+        <?php endif; ?>
     </article>
 
     <div id="fullscreen-container">
