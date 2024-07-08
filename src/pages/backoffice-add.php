@@ -234,7 +234,7 @@ if ($redirect) {
                         <p class="rem-bts">Description:</p>
                         <textarea name="content" id="description" required></textarea>
                     </div>
-                    <p class="img-text-center">Télécharger images:</p>
+                    <p class="img-text-center">Télécharger images: format jpg/jpeg/png => max 2Mo</p>
                     <div class="image-upload">
                         <div class="image-upload-container">
                             <input type="file" name="image_1" id="image1" accept="image/*" style="display: none;">

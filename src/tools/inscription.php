@@ -48,7 +48,7 @@ if(!empty($_POST)){
     } //fin des verifications
     
     // on écri la roquete sql d'inscription
-    $sql = "INSERT INTO users (first_name, last_name, email, password, `group`) VALUES (:first_name, :last_name, :email, :password, 'user')";
+    $sql = "INSERT INTO users (first_name, last_name, email, password, `group`) VALUES (:first_name, :last_name, :email, :password, 'utilisateur')";
 
         $requete = $db->prepare($sql);
 
