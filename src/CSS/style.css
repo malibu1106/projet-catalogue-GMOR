@@ -80,6 +80,7 @@ ul#menuBurger {
     text-align: center;
     transition: top 0.4s linear;
     font-size: 1.2em;
+    padding-top: 50px; /*pour afficher la cadegoria robes du menu au format mobile */
 }
 
 #menuBurger li {
