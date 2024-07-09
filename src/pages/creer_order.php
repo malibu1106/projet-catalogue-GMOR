@@ -10,6 +10,18 @@ if (!isset($_SESSION['user']['id'])) {
 
 $user_id = $_SESSION['user']['id'];
 
+// Verifica se o carrinho está vazio
+$sql_check_cart = "SELECT COUNT(*) FROM carts WHERE user_id = :user_id";
+$stmt_check_cart = $db->prepare($sql_check_cart);
+$stmt_check_cart->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+$stmt_check_cart->execute();
+$cart_count = $stmt_check_cart->fetchColumn();
+
+if ($cart_count == 0) {
+    echo json_encode(['success' => false, 'message' => 'O carrinho está vazio']);
+    exit;
+}
+
 // Recebe os dados do pedido
 $data = json_decode(file_get_contents('php://input'), true);
 

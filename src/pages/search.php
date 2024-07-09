@@ -43,7 +43,7 @@ function displayProduct($products) {
     echo "<h2>{$main_product['brand']} - {$main_product['ref']}</h2>";
     echo "<p>category: {$main_product['category']}</p>";
     echo "<p>price: " . number_format($main_product['price'], 2) . "€</p>";
-    echo "<div class='card'><a href='article.php?id='><img src='{$main_product['image_1']}' alt='{$main_product['ref']}' width='200'></a></div>";
+    echo "<div class='card'><a href='article.php?id={$main_product['id']}'><img src='{$main_product['image_1']}' alt='{$main_product['ref']}' width='200'></a></div>";
     
     echo "<h3>Colours available :</h3>";
     echo "<div class='color-options'>";
@@ -159,9 +159,9 @@ function displayProduct($products) {
 
             function updateSelection() {
                 if (selectedColor && selectedSize) {
-                    infoElement.textContent = `Selecionado: Cor ${selectedColor}, Tamanho ${selectedSize}`;
+                    infoElement.textContent = `Selected: Colour ${selectedColor}, Size ${selectedSize}`;
                 } else {
-                    infoElement.textContent = 'Por favor, selecione uma cor e um tamanho.';
+                    infoElement.textContent = 'Please select a color and size.';
                 }
             }
 
