@@ -37,26 +37,26 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
 
             <div class="row">
                 <?php foreach($resulta as $commande): ?>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <h5 class="card-title">Commande #<?= $commande['id'] ?></h5>
-                                    <p class="card-text"><strong>Client:</strong> <?= $commande['first_name'] . ' ' . $commande['last_name'] ?></p>
-                                    <p class="card-text"><strong>Date:</strong> <?= $commande['order_date'] ?></p>
-                                    <p class="card-text"><strong>Total:</strong> €<?= $commande['total_amount'] ?></p>
-                                    <p class="card-text"><strong>Adresse:</strong> <?= $commande['shipping_address'] ?></p>
-                                    <p class="card-text"><strong>Méthode de paiement:</strong> <?= $commande['payment_method'] ?></p>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Commande #<?= $commande['id'] ?></h5>
+                                        <p class="card-text"><strong>Client:</strong> <?= $commande['first_name'] . ' ' . $commande['last_name'] ?></p>
+                                        <p class="card-text"><strong>Date:</strong> <?= $commande['order_date'] ?></p>
+                                        <p class="card-text"><strong>Total:</strong> €<?= $commande['total_amount'] ?></p>
+                                        <p class="card-text"><strong>Adresse:</strong> <?= $commande['shipping_address'] ?></p>
+                                        <p class="card-text"><strong>Méthode de paiement:</strong> <?= $commande['payment_method'] ?></p>
+                                    </div>
+                                    <div class="text-end">
+                                        <a class="btn btn-sm btn-primary" title="Voir" href="backoffice-commande-details.php?id=<?= $commande["id"] ?>"><i class="bi bi-eye"></i></a>
+                                        <a class="btn btn-sm btn-warning" title="Modifier" href="backoffice-modif-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-pencil"></i></a>
+                                        <a class="btn btn-sm btn-danger" title="Supprimer" href="../tools/delete-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-trash"></i></a>
+                                    </div>
                                 </div>
-                                <div class="text-end">
-                                    <a class="btn btn-sm btn-primary" title="Voir" href="backoffice-commande-details.php?id=<?= $commande["id"] ?>"><i class="bi bi-eye"></i></a>
-                                    <a class="btn btn-sm btn-warning" title="Modifier" href="backoffice-modif-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-pencil"></i></a>
-                                    <a class="btn btn-sm btn-danger" title="Supprimer" href="../tools/delete-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-trash"></i></a>
-                                </div>
-                            </div>
-                            <div class="progress mt-3">
-                                <?php 
+                                <div class="progress mt-3">
+                                    <?php 
                                     $status = strtolower($commande['status']);
                                     $progress = 0;
                                     switch ($status) {
@@ -73,12 +73,32 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
                                             $progress = 100;
                                             break;
                                     }
-                                ?>
-                                <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%;" aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100"><?= ucfirst($status) ?></div>
+                                    ?>
+                                    <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%;" aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100"><?= ucfirst($status) ?></div>
+                                </div>
+                                <div class="mt-3">
+                                    <h6>Produits commandés:</h6>
+                                    <ul>
+                                        <?php
+                                        // Requête pour récupérer les produits associés à cette commande, avec taille et couleur
+                                        $sql_produits = "SELECT oi.quantity, p.brand, p.size, p.color
+                                                        FROM order_items oi
+                                                        JOIN products p ON oi.product_id = p.id
+                                                        WHERE oi.order_id = :order_id";
+                                        $requete_produits = $db->prepare($sql_produits);
+                                        $requete_produits->bindParam(':order_id', $commande['id'], PDO::PARAM_INT);
+                                        $requete_produits->execute();
+                                        $produits_commandes = $requete_produits->fetchAll(PDO::FETCH_ASSOC);
+
+                                        foreach ($produits_commandes as $produit) {
+                                            echo '<li>' . $produit['quantity'] . ' x ' . $produit['brand'] . ' (Taille: ' . $produit['size'] . ', Couleur: ' . $produit['color'] . ')</li>';
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 <?php endforeach; ?>
             </div>
         </article>

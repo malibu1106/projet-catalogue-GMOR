@@ -3,6 +3,10 @@
 session_start();
 require_once("../elements/connect.php");
 
+// Ajoutez ceci au début de votre script pour voir ce que vous recevez
+error_log('Data received: ' . file_get_contents('php://input'));
+
+
 
 // Vérifie si l'utilisateur est connecté
 if (!isset($_SESSION['user']['id'])) {
@@ -143,9 +147,9 @@ if(empty($cartResults)){
                 <label for="metodo-pagamento">Méthode de paiement:</label>
                 <select id="metodo-pagamento" name="metodo_pagamento" required>
                     <option value="">Sélectionner...</option>
-                    <option value="cartao">Carte bancaire</option>
-                    <option value="boleto">Virement bancaire</option>
-                    <option value="pix">PayPal</option>
+                    <option value="Carte_bancaire">Carte bancaire</option>
+                    <option value="Virement_bancaire">Virement bancaire</option>
+                    <option value="PayPal">PayPal</option>
                 </select>
                 
                 <button type="submit" class="btn btn-success">Confirmer la commande</button>
@@ -246,14 +250,16 @@ if(empty($cartResults)){
         const endereco = document.getElementById('endereco').value;
         const metodoPagamento = document.getElementById('metodo-pagamento').value;
 
-        fetch('../tools/creer_order.php', {
+        fetch('../pages/creer_order.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                endereco: endereco,
-                metodo_pagamento: metodoPagamento
+                // endereco: endereco,
+                // metodo_pagamento: metodoPagamento,
+                shipping_address: endereco,
+                payment_method: metodoPagamento
             })
         })
         .then(response => response.json())
