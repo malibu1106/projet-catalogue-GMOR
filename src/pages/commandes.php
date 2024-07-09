@@ -38,66 +38,86 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
             <div class="row">
                 <?php foreach($resulta as $commande): ?>
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <h5 class="card-title">Commande #<?= $commande['id'] ?></h5>
-                                        <p class="card-text"><strong>Client:</strong> <?= $commande['first_name'] . ' ' . $commande['last_name'] ?></p>
-                                        <p class="card-text"><strong>Date:</strong> <?= $commande['order_date'] ?></p>
-                                        <p class="card-text"><strong>Total:</strong> €<?= $commande['total_amount'] ?></p>
-                                        <p class="card-text"><strong>Adresse:</strong> <?= $commande['shipping_address'] ?></p>
-                                        <p class="card-text"><strong>Méthode de paiement:</strong> <?= $commande['payment_method'] ?></p>
-                                    </div>
-                                    <div class="text-end">
-                                        <a class="btn btn-sm btn-primary" title="Voir" href="backoffice-commande-details.php?id=<?= $commande["id"] ?>"><i class="bi bi-eye"></i></a>
-                                        <a class="btn btn-sm btn-warning" title="Modifier" href="backoffice-modif-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-pencil"></i></a>
-                                        <a class="btn btn-sm btn-danger" title="Supprimer" href="../tools/delete-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-trash"></i></a>
-                                    </div>
+                    <div class="card2">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h5 class="card-title">Commande #<?= $commande['id'] ?></h5>
+                                    <p class="card-text"><strong>Client:</strong> <?= $commande['first_name'] . ' ' . $commande['last_name'] ?></p>
+                                    <p class="card-text"><strong>Date:</strong> <?= $commande['order_date'] ?></p>
+                                    <p class="card-text"><strong>Total:</strong> €<?= $commande['total_amount'] ?></p>
+                                    <p class="card-text"><strong>Adresse:</strong> <?= $commande['shipping_address'] ?></p>
+                                    <p class="card-text"><strong>Méthode de paiement:</strong> <?= $commande['payment_method'] ?></p>
                                 </div>
-                                <div class="progress mt-3">
-                                    <?php 
-                                    $status = strtolower($commande['status']);
-                                    $progress = 0;
-                                    switch ($status) {
-                                        case 'en attente':
-                                            $progress = 25;
-                                            break;
-                                        case 'en traitement':
-                                            $progress = 50;
-                                            break;
-                                        case 'expédié':
-                                            $progress = 75;
-                                            break;
-                                        case 'livré':
-                                            $progress = 100;
-                                            break;
-                                    }
-                                    ?>
-                                    <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%;" aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100"><?= ucfirst($status) ?></div>
+                                <div class="text-end">
+                                    <a class="btn btn-sm btn-primary" title="Voir" href="backoffice-commande-details.php?id=<?= $commande["id"] ?>"><i class="bi bi-eye"></i></a>
+                                    <a class="btn btn-sm btn-warning" title="Modifier" href="backoffice-modif-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-pencil"></i></a>
+                                    <a class="btn btn-sm btn-danger" title="Supprimer" href="../tools/delete-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-trash"></i></a>
                                 </div>
-                                <div class="mt-3">
-                                    <h6>Produits commandés:</h6>
-                                    <ul>
-                                        <?php
-                                        // Requête pour récupérer les produits associés à cette commande, avec taille et couleur
-                                        $sql_produits = "SELECT oi.quantity, p.brand, p.size, p.color
-                                                        FROM order_items oi
-                                                        JOIN products p ON oi.product_id = p.id
-                                                        WHERE oi.order_id = :order_id";
-                                        $requete_produits = $db->prepare($sql_produits);
-                                        $requete_produits->bindParam(':order_id', $commande['id'], PDO::PARAM_INT);
-                                        $requete_produits->execute();
-                                        $produits_commandes = $requete_produits->fetchAll(PDO::FETCH_ASSOC);
+                            </div>
+                            <div class="progress mt-3">
+                                <?php 
+                                $status = strtolower($commande['status']);
+                                $progress = 0;
+                                switch ($status) {
+                                    case 'en attente':
+                                        $progress = 25;
+                                        break;
+                                    case 'en traitement':
+                                        $progress = 50;
+                                        break;
+                                    case 'expédié':
+                                        $progress = 75;
+                                        break;
+                                    case 'livré':
+                                        $progress = 100;
+                                        break;
+                                }
+                                ?>
+                                <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%;" aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100"><?= ucfirst($status) ?></div>
+                            </div>
+                            <div class="btn-container mt-3">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCommande<?= $commande['id'] ?>">
+                                    Voir les produits commandés
+                                </button>
+                            </div>
 
-                                        foreach ($produits_commandes as $produit) {
-                                            echo '<li>' . $produit['quantity'] . ' x ' . $produit['brand'] . ' (Taille: ' . $produit['size'] . ', Couleur: ' . $produit['color'] . ')</li>';
-                                        }
-                                        ?>
-                                    </ul>
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalCommande<?= $commande['id'] ?>" tabindex="-1" aria-labelledby="modalCommande<?= $commande['id'] ?>Label" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalCommande<?= $commande['id'] ?>Label">Produits commandés pour la commande #<?= $commande['id'] ?></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul>
+                                                <?php
+                                                // Requête pour récupérer les produits associés à cette commande, avec taille et couleur
+                                                $sql_produits = "SELECT oi.quantity, p.brand, p.size, p.color
+                                                                FROM order_items oi
+                                                                JOIN products p ON oi.product_id = p.id
+                                                                WHERE oi.order_id = :order_id";
+                                                $requete_produits = $db->prepare($sql_produits);
+                                                $requete_produits->bindParam(':order_id', $commande['id'], PDO::PARAM_INT);
+                                                $requete_produits->execute();
+                                                $produits_commandes = $requete_produits->fetchAll(PDO::FETCH_ASSOC);
+
+                                                foreach ($produits_commandes as $produit) {
+                                                    echo '<li>' . $produit['quantity'] . ' x ' . $produit['brand'] . ' (Taille: ' . $produit['size'] . ', Couleur: ' . $produit['color'] . ')</li>';
+                                                }
+                                                ?>
+                                            </ul>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
                     </div>
                 <?php endforeach; ?>
             </div>

@@ -108,5 +108,22 @@ require_once ('pages/slider.php');?>
     }
 </style>
 </body>
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+            var konamiIndex = 0;
+
+            document.addEventListener('keydown', function (e) {
+                if (e.keyCode === konamiCode[konamiIndex]) {
+                    konamiIndex++;
+                    if (konamiIndex === konamiCode.length) {
+                        window.location.href = '/pages/konami.php';
+                    }
+                } else {
+                    konamiIndex = 0;
+                }
+            });
+        });
+    </script>
 </html>
 

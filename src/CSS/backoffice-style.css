@@ -280,6 +280,32 @@ textarea {
     padding-top: 60px;
     max-width: 350px;
 }
+.card2 {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 550px;
+    position: relative;
+    padding-top: 60px;
+    max-width: 400px;
+    padding-bottom: 80px; /* Ajoutez un padding en bas pour l'espace du bouton */
+}
+
+.card2 .btn-container {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.text-end{
+    width: 32px;
+}
+
 
 .card:hover {
     transform: translateY(-10px);

@@ -141,7 +141,7 @@ if(empty($cartResults)){
         <div class="popup-content">
             <h3>Informations de livraison et de paiement</h3>
             <form id="form-endereco">
-                <label for="endereco">Adresse de livraison :</label>
+                <label for="endereco">Adresse de livraison <br> ex: 01 rue label 58000 Nevers:</label>
                 <textarea id="endereco" name="endereco" required></textarea>
                 
                 <label for="metodo-pagamento">Méthode de paiement:</label>
