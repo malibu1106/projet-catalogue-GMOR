@@ -143,15 +143,17 @@ if(empty($cartResults)){
                 <label for="metodo-pagamento">Méthode de paiement:</label>
                 <select id="metodo-pagamento" name="metodo_pagamento" required>
                     <option value="">Sélectionner...</option>
-                    <option value="cartao">carte bancaire</option>
+                    <option value="cartao">Carte bancaire</option>
                     <option value="boleto">Virement bancaire</option>
                     <option value="pix">PayPal</option>
                 </select>
                 
                 <button type="submit" class="btn btn-success">Confirmer la commande</button>
+                <button type="button" id="btn-annuler" class="btn btn-secondary">Annuler</button>
             </form>
         </div>
     </div>
+
 
 <?php require_once ('../elements/footer.php');?>
 
@@ -159,7 +161,6 @@ if(empty($cartResults)){
 <!-- // Script JavaScript pour gérer les actions du panier-->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Ajoute des écouteurs d'événements aux boutons d'action du panier
     const cartActions = document.querySelectorAll('.cart-action');
     
     cartActions.forEach(button => {
@@ -170,9 +171,7 @@ if(empty($cartResults)){
         });
     });
 
-    // Fonction pour mettre à jour le panier via une requête AJAX
     function updateCart(action, cartId) {
-        // Code pour envoyer une requête AJAX et mettre à jour le panier
         fetch('../tools/action_cart/update_cart.php', {
             method: 'POST',
             headers: {
@@ -185,16 +184,15 @@ if(empty($cartResults)){
             if (data.success) {
                 updateCartDisplay(data, action, cartId);
             } else {
-                console.error('Erro ao atualizar o carrinho:', data.message);
+                console.error('Erreur lors de la mise à jour du panier:', data.message);
             }
         })
         .catch(error => {
-            console.error('Erro:', error);
+            console.error('Erreur:', error);
         });
     }
-    // Fonction pour mettre à jour l'affichage du panier après une action
+
     function updateCartDisplay(data, action, cartId) {
-         // Code pour mettre à jour l'affichage du panier
         const cartItem = document.querySelector(`article[data-cart-id="${cartId}"]`);
         if (!cartItem) return;
 
@@ -205,79 +203,88 @@ if(empty($cartResults)){
             const priceElement = cartItem.querySelector('.product-price');
             
             if (quantityElement) {
-                quantityElement.textContent = `quantity: ${data.new_quantity} unit ${data.new_quantity !== 1 ? 's' : ''}`;
+                quantityElement.textContent = `quantité: ${data.new_quantity} unité${data.new_quantity !== 1 ? 's' : ''}`;
             }
             
             if (priceElement) {
                 const totalItemPrice = (data.new_quantity * data.item_price).toFixed(2);
-                priceElement.textContent = `price: ${totalItemPrice}€`;
+                priceElement.textContent = `prix: ${totalItemPrice}€`;
             }
         }
 
-        // Atualiza o total de itens no carrinho
         const cartTotalElement = document.getElementById('cart-total');
         if (cartTotalElement) {
             cartTotalElement.textContent = data.cart_total;
         }
 
-        // Atualiza o preço total
         const cartPriceTotalElement = document.getElementById('cart-price-total');
         if (cartPriceTotalElement) {
             cartPriceTotalElement.textContent = data.total_price;
         }
 
-        // Se o carrinho estiver vazio, exibe uma mensagem
         const productSection = document.querySelector('.affichage_des_produits');
         if (data.cart_total == 0 && productSection) {
-            productSection.innerHTML = '<h2>Seu carrinho está vazio.</h2>';
+            productSection.innerHTML = '<h2>Votre panier est vide.</h2>';
         }
     }
 
-        // Gestion du bouton "Finaliser la commande" et du popup
-        const btnFinalizarCompra = document.getElementById('btn-finalizar-compra');
-        const popup = document.getElementById('popup-endereco');
-        const form = document.getElementById('form-endereco');
+    const btnFinalizarCompra = document.getElementById('btn-finalizar-compra');
+    const popup = document.getElementById('popup-endereco');
+    const form = document.getElementById('form-endereco');
 
-        if (btnFinalizarCompra) {
-            btnFinalizarCompra.addEventListener('click', function() {
-                popup.style.display = 'block';
-            });
-        }
-        // Gestion de la soumission du formulaire de livraison et de paiement
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Code pour envoyer les informations de commande au serveur
-            const endereco = document.getElementById('endereco').value;
-            const metodoPagamento = document.getElementById('metodo-pagamento').value;
-
-            fetch('../tools/creer_order.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    endereco: endereco,
-                    metodo_pagamento: metodoPagamento
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Commande effectuée avec succès!');
-                    window.location.href = '../index.php?id=' + data.order_id;
-                } else {
-                    alert('Erreur lors de la création de la requête ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                alert('Erreur lors du traitement de votre demande. Veuillez réessayer.');
-            });
-
-            popup.style.display = 'none';
+    if (btnFinalizarCompra) {
+        btnFinalizarCompra.addEventListener('click', function() {
+            popup.style.display = 'block';
+            popup.setAttribute('aria-hidden', 'false');
+            popup.classList.add('show-popup');
         });
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const endereco = document.getElementById('endereco').value;
+        const metodoPagamento = document.getElementById('metodo-pagamento').value;
+
+        fetch('../tools/creer_order.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                endereco: endereco,
+                metodo_pagamento: metodoPagamento
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Commande effectuée avec succès!');
+                window.location.href = '../index.php?id=' + data.order_id;
+            } else {
+                alert('Erreur lors de la création de la commande ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            alert('Erreur lors du traitement de votre demande. Veuillez réessayer.');
+        });
+
+        popup.style.display = 'none';
+        popup.setAttribute('aria-hidden', 'true');
+        popup.classList.remove('show-popup');
     });
+
+    const btnAnnuler = document.getElementById('btn-annuler');
+    if (btnAnnuler) {
+        btnAnnuler.addEventListener('click', function() {
+            popup.style.display = 'none';
+            popup.setAttribute('aria-hidden', 'true');
+            popup.classList.remove('show-popup');
+        });
+    }
+});
+
     </script>
 </body>
 </html>
