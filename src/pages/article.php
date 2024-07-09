@@ -24,7 +24,7 @@ if ($product_id > 0) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,16 +33,14 @@ if ($product_id > 0) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script type="text/javascript" src="../JS/script.js" defer></script>
-    
     <title>Fiche produit</title>
-    
 </head>
 <body>
 <?php require_once ('../elements/header.php');?>
 
-    <div class="retour-accueil">
+<div class="retour-accueil">
     <a href="../index.php">Accueil</a>
-    </div>
+</div>
 
 <section id="container-pcp">
     <article class="photos-article">
@@ -82,8 +80,8 @@ if ($product_id > 0) {
         </div>
         <div class="add-to-cart">
             <form action="../tools/action_cart/insert_cart.php" method="POST">
-                <input type="hidden" name="product_id" value="<?php $product['id'];?>">
-                <input type="hidden" name="user_id" value="<?php (isset($_SESSION['id']) ? $_SESSION['id'] : '') ?>">
+                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
+                <input type="hidden" name="user_id" value="<?php echo isset($_SESSION['id']) ? htmlspecialchars($_SESSION['id']) : ''; ?>">
                 <button class="btn btn-dark" type="submit">Ajouter au panier</button>
             </form>
         </div>
@@ -123,7 +121,6 @@ print_r($_SESSION);
 echo '</pre>';
 ?>
 <script>
-
 //pour rendre la photo-pcp clicable et qu'elle s'affiche en fullscreen
     document.getElementById('thumbnail').addEventListener('click', function() {
     document.getElementById('fullscreen-container').style.display = 'flex';
