@@ -48,6 +48,13 @@ figure {
     
 }
 
+.card img {
+	height: 400px;
+	width: 350px;
+	object-fit: cover;
+	transition: transform .4s ease-in-out;
+}
+
 .popup {
     position: fixed;
     top: 0;
