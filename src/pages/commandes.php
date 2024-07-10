@@ -31,7 +31,19 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <?php require_once ('../elements/header.php'); ?>
+    <?php if (isset($_SESSION['success'])): ?>
+    <div class="alert alert-success" role="alert">
+        <?= $_SESSION['success'] ?>
+        <?php unset($_SESSION['success']); ?>
+    </div>
+<?php endif; ?>
 
+<?php if (isset($_SESSION['error'])): ?>
+    <div class="alert alert-danger" role="alert">
+        <?= $_SESSION['error'] ?>
+        <?php unset($_SESSION['error']); ?>
+    </div>
+<?php endif; ?>
     <main class="bg-commandes">
         <article class="container mt-4">
             <h1 class="backoff-comm-title mb-4">Gestion des Commandes</h1>
@@ -54,7 +66,7 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
                                     <a class="btn btn-sm btn-primary" title="Voir" href="backoffice-commande-details.php?id=<?= $commande["id"] ?>"><i class="bi bi-eye"></i></a>
                                     <a class="btn btn-sm btn-warning" title="Modifier" href="backoffice-modif-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-pencil"></i></a>
                                     <a class="btn btn-sm btn-danger" title="Supprimer" href="../tools/delete-commande.php?id=<?= $commande["id"] ?>"><i class="bi bi-trash"></i></a>
-                                    <a class="btn btn-sm btn-secondary" title="archiver" href="../pages/archives_cde.php?id=<?= $commande["id"] ?>"><i class="bi bi-archive"></i></a>
+                                    <a class="btn btn-sm btn-secondary" title="archiver" href="../pages/archive_order.php?id=<?= $commande["id"] ?>"><i class="bi bi-archive"></i></a>
                                 </div>
                             </div>
                             <div class="progress mt-3">
