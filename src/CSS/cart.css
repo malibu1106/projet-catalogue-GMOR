@@ -14,12 +14,17 @@
     width: 50px;
     height: 100%;
     align-items: flex-end;
+
 }
 
 .btn_action button img {
     min-width: 20px;
 }
 
+.cart-action{
+    border: none;
+    background: none;
+}
 h1 {
     display:flex;
     justify-content: center;
