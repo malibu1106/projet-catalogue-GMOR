@@ -15,8 +15,8 @@ $sql = "SELECT o.id, u.first_name, u.last_name, o.order_date, o.status, o.total_
 $requete = $db->prepare($sql);
 $requete->execute();
 $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +27,7 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../CSS/backoffice-style.css">
     <link rel="stylesheet" href="../CSS/style.css">
     <title>Gestion des Commandes</title>
+    <?php print_r($resulta);?>
 </head>
 <body>
     <?php require_once ('../elements/header.php'); ?>

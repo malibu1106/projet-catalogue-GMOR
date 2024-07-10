@@ -19,7 +19,7 @@ body {
     left: 0;
     right: 0;
     margin: auto;
-    z-index: 200000;
+    z-index: 1000;
 
 }
 
@@ -28,7 +28,6 @@ body {
     display: block;
     max-width: 200px;
     margin: auto;
-    z-index: 80000;
 }
 
 .logo img {
@@ -58,7 +57,6 @@ nav {
     justify-content: space-between;
     width: 100%;
     z-index: 200;
-    height: 15vh;
 }
 
 
@@ -80,7 +78,8 @@ ul#menuBurger {
     text-align: center;
     transition: top 0.4s linear;
     font-size: 1.2em;
-    padding-top: 50px; /*pour afficher la cadegoria robes du menu au format mobile */
+    padding-top: 50px;
+    /*pour afficher la cadegoria robes du menu au format mobile */
 }
 
 #menuBurger li {
