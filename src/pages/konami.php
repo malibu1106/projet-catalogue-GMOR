@@ -24,7 +24,9 @@
 </head>
 <body>
     <?php require_once('../elements/header.php'); ?>
-        <img src="/img/illustration/error404.jpg" height="400px" alt="">
+        <div class="konami-box">
+            <img src="/img/illustration/futurama.jpg" height="400px" alt="">
+        </div>
     <?php require_once ('../elements/footer.php');?>
 </body>
 </html>
