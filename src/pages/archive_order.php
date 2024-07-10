@@ -8,6 +8,20 @@ if (isset($_GET['id'])) {
     try {
         $db->beginTransaction();
 
+        // Verificar se a comanda já está arquivada
+        $sql_check = "SELECT COUNT(*) FROM archive WHERE order_id = :order_id";
+        $stmt_check = $db->prepare($sql_check);
+        $stmt_check->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+        $stmt_check->execute();
+        $is_archived = $stmt_check->fetchColumn();
+
+        if ($is_archived > 0) {
+            $_SESSION['info'] = "Esta comanda já está arquivada.";
+            $db->commit();
+            header("Location: ../pages/commandes.php");
+            exit();
+        }
+
         // Recuperar dados da comanda
         $sql_order = "SELECT * FROM orders WHERE id = :order_id";
         $stmt_order = $db->prepare($sql_order);
@@ -37,6 +51,7 @@ if (isset($_GET['id'])) {
             ]);
         }
 
+       
 
         $db->commit();
         $_SESSION['success'] = "Comanda arquivada com sucesso.";
