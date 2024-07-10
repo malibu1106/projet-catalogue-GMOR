@@ -35,9 +35,24 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../CSS/backoffice-style.css">
     <link rel="stylesheet" href="../CSS/style.css">
     <title>Commandes Archivées</title>
+    <style>
+        .back-button-container {
+            padding: 10px 15px;
+            position: fixed;
+        }
+    </style>
 </head>
 <body>
     <?php require_once ('../elements/header.php');?>
+
+    <!-- Container para o botão de voltar -->
+    <div class="back-button-container">
+        <div class="d-flex justify-content-end">
+            <a href="javascript:history.back()" class=" btn-primary">
+                <i class="bi bi-arrow-left"></i> Retour
+            </a>
+        </div>
+    </div>
 
     <main class="bg-commandes">
         <article class="backgene-set container mt-4">
@@ -78,7 +93,7 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
                     <tr>
                         <td>
                             <a class="btn btn-sm btn-primary btn-space" title="Voir" href="view_order.php?id=<?= $commande["id"] ?>"><i class="bi bi-eye"></i></a>
-                            <a class="btn btn-sm btn-danger btn-space" title="Supprimer" href="../tools/delete_archive.php?id=<?= $commande["id"] ?>"><i class="bi bi-trash"></i></a>
+                            <a class="btn btn-sm btn-danger btn-space" title="Supprimer" href="../pages/delete_archive.php?id=<?= $commande["id"] ?>"><i class="bi bi-trash"></i></a>
                         </td>
                         <td><?= $commande['id'] ?></td>
                         <td><?= $commande['cart_id'] ?></td>
@@ -93,7 +108,7 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
                 </table>
                 <button type="submit" class="btn btn-danger mb-5">Supprimer les commandes sélectionnées de l'archive</button>
             </form>
-        </article>
+            </article>
     </main>
     <?php require_once ('../elements/footer.php');?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
