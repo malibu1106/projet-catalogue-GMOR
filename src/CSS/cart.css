@@ -31,6 +31,13 @@ h2 {
     display:flex;
     justify-content: center;
 }
+
+p a{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    
+}
 figure {
     display:flex;
     flex-direction: column;
