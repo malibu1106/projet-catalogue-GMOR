@@ -48,7 +48,7 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
     <!-- Container para o botão de voltar -->
     <div class="back-button-container">
         <div class="d-flex justify-content-end">
-            <a href="javascript:history.back()" class=" btn-primary">
+            <a href="../pages/commandes.php" class=" btn-primary">
                 <i class="bi bi-arrow-left"></i> Retour
             </a>
         </div>
