@@ -27,7 +27,6 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../CSS/backoffice-style.css">
     <link rel="stylesheet" href="../CSS/style.css">
     <title>Gestion des Commandes</title>
-    <?php print_r($resulta);?>
 </head>
 <body>
     <?php require_once ('../elements/header.php'); ?>
