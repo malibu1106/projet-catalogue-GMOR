@@ -140,3 +140,108 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function cancelOrder(orderId) {
+    if (confirm('Êtes-vous sûr de vouloir annuler cette commande ?')) {
+        fetch('update_order_status.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ order_id: orderId, action: 'cancel' })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const card = document.querySelector('.card2[data-order-id="' + orderId + '"]');
+                const progressBar = card.querySelector('.progress-bar');
+                progressBar.style.width = '0%';
+                progressBar.setAttribute('aria-valuenow', '0');
+                progressBar.innerText = 'Annulée';
+
+                // Afficher l'image du tampon "cancel"
+                const stampImage = card.querySelector('.stamp-cancel');
+                stampImage.style.display = 'block';
+            } else {
+                alert('Erreur: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+}
+
+function confirmDelete(orderId) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette commande ?')) {
+        window.location.href = '../tools/delete_orders.php?id=' + orderId;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const progressButtons = document.querySelectorAll('.btn-progress');
+
+    progressButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const orderId = this.getAttribute('data-order-id');
+            fetch('update_order_status.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ order_id: orderId, action: 'progress' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Mettre à jour la barre de progression et le texte du statut
+                    const card = document.querySelector('.card2[data-order-id="' + orderId + '"]');
+                    const progressBar = card.querySelector('.progress-bar');
+                    let currentProgress = parseInt(progressBar.getAttribute('aria-valuenow'));
+                    let nextProgress = currentProgress + 25;
+
+                    if (nextProgress > 100) {
+                        nextProgress = 100;
+                    }
+
+                    progressBar.style.width = nextProgress + '%';
+                    progressBar.setAttribute('aria-valuenow', nextProgress);
+
+                    let newStatusText = '';
+                    switch (nextProgress) {
+                        case 25:
+                            newStatusText = 'En attente';
+                            break;
+                        case 50:
+                            newStatusText = 'En cours de traitement';
+                            break;
+                        case 75:
+                            newStatusText = 'Expédiée';
+                            break;
+                        case 100:
+                            newStatusText = 'Livrée';
+                            break;
+                        case 0:
+                            newStatusText = 'Annulée';
+                            break;
+                        default:
+                            newStatusText = progressBar.innerText;
+                    }
+
+                    progressBar.innerText = newStatusText;
+
+                    // Cacher l'image du tampon "cancel" si la commande n'est plus annulée
+                    const stampImage = card.querySelector('.stamp-cancel');
+                    if (nextProgress !== 0) {
+                        stampImage.style.display = 'none';
+                    }
+                } else {
+                    alert('Erreur: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+});
