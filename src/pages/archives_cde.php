@@ -13,11 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_ids']) && is_ar
 }
 
 // Récupérer les commandes archivées avec le nom de l'utilisateur
-$sql = "SELECT DISTINCT o.id, o.cart_id, o.user_id, u.first_name AS user_name, o.order_date, o.total_amount, o.status 
-        FROM orders o 
-        INNER JOIN archive a ON o.id = a.order_id 
-        INNER JOIN users u ON o.user_id = u.id
-        ORDER BY o.order_date DESC";
+$sql = "SELECT a.order_id, a.cart_id, a.user_id, u.first_name AS user_name, a.order_date, SUM(a.total_amount) as total_amount, a.status 
+        FROM archive a
+        INNER JOIN users u ON a.user_id = u.id
+        GROUP BY a.order_id, a.cart_id, a.user_id, u.first_name, a.order_date, a.status
+        ORDER BY a.order_date DESC";
 
 $requete = $db->prepare($sql);
 $requete->execute();
@@ -45,7 +45,6 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <?php require_once ('../elements/header.php');?>
 
-    <!-- Container para o botão de voltar -->
     <div class="back-button-container">
         <div class="d-flex justify-content-end">
             <a href="../pages/commandes.php" class=" btn-primary">
@@ -78,7 +77,7 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
                 <thead>
                     <tr>
                         <th>Action</th>
-                        <th class="pointer" data-sort="id">ID Commande</th>
+                        <th class="pointer" data-sort="order_id">ID Commande</th>
                         <th class="pointer" data-sort="cart_id">ID Panier</th>
                         <th class="pointer" data-sort="user_name">Nom Utilisateur</th>
                         <th class="pointer" data-sort="order_date">Date de Commande</th>
@@ -92,23 +91,23 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
                     <?php foreach($resulta as $commande): ?>
                     <tr>
                         <td>
-                            <a class="btn btn-sm btn-primary btn-space" title="Voir" href="view_order.php?id=<?= $commande["id"] ?>"><i class="bi bi-eye"></i></a>
-                            <a class="btn btn-sm btn-danger btn-space" title="Supprimer" href="../pages/delete_archive.php?id=<?= $commande["id"] ?>"><i class="bi bi-trash"></i></a>
+                            <a class="btn btn-sm btn-primary btn-space" title="Voir" href="view_order.php?id=<?= $commande["order_id"] ?>"><i class="bi bi-eye"></i></a>
+                            <a class="btn btn-sm btn-danger btn-space" title="Supprimer" href="../pages/delete_archive.php?id=<?= $commande["order_id"] ?>"><i class="bi bi-trash"></i></a>
                         </td>
-                        <td><?= $commande['id'] ?></td>
+                        <td><?= $commande['order_id'] ?></td>
                         <td><?= $commande['cart_id'] ?></td>
                         <td><?= $commande['user_name'] ?></td>
                         <td><?= $commande['order_date'] ?></td>
-                        <td><?= $commande['total_amount'] ?> €</td>
+                        <td><?= number_format($commande['total_amount'], 2) ?> €</td>
                         <td><?= $commande['status'] ?></td>
-                        <td><input type="checkbox" name="delete_ids[]" value="<?= $commande['id'] ?>"></td>
+                        <td><input type="checkbox" name="delete_ids[]" value="<?= $commande['order_id'] ?>"></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
                 </table>
                 <button type="submit" class="btn btn-danger mb-5">Supprimer les commandes sélectionnées de l'archive</button>
             </form>
-            </article>
+        </article>
     </main>
     <?php require_once ('../elements/footer.php');?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
