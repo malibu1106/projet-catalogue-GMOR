@@ -83,7 +83,7 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
                         <th class="pointer" data-sort="order_date">Date de Commande</th>
                         <th class="pointer" data-sort="total_amount">Montant Total</th>
                         <th class="pointer" data-sort="status">Statut</th>
-                        <th scope="col"><input type="checkbox" id="selectAllOrders"></th>
+                        <th scope="col"><input type="checkbox" id="selectAllProducts"></th>
                     </tr>
                 </thead>
 
