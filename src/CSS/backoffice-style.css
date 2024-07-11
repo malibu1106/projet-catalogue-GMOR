@@ -303,7 +303,10 @@ textarea {
     transform: translateX(-50%);
 }
 .text-end{
+    display: flex;
+    flex-direction: column;
     width: 32px;
+    gap: 5px;
 }
 
 
@@ -657,6 +660,45 @@ h1 {
 }
 
 
+.btn-cross {
+    background-color: #dc3545;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 3px;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.btn-cross i {
+    font-size: 1.2rem;
+}
+
+.stamp-cancel {
+    display: none; /* Cachée par défaut */
+    position: absolute;
+    top: 36%;
+    left: 39%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: auto;
+    z-index: 10;
+}
+.btn-prog-show{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.btn-progress{
+    width: 100%;
+    font-size: 16px;
+}
 
 @media only screen and (min-width: 768px) {
 

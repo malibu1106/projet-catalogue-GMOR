@@ -462,10 +462,5 @@ button .btn-color:hover {
     background-color: rgba(29, 29, 29, 0.7);
 }
 
-/*Konami code*/
-.konami-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+
+
