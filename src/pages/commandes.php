@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once("../elements/connect.php");
 
@@ -15,10 +15,11 @@ $sql = "SELECT o.id, u.first_name, u.last_name, o.order_date, o.status, o.total_
 $requete = $db->prepare($sql);
 $requete->execute();
 $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,69 +29,91 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../CSS/style.css">
     <title>Gestion des Commandes</title>
 </head>
-<body>
-    <?php require_once ('../elements/header.php'); ?>
 
+<body>
+    <?php require_once('../elements/header.php'); ?>
+    <?php if (isset($_SESSION['success'])) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= $_SESSION['success'] ?>
+            <?php unset($_SESSION['success']); ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error'])) : ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $_SESSION['error'] ?>
+            <?php unset($_SESSION['error']); ?>
+        </div>
+    
+    <?php if (isset($_SESSION['info'])): ?>
+        <div class="alert alert-info" role="alert">
+            <?= $_SESSION['info'] ?>
+            <?php unset($_SESSION['info']); ?>
+        </div>
+<?php endif; ?>
+
+    <?php endif; ?>
     <main class="bg-commandes">
         <article class="container mt-4">
             <h1 class="backoff-comm-title mb-4">Gestion des Commandes</h1>
-
+            <a class="nav-link" href="archives_cde.php">Commandes Archivées</a>
             <div class="row">
-                <?php foreach($resulta as $commande): ?>
+                <?php foreach ($resulta as $commande) : ?>
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                        <div class="card2" data-order-id="<?= $commande['id'] ?>">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <h5 class="card-title">Commande #<?= $commande['id'] ?></h5>
-                                        <p class="card-text"><strong>Client:</strong> <?= $commande['first_name'] . ' ' . $commande['last_name'] ?></p>
-                                        <p class="card-text"><strong>Date:</strong> <?= $commande['order_date'] ?></p>
-                                        <p class="card-text"><strong>Total:</strong> €<?= $commande['total_amount'] ?></p>
-                                        <p class="card-text"><strong>Adresse:</strong> <?= $commande['shipping_address'] ?></p>
-                                        <p class="card-text"><strong>Méthode de paiement:</strong> <?= $commande['payment_method'] ?></p>
-                                    </div>
-                                    <div class="text-end">
-                                        <a class="btn btn-sm btn-danger btn-cross" title="Annuler" href="#" onclick="cancelOrder(<?= $commande['id'] ?>); return false;">
-                                            <i class="bi bi-x-lg"></i>
+                            <div class="card2" data-order-id="<?= $commande['id'] ?>">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h5 class="card-title">Commande #<?= $commande['id'] ?></h5>
+                                            <p class="card-text"><strong>Client:</strong> <?= $commande['first_name'] . ' ' . $commande['last_name'] ?></p>
+                                            <p class="card-text"><strong>Date:</strong> <?= $commande['order_date'] ?></p>
+                                            <p class="card-text"><strong>Total:</strong> €<?= $commande['total_amount'] ?></p>
+                                            <p class="card-text"><strong>Adresse:</strong> <?= $commande['shipping_address'] ?></p>
+                                            <p class="card-text"><strong>Méthode de paiement:</strong> <?= $commande['payment_method'] ?></p>
+                                        </div>
+                                        <div class="text-end">
+                                            <a class="btn btn-sm btn-danger btn-cross" title="Annuler" href="#" onclick="cancelOrder(<?= $commande['id'] ?>); return false;">
+                                                <i class="bi bi-x-lg"></i>
                                         </a>
-                                        <a class="btn btn-sm btn-danger" title="Supprimer" href="#" onclick="confirmDelete(<?= $commande['id'] ?>); return false;"><i class="bi bi-trash"></i></a>
+                                            <a class="btn btn-sm btn-danger" title="Supprimer" href="#" onclick="confirmDelete(<?= $commande['id'] ?>); return false;"><i class="bi bi-trash"></i></a>
+                                        <a class="btn btn-sm btn-secondary" title="archiver" href="../pages/archive_order.php?id=<?= $commande["id"] ?>"><i class="bi bi-archive"></i></a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="progress mt-3">
-                                    <?php 
-                                    $status = strtolower($commande['status']);
-                                    $progress = 0;
-                                    switch ($status) {
-                                        case 'en attente':
-                                            $progress = 25;
-                                            break;
-                                        case 'en cours de traitement':
-                                            $progress = 50;
-                                            break;
-                                        case 'expédiée':
-                                            $progress = 75;
-                                            break;
-                                        case 'livrée':
-                                            $progress = 100;
-                                            break;
-                                        case 'annulée':
+                                    <div class="progress mt-3">
+                                        <?php
+                                        $status = strtolower($commande['status']);
+                                        $progress = 0;
+                                        switch ($status) {
+                                            case 'en attente':
+                                                $progress = 25;
+                                                break;
+                                            case 'en cours de traitement':
+                                                $progress = 50;
+                                                break;
+                                            case 'expédiée':
+                                                $progress = 75;
+                                                break;
+                                            case 'livrée':
+                                                $progress = 100;
+                                                break;
+                                            case 'annulée':
                                             $progress = 0;
                                             break;
                                     }
-                                    ?>
-                                    <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%;" aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100"><?= ucfirst($status) ?></div>
-                                </div>
-                                <!-- Image du tampon "cancel" -->
+                                        ?>
+                                        <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%;" aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100"><?= ucfirst($status) ?></div>
+                                    </div>
+                                    <!-- Image du tampon "cancel" -->
                                 <img src="../img/illustration/cancel-btn.png" class="stamp-cancel" alt="Cancelled Stamp" />
 
                                 <div class="btn-container mt-3 btn-prog-show">
-                                    <button type="button" class="btn btn-success btn-progress" data-order-id="<?= $commande['id'] ?>">
+                                        <button type="button" class="btn btn-success btn-progress" data-order-id="<?= $commande['id'] ?>">
                                         Faire progresser la commande
                                     </button>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCommande<?= $commande['id'] ?>">
-                                        Voir les produits commandés
-                                    </button>
-                                </div>
+                                            Voir les produits commandés
+                                        </button>
+                                    </div>
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="modalCommande<?= $commande['id'] ?>" tabindex="-1" aria-labelledby="modalCommande<?= $commande['id'] ?>Label" aria-hidden="true">
@@ -133,7 +156,7 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
         </article>
     </main>
 
-    <?php require_once ('../elements/footer.php'); ?>
+    <?php require_once('../elements/footer.php'); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../JS/script.js" defer></script>
     <script>
@@ -244,4 +267,5 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
 
     </script>
 </body>
+
 </html>

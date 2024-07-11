@@ -79,7 +79,7 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
 // Vérifie si le panier est vide
 if(empty($cartResults)){
         echo '<h2>Not the product in this cart.</h2>';
-        echo ' <h2><a href="produits.php">Select your products here.</a></h2> ';
+        echo ' <p><a href="produits.php">Select your products here.</a></p> ';
         
     }else{
     // Affiche le nombre total de produits et le prix total
@@ -123,14 +123,14 @@ if(empty($cartResults)){
     }
 
 // Affiche les informations de débogage (session, comptage et résultats du panier)
-    echo '<pre>';
-    print_r($_SESSION);
-    echo '</pre>';
-    print_r($result_count);
-    echo '</pre>';
-    echo '<pre>';
-    print_r($cartResults);
-    echo '</pre>';
+    // echo '<pre>';
+    // print_r($_SESSION);
+    // echo '</pre>';
+    // print_r($result_count);
+    // echo '</pre>';
+    // echo '<pre>';
+    // print_r($cartResults);
+    // echo '</pre>';
 ?>
 
 <!-- Fermer la section qui a été ouverte dans php -->

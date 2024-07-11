@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : lun. 08 juil. 2024 à 07:24
+-- Généré le : mer. 10 juil. 2024 à 07:05
 -- Version du serveur : 8.0.37
 -- Version de PHP : 8.2.8
 
@@ -33,16 +33,6 @@ CREATE TABLE `carts` (
   `product_id` int NOT NULL,
   `product_quantity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Déchargement des données de la table `carts`
---
-
-INSERT INTO `carts` (`id`, `user_id`, `product_id`, `product_quantity`) VALUES
-(1, 5, 1, 5),
-(2, 5, 2, 10),
-(3, 5, 2, 10),
-(4, 5, 2, 10);
 
 -- --------------------------------------------------------
 
@@ -132,7 +122,6 @@ INSERT INTO `messages` (`message_id`, `message_type`, `datetime`, `sender_user_i
 (137, NULL, '2024-07-01 13:05:19', 3, 4, 'Test', 1, NULL),
 (138, NULL, '2024-07-02 06:43:00', 4, 2, 'Coucou Guilain !', 1, NULL),
 (141, NULL, '2024-07-04 07:41:01', 6, 7, 'blabla teste', 1, NULL),
-(142, NULL, '2024-07-04 07:41:27', 6, 4, 'blabla test', 1, NULL),
 (143, 'image', '2024-07-04 07:42:09', 6, 4, '../messages-files-storage/df2bcfb4ab294c4a3eef.jpg', 1, NULL);
 
 -- --------------------------------------------------------
@@ -144,7 +133,7 @@ INSERT INTO `messages` (`message_id`, `message_type`, `datetime`, `sender_user_i
 CREATE TABLE `orders` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
-  `cart_id` int NOT NULL,
+  `cart_id` int DEFAULT NULL,
   `order_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `status` enum('en attente','en cours de traitement','expédiée','livrée','annulée') DEFAULT 'en attente',
   `total_amount` decimal(10,2) NOT NULL,
@@ -157,14 +146,13 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `cart_id`, `order_date`, `status`, `total_amount`, `shipping_address`, `payment_method`) VALUES
-(1, 3, 0, '2024-07-05 13:24:40', 'en attente', 10.00, '01 boulvards blabala balablab ', 'carte bancaire'),
-(2, 4, 0, '2024-07-05 13:24:40', 'en attente', 10.00, '01 boulvards blabala balablab ', 'carte bancaire'),
-(3, 2, 0, '2024-07-05 13:24:40', 'en attente', 10.00, '01 boulvards blabala balablab ', 'carte bancaire'),
-(4, 6, 0, '2024-07-05 13:24:40', 'en attente', 10.00, '01 boulvards blabala balablab ', 'carte bancaire'),
-(5, 5, 0, '2024-07-05 13:24:40', 'en attente', 10.00, '01 boulvards blabala balablab ', 'carte bancaire'),
-(6, 1, 0, '2024-07-05 13:24:40', 'en attente', 10.00, '01 boulvards blabala balablab ', 'carte bancaire'),
-(7, 3, 0, '2024-07-05 13:24:40', 'en attente', 10.00, '01 boulvards blabala balablab ', 'carte bancaire'),
-(8, 7, 0, '2024-07-05 13:24:40', 'en attente', 10.00, '01 boulvards blabala balablab ', 'carte bancaire');
+(15, 6, NULL, '2024-07-09 10:27:39', 'en attente', 105.80, 'chatfouin', 'Carte_bancaire'),
+(16, 6, NULL, '2024-07-09 10:55:41', 'en attente', 2.00, 'huiuiuiuiuiu', 'PayPal'),
+(17, 8, NULL, '2024-07-09 11:30:39', 'en attente', 243.00, 'rue reloud', 'Virement_bancaire'),
+(18, 6, NULL, '2024-07-09 11:35:08', 'en attente', 12.90, 'shsrgoirsoigj', 'PayPal'),
+(19, 6, NULL, '2024-07-09 12:13:44', 'en attente', 1.00, '01 La chaume contant magny cours 58470 rue du prés vert batiement 01 de la boustifaille', 'Virement_bancaire'),
+(20, 6, NULL, '2024-07-09 13:06:51', 'en attente', 38.90, 'htiophtjhrt', 'PayPal'),
+(21, 6, NULL, '2024-07-09 13:21:53', 'en attente', 156.00, 'qmojflqjfijq', 'Virement_bancaire');
 
 -- --------------------------------------------------------
 
@@ -174,6 +162,7 @@ INSERT INTO `orders` (`id`, `user_id`, `cart_id`, `order_date`, `status`, `total
 
 CREATE TABLE `order_items` (
   `id` int NOT NULL,
+  `cart_id` int DEFAULT NULL,
   `order_id` int NOT NULL,
   `product_id` int NOT NULL,
   `quantity` int NOT NULL,
@@ -184,8 +173,24 @@ CREATE TABLE `order_items` (
 -- Déchargement des données de la table `order_items`
 --
 
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`) VALUES
-(1, 1, 18, 1, 12.90);
+INSERT INTO `order_items` (`id`, `cart_id`, `order_id`, `product_id`, `quantity`, `price`) VALUES
+(18, NULL, 15, 18, 2, 19.90),
+(19, NULL, 15, 36, 1, 65.00),
+(20, NULL, 15, 32, 1, 1.00),
+(21, NULL, 16, 32, 1, 1.00),
+(22, NULL, 16, 29, 1, 1.00),
+(24, NULL, 17, 36, 1, 65.00),
+(25, NULL, 17, 29, 1, 1.00),
+(26, NULL, 17, 32, 1, 1.00),
+(27, NULL, 17, 37, 1, 155.00),
+(28, NULL, 17, 35, 1, 21.00),
+(31, NULL, 18, 27, 1, 12.90),
+(32, NULL, 19, 31, 1, 1.00),
+(33, NULL, 20, 28, 1, 25.90),
+(34, NULL, 20, 33, 1, 12.00),
+(35, NULL, 20, 34, 1, 1.00),
+(36, NULL, 21, 37, 1, 155.00),
+(37, NULL, 21, 34, 1, 1.00);
 
 -- --------------------------------------------------------
 
@@ -227,7 +232,11 @@ INSERT INTO `products` (`id`, `ref`, `brand`, `size`, `color`, `pattern`, `mater
 (30, '98189191', 'Bugs ', 'M', 'rouge', 'rayure', 'polyestere', 'homme', 13, 12.00, 1.00, 'Pull', 'IAOFHOIo feifj iozejfio ejzio fjziojf zejfozejiozfe jIAOFHOIo feifj iozejfio ejzio fjziojf zejfozejiozfe jIAOFHOIo feifj iozejfio ejzio fjziojf zejfozejiozfe jIAOFHOIo feifj iozejfio ejzio fjziojf zejfozejiozfe jIAOFHOIo feifj iozejfio ejzio fjziojf zejfozejiozfe jIAOFHOIo feifj iozejfio ejzio fjziojf zejfozejiozfe jIAOFHOIo feifj iozejfio ejzio fjziojf zejfozejiozfe j', '/img/upload_model/07e39223475ed7514aa8d0e9448bbc8a.jpg', '/img/upload_model/dde038a5e06822ec02f54c03cce11f78.jpeg', '/img/upload_model/d6bf14418816ebd1bfed277357bae083.png', '/img/upload_model/2d4b37e545a59d27e964c4b4dc66f0be.jpg'),
 (31, '489165', 'Bunny', 'S', 'rouge', 'carre', 'polyestere', 'homme', 1, 1.00, 1.00, 'Pantalon', 'ioefoiejf oizejofejzo fjoize e zoioefoiejf oizejofejzo fjoize e zoioefoiejf oizejofejzo fjoize e zoioefoiejf oizejofejzo fjoize e zoioefoiejf oizejofejzo fjoize e zoioefoiejf oizejofejzo fjoize e zoioefoiejf oizejofejzo fjoize e zoioefoiejf oizejofejzo fjoize e zoioefoiejf oizejofejzo fjoize e zoioefoiejf oizejofejzo fjoize e zo', '/img/upload_model/3bf8ad16983be3ed373be091a797129a.jpg', '/img/upload_model/ff4aadd53377fa99a60fa9370abfcd60.png', '/img/upload_model/709862044c6b4b2805c8d7c3e8a64353.jpg', '/img/upload_model/3ee66141ec4ab81a34c5f16f28a99eb4.jpeg'),
 (32, '89416HJ', 'Silent', 'XS', 'bleu', 'carre', 'cuir', 'homme', 1, 1.00, 0.00, 'T-shirt', 'enfoef oiejfijz iojorjg oirjgoirej jgreo ogj', '/img/upload_model/fbaac4d4002fba81fc7b8081135caa48.png', '', '', ''),
-(33, '9874516', 'Fugu', 'M', 'bleu', 'rayure', 'coton', 'homme', 12, 12.00, 0.00, 'Veste', 'ziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeoj', '/img/upload_model/84d9485e6b6c20cc01a931ec1721c10b.jpeg', 'img/upload_model/85bd8289457930d5d7928d9989112660.jpeg', 'img/upload_model/e23d2a93ea5545d146367b10ae4b3863.jpeg', 'img/upload_model/bac131b4b0805f661281e8bc546f42d2.jpeg');
+(33, '9874516', 'Fugu', 'M', 'bleu', 'rayure', 'coton', 'homme', 12, 12.00, 0.00, 'Veste', 'ziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeojziofiozfjio efoi ejzfjezojf oiezjfj zeoj', '/img/upload_model/0669ffba6c7bbf515a06b934e3c5aa4e.png', '/img/upload_model/e11bee3b78b518b1f2a2b37c5c166176.jpg', '/img/upload_model/e2ea999ed4ce3341aa43644897c202e1.png', '/img/upload_model/7e7803f5b88867a2fcdc3faa1dbc0584.png'),
+(34, '48984D', 'bUNNY', 'XS', 'rouge', 'rayure', 'coton', 'femme', 1, 1.00, 1.00, 'Veste', 'eflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen g', '/img/upload_model/fe6d24c8fdbf60a9319928ab3d7d6c20.jpg', '/img/upload_model/319997e6c3e7d6c1a64b9593edac6e4a.jpeg', '/img/upload_model/260fb351771b3778c1249ad35b3dc07b.png', '/img/upload_model/fb1c067d83bb6c0b4687326f5da8a494.png'),
+(35, '65489fd', 'Lola', 'L', 'rouge', 'carre', 'polyestere', 'femme', 1, 21.00, 0.00, 'Veste', 'eflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen g', '/img/upload_model/b818843d10c8ee879b933d2f8f4fa825.png', '/img/upload_model/89ece434333dee4c8e5559b639449724.png', '/img/upload_model/b1bbf171b86ee029f523bc57eff511b6.jpg', '/img/upload_model/e11562a8893894c9ad047bb688a70dd0.jpg'),
+(36, '44894854', 'Coyotyto', 'M', 'bleu', 'losange', 'polyestere', 'femme', 1, 65.00, 0.00, 'Veste', 'efbek ezkjf nkeflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen g', '/img/upload_model/bef91caaa5fb29a954429912903c1d12.jpg', '/img/upload_model/466f5ab619d82a22501d504a89f60a73.png', '', ''),
+(37, '8441915', 'Little', 'L', 'bleu', 'losange', 'cuir', 'homme', 12, 155.00, 1.00, 'Veste', 'eflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen geflkeneglkzeezlgnez zrign rng rngergrn rlen g', '/img/upload_model/4979e97dafd12e0d1238a0cbbf8cf3de.png', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -252,11 +261,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `Linkedin`, `avatar`, `group`) VALUES
 (1, 'super', 'admin', 'super@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$OW5XVHlqaktCS0hudnlHTA$2LZ2t5ehCOV4QeEAcD0ARL7fgk9WhGaqSsZ5MEr1OHQ', NULL, NULL, 'sub-admin,utilisateur'),
-(2, 'guilain', 'painsec', 'guilain@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$cUlHbkVtUXZITHEzdlBNdA$uX12BS4BjYDq8/uQW1GxKhiXXERCqNYtAqI1w/4hl/4', '', '../img/upload_avatars/profile_66868c1b2a090.png', 'admin,sub-admin,utilisateur,formateur,apprenant,gestion commercial,logistique,comptable,vendeur'),
-(3, 'morgane', 'lerein', 'morgane@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$NkdGbFIwZzY1SDBacEh0Sw$ubz/vUmV9jXx5dR80zAOD7gQTtyoht5ZhKzQP/eb7FQ', NULL, NULL, 'admin,sub-admin,utilisateur,formateur,apprenant,gestion commercial,logistique,comptable,vendeur'),
+(2, 'guilain', 'painsec', 'guilain@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$cUlHbkVtUXZITHEzdlBNdA$uX12BS4BjYDq8/uQW1GxKhiXXERCqNYtAqI1w/4hl/4', '', '../img/upload_avatars/profile_66868c1b2a090.png', 'admin,formateur,apprenant,comptable'),
+(3, 'morgane', 'lerein', 'morgane@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$NkdGbFIwZzY1SDBacEh0Sw$ubz/vUmV9jXx5dR80zAOD7gQTtyoht5ZhKzQP/eb7FQ', NULL, NULL, 'admin,formateur,apprenant,gestion commercial'),
 (4, 'roberto', 'zigoto', 'roberto@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$V2xDZFduQXcxSEZwMnlNYQ$kpZavx+IKYGw+wtGOsj2rkMeUI5N1Bu/+4NKsBqrsFY', NULL, NULL, 'admin,apprenant,logistique'),
-(5, 'osias', 'chorizo', 'osias@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$cERBLzl5R3FsWHE5Nm5Ubw$6grq+rt5BkmF5GKSwkGpmpNDFWjDJxiON3ZbPZF0DQc', NULL, NULL, 'admin,apprenant,vendeur'),
-(6, 'Yrautcnas', 'Keryoh', 'yrautcnas@msn.com', '$argon2id$v=19$m=65536,t=4,p=1$OFE5V3dKeWM2dlVpWWhiWg$RFNrYEQjT4kzIUjJFOP2sOGMfKynq0j7IaWkV4V2Y6g', 'https://www.linkedin.com/in/guilain-de-meyer-3aa4a5317/', '../img/upload_avatars/profile_66864c572cacf.png', 'admin,sub-admin,apprenant,comptable'),
+(5, 'osias', 'chorizo', 'osias@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$cERBLzl5R3FsWHE5Nm5Ubw$6grq+rt5BkmF5GKSwkGpmpNDFWjDJxiON3ZbPZF0DQc', NULL, NULL, 'admin,apprenant,gestion commercial,logistique,comptable,vendeur'),
+(6, 'Yrautcnas', 'Keryoh', 'yrautcnas@msn.com', '$argon2id$v=19$m=65536,t=4,p=1$OFE5V3dKeWM2dlVpWWhiWg$RFNrYEQjT4kzIUjJFOP2sOGMfKynq0j7IaWkV4V2Y6g', 'https://www.linkedin.com/in/guilain-de-meyer-3aa4a5317/', '../img/upload_avatars/profile_66864c572cacf.png', 'admin,sub,formateur,apprenant,gestion commercial,logistique,comptable,vendeur,utilisateur'),
 (7, 'Blaireau', 'Super', 'SB@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$VW5Bd2ZUWmg0YkhWSmx4bg$9ygrpgB0u2FdJ4HXz4+hudNBi6AqMj2Bwm1mm6roSS4', '', '../img/upload_avatars/profile_66865ec2eceaa.jpg', 'sub,apprenant'),
 (8, 'Zag', 'Zig', 'Zigzag@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$eDczQXVZMHhoTkRyNzFxUw$EdfEgSlJLcYDOuWwCfdLFtmyty+uerVf36Bm1WVno98', NULL, NULL, 'user');
 
@@ -318,7 +327,8 @@ ALTER TABLE `orders`
 ALTER TABLE `order_items`
   ADD PRIMARY KEY (`id`),
   ADD KEY `order_id` (`order_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `fk_cart_id` (`cart_id`);
 
 --
 -- Index pour la table `products`
@@ -340,7 +350,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT pour la table `commentaries`
@@ -370,19 +380,19 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT pour la table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT pour la table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT pour la table `users`
@@ -404,6 +414,7 @@ ALTER TABLE `orders`
 -- Contraintes pour la table `order_items`
 --
 ALTER TABLE `order_items`
+  ADD CONSTRAINT `fk_cart_id` FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`),
   ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 COMMIT;
