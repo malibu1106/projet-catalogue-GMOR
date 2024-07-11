@@ -80,8 +80,9 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
 if(empty($cartResults)){
         echo '<h2>Not the product in this cart.</h2>';
         echo ' <p><a href="produits.php">Select your products here.</a></p> ';
-        
+        echo ' <h2><a href="../pages/my_orders.php">My order</a></h2> ' ;
     }else{
+       echo '<h2><a href="../pages/my_orders.php">My order</a></h2>';
     // Affiche le nombre total de produits et le prix total
     echo '<h2>Your cart has <span id="cart-total"> ' . $result_count['total_product'] . ' </span> products</h2>';
         
@@ -140,6 +141,7 @@ if(empty($cartResults)){
     <div id="popup-endereco" class="popup" style="display: none;">
         <div class="popup-content">
             <h3>Informations de livraison et de paiement</h3>
+            
             <form id="form-endereco">
                 <label for="endereco">Adresse de livraison <br> ex: 01 rue label 58000 Nevers:</label>
                 <textarea id="endereco" name="endereco" required></textarea>
