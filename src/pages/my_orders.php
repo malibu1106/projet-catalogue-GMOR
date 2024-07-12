@@ -58,8 +58,14 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
     <?php endif; ?>
     <main class="bg-commandes">
         <article class="container mt-4">
+            <div class="back-button-container">
+                <div class="d-flex justify-content-end">
+                    <a href="../pages/cart.php" class=" btn_retour">
+                        <i class="bi bi-arrow-left"></i> Retour </a>
+                </div>
+            </div>
             <h1 class="backoff-comm-title mb-4">My Orders</h1>
-            <!-- <a class="nav-link" href="archives_cde.php">Commandes Archivées</a> -->
+
             <div class="row">
                 <?php foreach ($resulta as $commande) : ?>
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-4">

@@ -99,3 +99,9 @@ figure {
 #form-endereco label, #form-endereco textarea, #form-endereco select, #form-endereco button {
     margin-bottom: 10px;
 }
+
+.btn_retour {
+  text-decoration: none;  
+  color: black;
+  margin-right: 30px;
+}

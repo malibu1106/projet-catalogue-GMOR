@@ -59,6 +59,7 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,58 +73,64 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
     <script type="text/javascript" src="../JS/script.js" defer></script>
     <title>cart</title>
 </head>
-<body>
-<?php require_once("../elements/header.php");?>
-<?php    
 
-// Vérifie si le panier est vide
-if(empty($cartResults)){
+<body>
+    <?php require_once("../elements/header.php"); ?>
+    <?php
+    echo '<div class="back-button-container">';
+    echo '<div class="d-flex justify-content-end">';
+    echo   '<a href="../index.php" class=" btn_retour">';
+    echo     '<i class="bi bi-arrow-left"></i> Retour </a>';
+    echo '</div>';
+    echo '</div>';
+    // Vérifie si le panier est vide
+    if (empty($cartResults)) {
         echo '<h2>Not the product in this cart.</h2>';
         echo ' <p><a href="produits.php">Select your products here.</a></p> ';
-        echo ' <h2><a href="../pages/my_orders.php">My order</a></h2> ' ;
-    }else{
-       echo '<h2><a href="../pages/my_orders.php">My order</a></h2>';
-    // Affiche le nombre total de produits et le prix total
-    echo '<h2>Your cart has <span id="cart-total"> ' . $result_count['total_product'] . ' </span> products</h2>';
-        
-        echo '<h2>Total: <span id="cart-price-total">' . $result_total['total_price'] . '</span>€</h2>';
-        echo'<section class="affichage_des_produits">';
+        echo ' <h2><a href="../pages/my_orders.php">My order</a></h2> ';
+    } else {
+        echo '<h2><a href="../pages/my_orders.php">My order</a></h2>';
+        // Affiche le nombre total de produits et le prix total
+        echo '<h2>Your cart has <span id="cart-total"> ' . $result_count['total_product'] . ' </span> products</h2>';
 
-    // Boucle pour afficher chaque produit dans le panier
-    foreach($cartResults as $cartResult){
-        // Affiche les détails du produit et les boutons d'action
-        echo '<article data-cart-id="'. $cartResult['cart_id'] .'">
+        echo '<h2>Total: <span id="cart-price-total">' . $result_total['total_price'] . '</span>€</h2>';
+        echo '<section class="affichage_des_produits">';
+
+        // Boucle pour afficher chaque produit dans le panier
+        foreach ($cartResults as $cartResult) {
+            // Affiche les détails du produit et les boutons d'action
+            echo '<article data-cart-id="' . $cartResult['cart_id'] . '">
     <div>
         <figure >
                     <!-- Detalhes do produto e botões -->
-            <a href="article.php?id='. $cartResult['product_id'] .'" class="card"><img src="'. $cartResult['image_1'].'" alt="'. $cartResult['brand'] .'"></a>
+            <a href="article.php?id=' . $cartResult['product_id'] . '" class="card"><img src="' . $cartResult['image_1'] . '" alt="' . $cartResult['brand'] . '"></a>
             <div class="recap">
-                <figcaption>product: '. $cartResult['brand'].'</figcaption>
-                <figcaption>color: '. $cartResult['color'].'</figcaption>
-                <figcaption>size: '. $cartResult['size'].'</figcaption>
-                <figcaption class="product-price">price: '.number_format($cartResult['price'], 2). '€</figcaption>
-                <figcaption class="product-quantity" data-id="'. $cartResult['cart_id'] .'">quantity: '. $cartResult['product_quantity'].' unit.'. ($cartResult['product_quantity'] !== 1 ? 's' : '') .'</figcaption>
+                <figcaption>product: ' . $cartResult['brand'] . '</figcaption>
+                <figcaption>color: ' . $cartResult['color'] . '</figcaption>
+                <figcaption>size: ' . $cartResult['size'] . '</figcaption>
+                <figcaption class="product-price">price: ' . number_format($cartResult['price'], 2) . '€</figcaption>
+                <figcaption class="product-quantity" data-id="' . $cartResult['cart_id'] . '">quantity: ' . $cartResult['product_quantity'] . ' unit.' . ($cartResult['product_quantity'] !== 1 ? 's' : '') . '</figcaption>
         
                 <div class="btn_action">
-                    <button class="cart-action" data-action="add" data-id="'. $cartResult['cart_id'] .'" aria-label="Adicionar uma unidade"><img src="../img/illustration/add_produce.png" alt="adicionar produto"></button>
-                    <button class="cart-action" data-action="subtract" data-id="'. $cartResult['cart_id'] .'" aria-label="Subtrair uma unidade"><img src="../img/illustration/remove_produce.png" alt="remover produto"></button>
-                    <button class="cart-action" data-action="delete" data-id="'. $cartResult['cart_id'] .'" aria-label="Remover o produto"><img src="../img/illustration/delete.png" alt="deletar produto"></button>
+                    <button class="cart-action" data-action="add" data-id="' . $cartResult['cart_id'] . '" aria-label="Adicionar uma unidade"><img src="../img/illustration/add_produce.png" alt="adicionar produto"></button>
+                    <button class="cart-action" data-action="subtract" data-id="' . $cartResult['cart_id'] . '" aria-label="Subtrair uma unidade"><img src="../img/illustration/remove_produce.png" alt="remover produto"></button>
+                    <button class="cart-action" data-action="delete" data-id="' . $cartResult['cart_id'] . '" aria-label="Remover o produto"><img src="../img/illustration/delete.png" alt="deletar produto"></button>
                 </div>
             </div>
         </figure>
     </div>
-    </article>';    
-}
-}
+    </article>';
+        }
+    }
 
-// Affiche le bouton "Finaliser la commande" si le panier n'est pas vide
+    // Affiche le bouton "Finaliser la commande" si le panier n'est pas vide
     if (!empty($cartResults)) {
         echo '<div class="finalizar-compra">';
         echo '<button id="btn-finalizar-compra" class="btn btn-dark">Finaliser la commande</button>';
         echo '</div>';
     }
 
-// Affiche les informations de débogage (session, comptage et résultats du panier)
+    // Affiche les informations de débogage (session, comptage et résultats du panier)
     // echo '<pre>';
     // print_r($_SESSION);
     // echo '</pre>';
@@ -132,20 +139,20 @@ if(empty($cartResults)){
     // echo '<pre>';
     // print_r($cartResults);
     // echo '</pre>';
-?>
+    ?>
 
-<!-- Fermer la section qui a été ouverte dans php -->
-</section>
+    <!-- Fermer la section qui a été ouverte dans php -->
+    </section>
 
-<!-- Popup pour les informations de livraison et de paiement -->
+    <!-- Popup pour les informations de livraison et de paiement -->
     <div id="popup-endereco" class="popup" style="display: none;">
         <div class="popup-content">
             <h3>Informations de livraison et de paiement</h3>
-            
+
             <form id="form-endereco">
                 <label for="endereco">Adresse de livraison <br> ex: 01 rue label 58000 Nevers:</label>
                 <textarea id="endereco" name="endereco" required></textarea>
-                
+
                 <label for="metodo-pagamento">Méthode de paiement:</label>
                 <select id="metodo-pagamento" name="metodo_pagamento" required>
                     <option value="">Sélectionner...</option>
@@ -153,7 +160,7 @@ if(empty($cartResults)){
                     <option value="Virement_bancaire">Virement bancaire</option>
                     <option value="PayPal">PayPal</option>
                 </select>
-                
+
                 <button type="submit" class="btn btn-success">Confirmer la commande</button>
                 <button type="button" id="btn-annuler" class="btn btn-secondary">Annuler</button>
             </form>
@@ -161,138 +168,138 @@ if(empty($cartResults)){
     </div>
 
 
-<?php require_once ('../elements/footer.php');?>
+    <?php require_once('../elements/footer.php'); ?>
 
 
-<!-- // Script JavaScript pour gérer les actions du panier-->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const cartActions = document.querySelectorAll('.cart-action');
-    
-    cartActions.forEach(button => {
-        button.addEventListener('click', function() {
-            const action = this.getAttribute('data-action');
-            const cartId = this.getAttribute('data-id');
-            updateCart(action, cartId);
-        });
-    });
+    <!-- // Script JavaScript pour gérer les actions du panier-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartActions = document.querySelectorAll('.cart-action');
 
-    function updateCart(action, cartId) {
-        fetch('../tools/action_cart/update_cart.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'cart_id=' + cartId + '&action=' + action
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                updateCartDisplay(data, action, cartId);
-            } else {
-                console.error('Erreur lors de la mise à jour du panier:', data.message);
+            cartActions.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.getAttribute('data-action');
+                    const cartId = this.getAttribute('data-id');
+                    updateCart(action, cartId);
+                });
+            });
+
+            function updateCart(action, cartId) {
+                fetch('../tools/action_cart/update_cart.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'cart_id=' + cartId + '&action=' + action
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            updateCartDisplay(data, action, cartId);
+                        } else {
+                            console.error('Erreur lors de la mise à jour du panier:', data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur:', error);
+                    });
             }
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-        });
-    }
 
-    function updateCartDisplay(data, action, cartId) {
-        const cartItem = document.querySelector(`article[data-cart-id="${cartId}"]`);
-        if (!cartItem) return;
+            function updateCartDisplay(data, action, cartId) {
+                const cartItem = document.querySelector(`article[data-cart-id="${cartId}"]`);
+                if (!cartItem) return;
 
-        if (action === 'delete') {
-            cartItem.remove();
-        } else {
-            const quantityElement = cartItem.querySelector('.product-quantity');
-            const priceElement = cartItem.querySelector('.product-price');
-            
-            if (quantityElement) {
-                quantityElement.textContent = `quantité: ${data.new_quantity} unité${data.new_quantity !== 1 ? 's' : ''}`;
+                if (action === 'delete') {
+                    cartItem.remove();
+                } else {
+                    const quantityElement = cartItem.querySelector('.product-quantity');
+                    const priceElement = cartItem.querySelector('.product-price');
+
+                    if (quantityElement) {
+                        quantityElement.textContent = `quantité: ${data.new_quantity} unité${data.new_quantity !== 1 ? 's' : ''}`;
+                    }
+
+                    if (priceElement) {
+                        const totalItemPrice = (data.new_quantity * data.item_price).toFixed(2);
+                        priceElement.textContent = `prix: ${totalItemPrice}€`;
+                    }
+                }
+
+                const cartTotalElement = document.getElementById('cart-total');
+                if (cartTotalElement) {
+                    cartTotalElement.textContent = data.cart_total;
+                }
+
+                const cartPriceTotalElement = document.getElementById('cart-price-total');
+                if (cartPriceTotalElement) {
+                    cartPriceTotalElement.textContent = data.total_price;
+                }
+
+                const productSection = document.querySelector('.affichage_des_produits');
+                if (data.cart_total == 0 && productSection) {
+                    productSection.innerHTML = '<h2>Votre panier est vide.</h2>';
+                }
             }
-            
-            if (priceElement) {
-                const totalItemPrice = (data.new_quantity * data.item_price).toFixed(2);
-                priceElement.textContent = `prix: ${totalItemPrice}€`;
+
+            const btnFinalizarCompra = document.getElementById('btn-finalizar-compra');
+            const popup = document.getElementById('popup-endereco');
+            const form = document.getElementById('form-endereco');
+
+            if (btnFinalizarCompra) {
+                btnFinalizarCompra.addEventListener('click', function() {
+                    popup.style.display = 'block';
+                    popup.setAttribute('aria-hidden', 'false');
+                    popup.classList.add('show-popup');
+                });
             }
-        }
 
-        const cartTotalElement = document.getElementById('cart-total');
-        if (cartTotalElement) {
-            cartTotalElement.textContent = data.cart_total;
-        }
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-        const cartPriceTotalElement = document.getElementById('cart-price-total');
-        if (cartPriceTotalElement) {
-            cartPriceTotalElement.textContent = data.total_price;
-        }
+                const endereco = document.getElementById('endereco').value;
+                const metodoPagamento = document.getElementById('metodo-pagamento').value;
 
-        const productSection = document.querySelector('.affichage_des_produits');
-        if (data.cart_total == 0 && productSection) {
-            productSection.innerHTML = '<h2>Votre panier est vide.</h2>';
-        }
-    }
+                fetch('../pages/creer_order.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            // endereco: endereco,
+                            // metodo_pagamento: metodoPagamento,
+                            shipping_address: endereco,
+                            payment_method: metodoPagamento
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Commande effectuée avec succès!');
+                            window.location.href = '../index.php?id=' + data.order_id;
+                        } else {
+                            alert('Erreur lors de la création de la commande ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur:', error);
+                        alert('Erreur lors du traitement de votre demande. Veuillez réessayer.');
+                    });
 
-    const btnFinalizarCompra = document.getElementById('btn-finalizar-compra');
-    const popup = document.getElementById('popup-endereco');
-    const form = document.getElementById('form-endereco');
+                popup.style.display = 'none';
+                popup.setAttribute('aria-hidden', 'true');
+                popup.classList.remove('show-popup');
+            });
 
-    if (btnFinalizarCompra) {
-        btnFinalizarCompra.addEventListener('click', function() {
-            popup.style.display = 'block';
-            popup.setAttribute('aria-hidden', 'false');
-            popup.classList.add('show-popup');
-        });
-    }
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const endereco = document.getElementById('endereco').value;
-        const metodoPagamento = document.getElementById('metodo-pagamento').value;
-
-        fetch('../pages/creer_order.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                // endereco: endereco,
-                // metodo_pagamento: metodoPagamento,
-                shipping_address: endereco,
-                payment_method: metodoPagamento
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Commande effectuée avec succès!');
-                window.location.href = '../index.php?id=' + data.order_id;
-            } else {
-                alert('Erreur lors de la création de la commande ' + data.message);
+            const btnAnnuler = document.getElementById('btn-annuler');
+            if (btnAnnuler) {
+                btnAnnuler.addEventListener('click', function() {
+                    popup.style.display = 'none';
+                    popup.setAttribute('aria-hidden', 'true');
+                    popup.classList.remove('show-popup');
+                });
             }
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            alert('Erreur lors du traitement de votre demande. Veuillez réessayer.');
         });
-
-        popup.style.display = 'none';
-        popup.setAttribute('aria-hidden', 'true');
-        popup.classList.remove('show-popup');
-    });
-
-    const btnAnnuler = document.getElementById('btn-annuler');
-    if (btnAnnuler) {
-        btnAnnuler.addEventListener('click', function() {
-            popup.style.display = 'none';
-            popup.setAttribute('aria-hidden', 'true');
-            popup.classList.remove('show-popup');
-        });
-    }
-});
-
     </script>
 </body>
+
 </html>
