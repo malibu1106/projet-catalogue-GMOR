@@ -64,6 +64,19 @@ body h1 {
 .retour-accueil {
     padding-left: 4%;
 }
+/* boutons de lien entre les pages  */
+.btn_link{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+}
+
+.btn_link:hover{
+    transform: scale(1.2);
+    transition: transform .3s ease-in-out;
+    color: #BF2C2C;
+}
 
 /*ANIMATION*/
 

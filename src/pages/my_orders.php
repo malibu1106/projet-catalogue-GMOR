@@ -60,7 +60,7 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
         <article class="container mt-4">
             <div class="back-button-container">
                 <div class="d-flex justify-content-end">
-                    <a href="../pages/cart.php" class=" btn_retour">
+                    <a href="../pages/cart.php" class=" btn_retour btn_link">
                         <i class="bi bi-arrow-left"></i> Retour </a>
                 </div>
             </div>

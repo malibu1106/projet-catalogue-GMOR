@@ -42,12 +42,19 @@ h2 a {
     color: black;
 }
 
-p a{
+.btn_link{
     display: flex;
     justify-content: center;
     text-decoration: none;
-    
+    color: black;
 }
+
+.btn_link:hover{
+    transform: scale(1.2);
+    transition: transform .3s ease-in-out;
+    color: #BF2C2C;
+}
+
 figure {
     display:flex;
     flex-direction: column;

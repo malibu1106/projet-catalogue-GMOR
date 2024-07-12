@@ -79,17 +79,17 @@ $result_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
     <?php
     echo '<div class="back-button-container">';
     echo '<div class="d-flex justify-content-end">';
-    echo   '<a href="../index.php" class=" btn_retour">';
+    echo   '<a href="../index.php" class=" btn_retour btn_link">';
     echo     '<i class="bi bi-arrow-left"></i> Retour </a>';
     echo '</div>';
     echo '</div>';
     // Vérifie si le panier est vide
     if (empty($cartResults)) {
         echo '<h2>Not the product in this cart.</h2>';
-        echo ' <p><a href="produits.php">Select your products here.</a></p> ';
-        echo ' <h2><a href="../pages/my_orders.php">My order</a></h2> ';
+        echo ' <p><a href="produits.php" class="btn_link">Select your products here.</a></p> ';
+        echo ' <h2><a href="../pages/my_orders.php" class="btn_link">My orders</a></h2> ';
     } else {
-        echo '<h2><a href="../pages/my_orders.php">My order</a></h2>';
+        echo '<h2><a href="../pages/my_orders.php">My orders</a></h2>';
         // Affiche le nombre total de produits et le prix total
         echo '<h2>Your cart has <span id="cart-total"> ' . $result_count['total_product'] . ' </span> products</h2>';
 
