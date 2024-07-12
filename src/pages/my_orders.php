@@ -110,14 +110,14 @@ $resulta = $requete->fetchAll(PDO::FETCH_ASSOC);
 
                                 <div class="btn-container mt-3 btn-prog-show">
                                     <form action="commande_client.php" method="get">
-                                        <input type="hidden" name="id_commande" value="<?= $commande['id'] ?>">
+                                        <input type="hidden" name="order_id" value="<?= $commande['id'] ?>">
                                         <button type="submit" class="btn btn-dark">
-                                        Voir cette commandante 
-
+                                            Voir cette commande
                                         </button>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCommande<?= $commande['id'] ?>">
-                                            Voir les produits commandés
-                                        </button>
+                                    </form>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCommande<?= $commande['id'] ?>">
+                                        Voir les produits commandés
+                                    </button>
 
                                 </div>
 

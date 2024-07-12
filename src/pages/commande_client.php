@@ -2,34 +2,47 @@
 session_start();
 require_once("../elements/connect.php");
 
-// Verifica se o usuário está autenticado ou se um ID de usuário foi fornecido via GET
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
-} elseif (isset($_GET['user_id'])) {
-    // Apenas para fins de teste - não use isso em produção!
-    $user_id = $_GET['user_id'];
-} else {
-    die("Usuário não autenticado. Por favor, faça login ou forneça um ID de usuário válido.");
+// Verifica se o usuário está autenticado
+if (!isset($_SESSION['user']) || !isset($_SESSION['user']['id'])) {
+    header("Location: login.php");
+    exit();
 }
 
+$user_id = $_SESSION['user']['id'];
+
+// Verifica se um ID de ordem foi fornecido
+if (!isset($_GET['order_id'])) {
+    die("ID de ordem não fornecido.");
+}
+
+$order_id = $_GET['order_id'];
+
 try {
-    // Recuperação da última ordem do usuário
-    $stmt = $db->prepare("SELECT o.*, u.first_name, u.last_name FROM orders o JOIN users u ON o.user_id = u.id WHERE o.user_id = ? ORDER BY o.order_date DESC LIMIT 1");
-    $stmt->execute([$user_id]);
+    // Recuperação da ordem específica do usuário
+    $stmt = $db->prepare("SELECT o.*, u.first_name, u.last_name 
+                          FROM orders o 
+                          JOIN users u ON o.user_id = u.id 
+                          WHERE o.id = ? AND o.user_id = ?");
+    $stmt->execute([$order_id, $user_id]);
     $order = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$order) {
-        die("Nenhuma ordem encontrada para o usuário com ID: " . htmlspecialchars($user_id));
+        die("Ordem não encontrada ou não pertence a este usuário.");
     }
 
     // Recuperação dos itens da ordem
-    $stmt = $db->prepare("SELECT oi.*, p.ref, p.brand FROM order_items oi JOIN products p ON oi.product_id = p.id WHERE oi.order_id = ?");
-    $stmt->execute([$order['id']]);
+    $stmt = $db->prepare("SELECT oi.*, p.ref, p.brand 
+                          FROM order_items oi 
+                          JOIN products p ON oi.product_id = p.id 
+                          WHERE oi.order_id = ?");
+    $stmt->execute([$order_id]);
     $order_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     error_log("Erro no banco de dados: " . $e->getMessage());
-    die("Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde. Detalhes: " . $e->getMessage());
+    die("Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde.");
 }
+
+// Resto do código HTML permanece o mesmo...
 ?>
 
 <!DOCTYPE html>
@@ -56,11 +69,12 @@ try {
     </div>
 
     <div class="order-details">
-        <h2>Détails de la commande</h2>
-        <p><strong>Numéro de commande:</strong> <?php echo htmlspecialchars($order['id']); ?></p>
-        <p><strong>Date:</strong> <?php echo date('d/m/Y', strtotime($order['order_date'])); ?></p>
-        <p><strong>Livraison le:</strong> <?php echo date('d/m/Y', strtotime($order['order_date'] . ' +3 days')); ?></p>
-        <p><strong>Statut:</strong> <?php echo htmlspecialchars($order['status']); ?></p>
+    <h2>Détails de la commande</h2>
+    <p><strong>Numéro de commande:</strong> <?php echo htmlspecialchars($order['id']); ?></p>
+    <p><strong>Date:</strong> <?php echo date('d/m/Y', strtotime($order['order_date'])); ?></p>
+    <p><strong>Livraison le:</strong> <?php echo date('d/m/Y', strtotime($order['order_date'] . ' +3 days')); ?></p>
+    <p><strong>Statut:</strong> <?php echo htmlspecialchars($order['status']); ?></p>
+    <a href="my_orders.php" class="btn btn-primary">Retour à Mes Commandes</a>
     </div>
 
     <div class="order-items">
